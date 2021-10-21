@@ -1,0 +1,658 @@
+{
+  "paragraphs": [
+    {
+      "text": "CREATE TABLE IF NOT EXISTS movies ( movieId int, title String, genres String)\nCOMMENT \u0027Movies details\u0027\nROW FORMAT DELIMITED\nFIELDS TERMINATED BY \u0027\\054\u0027\nLINES TERMINATED BY \u0027\\n\u0027\nSTORED AS TEXTFILE;",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-20 10:49:22.050",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Query executed successfully. Affected rows : -1\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1634726947354_2049938018",
+      "id": "paragraph_1634726947354_2049938018",
+      "dateCreated": "2021-10-20 10:49:07.354",
+      "dateStarted": "2021-10-20 10:49:22.059",
+      "dateFinished": "2021-10-20 10:49:25.990",
+      "status": "FINISHED"
+    },
+    {
+      "text": "LOAD DATA INPATH \u0027/dataset/ml-latest/movies.csv\u0027 overwrite INTO TABLE movies;",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-20 10:50:52.794",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Query executed successfully. Affected rows : -1\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1634727028763_268903051",
+      "id": "paragraph_1634727028763_268903051",
+      "dateCreated": "2021-10-20 10:50:28.763",
+      "dateStarted": "2021-10-20 10:50:52.800",
+      "dateFinished": "2021-10-20 10:50:53.573",
+      "status": "FINISHED"
+    },
+    {
+      "text": "select * from movies limit 100;",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-20 11:06:03.704",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "movieid": "string",
+                      "title": "string",
+                      "genres": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                },
+                "multiBarChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                }
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "movieid",
+                  "index": 0.0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [],
+              "values": [
+                {
+                  "name": "title",
+                  "index": 1.0,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "movieid\ttitle\tgenres\nnull\ttitle\tgenres\n1\tToy Story (1995)\tAdventure|Animation|Children|Comedy|Fantasy\n2\tJumanji (1995)\tAdventure|Children|Fantasy\n3\tGrumpier Old Men (1995)\tComedy|Romance\n4\tWaiting to Exhale (1995)\tComedy|Drama|Romance\n5\tFather of the Bride Part II (1995)\tComedy\n6\tHeat (1995)\tAction|Crime|Thriller\n7\tSabrina (1995)\tComedy|Romance\n8\tTom and Huck (1995)\tAdventure|Children\n9\tSudden Death (1995)\tAction\n10\tGoldenEye (1995)\tAction|Adventure|Thriller\n11\t\"American President\t The (1995)\"\n12\tDracula: Dead and Loving It (1995)\tComedy|Horror\n13\tBalto (1995)\tAdventure|Animation|Children\n14\tNixon (1995)\tDrama\n15\tCutthroat Island (1995)\tAction|Adventure|Romance\n16\tCasino (1995)\tCrime|Drama\n17\tSense and Sensibility (1995)\tDrama|Romance\n18\tFour Rooms (1995)\tComedy\n19\tAce Ventura: When Nature Calls (1995)\tComedy\n20\tMoney Train (1995)\tAction|Comedy|Crime|Drama|Thriller\n21\tGet Shorty (1995)\tComedy|Crime|Thriller\n22\tCopycat (1995)\tCrime|Drama|Horror|Mystery|Thriller\n23\tAssassins (1995)\tAction|Crime|Thriller\n24\tPowder (1995)\tDrama|Sci-Fi\n25\tLeaving Las Vegas (1995)\tDrama|Romance\n26\tOthello (1995)\tDrama\n27\tNow and Then (1995)\tChildren|Drama\n28\tPersuasion (1995)\tDrama|Romance\n29\t\"City of Lost Children\t The (Cité des enfants perdus\n30\tShanghai Triad (Yao a yao yao dao waipo qiao) (1995)\tCrime|Drama\n31\tDangerous Minds (1995)\tDrama\n32\tTwelve Monkeys (a.k.a. 12 Monkeys) (1995)\tMystery|Sci-Fi|Thriller\n33\tWings of Courage (1995)\tAdventure|Romance|IMAX\n34\tBabe (1995)\tChildren|Drama\n35\tCarrington (1995)\tDrama|Romance\n36\tDead Man Walking (1995)\tCrime|Drama\n37\tAcross the Sea of Time (1995)\tDocumentary|IMAX\n38\tIt Takes Two (1995)\tChildren|Comedy\n39\tClueless (1995)\tComedy|Romance\n40\t\"Cry\t the Beloved Country (1995)\"\n41\tRichard III (1995)\tDrama|War\n42\tDead Presidents (1995)\tAction|Crime|Drama\n43\tRestoration (1995)\tDrama\n44\tMortal Kombat (1995)\tAction|Adventure|Fantasy\n45\tTo Die For (1995)\tComedy|Drama|Thriller\n46\tHow to Make an American Quilt (1995)\tDrama|Romance\n47\tSeven (a.k.a. Se7en) (1995)\tMystery|Thriller\n48\tPocahontas (1995)\tAnimation|Children|Drama|Musical|Romance\n49\tWhen Night Is Falling (1995)\tDrama|Romance\n50\t\"Usual Suspects\t The (1995)\"\n51\tGuardian Angel (1994)\tAction|Drama|Thriller\n52\tMighty Aphrodite (1995)\tComedy|Drama|Romance\n53\tLamerica (1994)\tAdventure|Drama\n54\t\"Big Green\t The (1995)\"\n55\tGeorgia (1995)\tDrama\n56\tKids of the Round Table (1995)\tAdventure|Children|Comedy|Fantasy\n57\tHome for the Holidays (1995)\tDrama\n58\t\"Postman\t The (Postino\n59\t\"Confessional\t The (Confessionnal\n60\t\"Indian in the Cupboard\t The (1995)\"\n61\tEye for an Eye (1996)\tDrama|Thriller\n62\tMr. Holland\u0027s Opus (1995)\tDrama\n63\tDon\u0027t Be a Menace to South Central While Drinking Your Juice in the Hood (1996)\tComedy|Crime\n64\tTwo if by Sea (1996)\tComedy|Romance\n65\tBio-Dome (1996)\tComedy\n66\tLawnmower Man 2: Beyond Cyberspace (1996)\tAction|Sci-Fi|Thriller\n67\tTwo Bits (1995)\tDrama\n68\tFrench Twist (Gazon maudit) (1995)\tComedy|Romance\n69\tFriday (1995)\tComedy\n70\tFrom Dusk Till Dawn (1996)\tAction|Comedy|Horror|Thriller\n71\tFair Game (1995)\tAction\n72\tKicking and Screaming (1995)\tComedy|Drama\n73\t\"Misérables\t Les (1995)\"\n74\tBed of Roses (1996)\tDrama|Romance\n75\tBig Bully (1996)\tComedy|Drama\n76\tScreamers (1995)\tAction|Sci-Fi|Thriller\n77\tNico Icon (1995)\tDocumentary\n78\t\"Crossing Guard\t The (1995)\"\n79\t\"Juror\t The (1996)\"\n80\t\"White Balloon\t The (Badkonake sefid) (1995)\"\n81\tThings to Do in Denver When You\u0027re Dead (1995)\tCrime|Drama|Romance\n82\tAntonia\u0027s Line (Antonia) (1995)\tComedy|Drama\n83\tOnce Upon a Time... When We Were Colored (1995)\tDrama|Romance\n84\tLast Summer in the Hamptons (1995)\tComedy|Drama\n85\tAngels and Insects (1995)\tDrama|Romance\n86\tWhite Squall (1996)\tAction|Adventure|Drama\n87\tDunston Checks In (1996)\tChildren|Comedy\n88\tBlack Sheep (1996)\tComedy\n89\tNick of Time (1995)\tAction|Thriller\n90\tThe Journey of August King (1995)\tDrama\n92\tMary Reilly (1996)\tDrama|Horror|Thriller\n93\tVampire in Brooklyn (1995)\tComedy|Horror|Romance\n94\tBeautiful Girls (1996)\tComedy|Drama|Romance\n95\tBroken Arrow (1996)\tAction|Adventure|Thriller\n96\tIn the Bleak Midwinter (1995)\tComedy|Drama\n97\t\"Hate (Haine\t La) (1995)\"\n98\tShopping (1994)\tAction|Thriller\n99\tHeidi Fleiss: Hollywood Madam (1995)\tDocumentary\n100\tCity Hall (1996)\tDrama|Thriller\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1634727081691_1707161938",
+      "id": "paragraph_1634727081691_1707161938",
+      "dateCreated": "2021-10-20 10:51:21.691",
+      "dateStarted": "2021-10-20 11:06:03.711",
+      "dateFinished": "2021-10-20 11:06:03.883",
+      "status": "FINISHED"
+    },
+    {
+      "text": "CREATE TABLE IF NOT EXISTS tags ( userId int, movieId int, tag String, `time` bigint)\nCOMMENT \"Movie Tags\"\nROW FORMAT DELIMITED\nFIELDS TERMINATED BY \u0027\\054\u0027\nLINES TERMINATED BY \u0027\\n\u0027\nSTORED AS TEXTFILE;",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-20 10:49:36.069",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Query executed successfully. Affected rows : -1\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1634726962057_1957617052",
+      "id": "paragraph_1634726962057_1957617052",
+      "dateCreated": "2021-10-20 10:49:22.058",
+      "dateStarted": "2021-10-20 10:49:36.075",
+      "dateFinished": "2021-10-20 10:49:36.238",
+      "status": "FINISHED"
+    },
+    {
+      "text": "LOAD DATA INPATH \u0027/dataset/ml-latest/tags.csv\u0027 overwrite INTO TABLE tags;",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-20 10:52:55.390",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Query executed successfully. Affected rows : -1\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1634727171671_593626615",
+      "id": "paragraph_1634727171671_593626615",
+      "dateCreated": "2021-10-20 10:52:51.671",
+      "dateStarted": "2021-10-20 10:52:55.397",
+      "dateFinished": "2021-10-20 10:52:55.830",
+      "status": "FINISHED"
+    },
+    {
+      "text": "CREATE TABLE IF NOT EXISTS ratings ( userId int, movieId int, rating double, `time` bigint)\nCOMMENT \"Movie Ratings\"\nROW FORMAT DELIMITED\nFIELDS TERMINATED BY \u0027\\054\u0027\nLINES TERMINATED BY \u0027\\n\u0027\nSTORED AS TEXTFILE;",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-20 10:49:45.881",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Query executed successfully. Affected rows : -1\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1634726976074_1300338924",
+      "id": "paragraph_1634726976074_1300338924",
+      "dateCreated": "2021-10-20 10:49:36.074",
+      "dateStarted": "2021-10-20 10:49:45.888",
+      "dateFinished": "2021-10-20 10:49:46.009",
+      "status": "FINISHED"
+    },
+    {
+      "text": "select count(*) from ratings;\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-20 11:04:47.466",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "col_name": "string",
+                      "data_type": "string",
+                      "comment": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                },
+                "multiBarChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                },
+                "stackedAreaChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                },
+                "lineChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                }
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "userid",
+                  "index": 0.0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [],
+              "values": [
+                {
+                  "name": "movieid",
+                  "index": 1.0,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          },
+          "1": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "_c0": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "WARNING: Hive-on-MR is deprecated in Hive 2 and may not be available in the future versions. Consider using a different execution engine (i.e. spark, tez) or using Hive 1.X releases.\n"
+          },
+          {
+            "type": "TABLE",
+            "data": "_c0\n27753445\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1634727249626_1663519820",
+      "id": "paragraph_1634727249626_1663519820",
+      "dateCreated": "2021-10-20 10:54:09.627",
+      "dateStarted": "2021-10-20 11:00:58.537",
+      "dateFinished": "2021-10-20 11:01:05.913",
+      "status": "FINISHED"
+    },
+    {
+      "text": "LOAD DATA INPATH \u0027/dataset/ml-latest/ratings.csv\u0027 overwrite INTO TABLE ratings;",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-20 10:53:11.747",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Query executed successfully. Affected rows : -1\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1634727188209_404062790",
+      "id": "paragraph_1634727188209_404062790",
+      "dateCreated": "2021-10-20 10:53:08.209",
+      "dateStarted": "2021-10-20 10:53:11.754",
+      "dateFinished": "2021-10-20 10:53:12.208",
+      "status": "FINISHED"
+    },
+    {
+      "text": "CREATE TABLE IF NOT EXISTS genome_scores ( movieId int, tagId int, relevance double)\nCOMMENT \"Movie Genome Scores\"\nROW FORMAT DELIMITED\nFIELDS TERMINATED BY \u0027\\054\u0027\nLINES TERMINATED BY \u0027\\n\u0027\nSTORED AS TEXTFILE;",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-20 10:49:53.562",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Query executed successfully. Affected rows : -1\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1634726985886_785207814",
+      "id": "paragraph_1634726985886_785207814",
+      "dateCreated": "2021-10-20 10:49:45.886",
+      "dateStarted": "2021-10-20 10:49:53.569",
+      "dateFinished": "2021-10-20 10:49:53.679",
+      "status": "FINISHED"
+    },
+    {
+      "text": "LOAD DATA INPATH \u0027/dataset/ml-latest/genome-tags.csv\u0027 overwrite INTO TABLE genome_tags;",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-20 10:53:23.660",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Query executed successfully. Affected rows : -1\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1634727200570_456938409",
+      "id": "paragraph_1634727200570_456938409",
+      "dateCreated": "2021-10-20 10:53:20.570",
+      "dateStarted": "2021-10-20 10:53:23.666",
+      "dateFinished": "2021-10-20 10:53:24.070",
+      "status": "FINISHED"
+    },
+    {
+      "text": "CREATE TABLE IF NOT EXISTS genome_tags ( tagId int, tags String)\nCOMMENT \u0027genome_tags details\u0027\nROW FORMAT DELIMITED\nFIELDS TERMINATED BY \u0027\\054\u0027\nLINES TERMINATED BY \u0027\\n\u0027\nSTORED AS TEXTFILE;",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-20 10:49:59.532",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Query executed successfully. Affected rows : -1\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1634726993567_298471936",
+      "id": "paragraph_1634726993567_298471936",
+      "dateCreated": "2021-10-20 10:49:53.567",
+      "dateStarted": "2021-10-20 10:49:59.539",
+      "dateFinished": "2021-10-20 10:49:59.661",
+      "status": "FINISHED"
+    },
+    {
+      "text": "LOAD DATA INPATH \u0027/dataset/ml-latest/genome-scores.csv\u0027 overwrite INTO TABLE genome_scores;",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-20 10:53:36.555",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Query executed successfully. Affected rows : -1\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1634726999538_2069953636",
+      "id": "paragraph_1634726999538_2069953636",
+      "dateCreated": "2021-10-20 10:49:59.538",
+      "dateStarted": "2021-10-20 10:53:36.562",
+      "dateFinished": "2021-10-20 10:53:37.027",
+      "status": "FINISHED"
+    },
+    {
+      "user": "anonymous",
+      "progress": 0,
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1634727216561_921389972",
+      "id": "paragraph_1634727216561_921389972",
+      "dateCreated": "2021-10-20 10:53:36.561",
+      "status": "READY"
+    }
+  ],
+  "name": "import-movielens",
+  "id": "2GMTTK5X9",
+  "defaultInterpreterGroup": "hive",
+  "version": "0.9.0",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}
