@@ -43,9 +43,77 @@
       "status": "FINISHED"
     },
     {
+      "text": "%hive\nshow tables;",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-30 10:29:41.200",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "tab_name": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "tab_name\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1635589767063_41724157",
+      "id": "paragraph_1635589767063_41724157",
+      "dateCreated": "2021-10-30 10:29:27.063",
+      "dateStarted": "2021-10-30 10:29:40.157",
+      "dateFinished": "2021-10-30 10:29:40.491",
+      "status": "FINISHED"
+    },
+    {
       "text": "select a.moviename as moviename,count(a.moviename) as total \nfrom t_movie a join t_rating b on a.movieid\u003db.movieid \ngroup by a.moviename \norder by total desc \nlimit 10;",
       "user": "anonymous",
-      "dateUpdated": "2021-10-21 08:12:43.322",
+      "dateUpdated": "2021-10-30 10:29:05.547",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -115,15 +183,11 @@
         "forms": {}
       },
       "results": {
-        "code": "SUCCESS",
+        "code": "ERROR",
         "msg": [
           {
             "type": "TEXT",
-            "data": "WARNING: Hive-on-MR is deprecated in Hive 2 and may not be available in the future versions. Consider using a different execution engine (i.e. spark, tez) or using Hive 1.X releases.\nSLF4J: Class path contains multiple SLF4J bindings.\nSLF4J: Found binding in [jar:file:/opt/hive/lib/log4j-slf4j-impl-2.6.2.jar!/org/slf4j/impl/StaticLoggerBinder.class]\nSLF4J: Found binding in [jar:file:/opt/hadoop-2.7.4/share/hadoop/common/lib/slf4j-log4j12-1.7.10.jar!/org/slf4j/impl/StaticLoggerBinder.class]\nSLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.\nSLF4J: Actual binding is of type [org.apache.logging.slf4j.Log4jLoggerFactory]\nExecution log at: /tmp/root/root_20211021044519_4d0b1fda-eede-4b39-be5f-b456b142470c.log\n2021-10-21 04:45:22\tStarting to launch local task to process map join;\tmaximum memory \u003d 477626368\n2021-10-21 04:45:23\tDump the side-table for tag: 0 with group count: 3883 into file: file:/tmp/root/d8ad932a-d8cb-47ba-9ad3-501b3d674aff/hive_2021-10-21_04-45-19_740_7509201125056122943-1/-local-10006/HashTable-Stage-2/MapJoin-mapfile10--.hashtable\n2021-10-21 04:45:23\tUploaded 1 File to: file:/tmp/root/d8ad932a-d8cb-47ba-9ad3-501b3d674aff/hive_2021-10-21_04-45-19_740_7509201125056122943-1/-local-10006/HashTable-Stage-2/MapJoin-mapfile10--.hashtable (180283 bytes)\n2021-10-21 04:45:23\tEnd of local task; Time Taken: 0.902 sec.\n"
-          },
-          {
-            "type": "TABLE",
-            "data": "moviename\ttotal\nAmerican Beauty (1999)\t3428\nStar Wars: Episode IV - A New Hope (1977)\t2991\nStar Wars: Episode V - The Empire Strikes Back (1980)\t2990\nStar Wars: Episode VI - Return of the Jedi (1983)\t2883\nJurassic Park (1993)\t2672\nSaving Private Ryan (1998)\t2653\nTerminator 2: Judgment Day (1991)\t2649\nMatrix, The (1999)\t2590\nBack to the Future (1985)\t2583\nSilence of the Lambs, The (1991)\t2578\n"
+            "data": "Error while compiling statement: FAILED: SemanticException [Error 10001]: Line 2:5 Table not found \u0027t_movie\u0027"
           }
         ]
       },
@@ -133,9 +197,9 @@
       "jobName": "paragraph_1634728205039_1195705975",
       "id": "paragraph_1634728205039_1195705975",
       "dateCreated": "2021-10-20 11:10:05.039",
-      "dateStarted": "2021-10-21 04:45:19.724",
-      "dateFinished": "2021-10-21 04:45:29.208",
-      "status": "FINISHED"
+      "dateStarted": "2021-10-30 10:29:05.555",
+      "dateFinished": "2021-10-30 10:29:08.788",
+      "status": "ERROR"
     },
     {
       "text": "%md\n## 分别求男性，女性当中评分最高的10部电影（性别，电影名，影评分）",
@@ -398,7 +462,7 @@
     {
       "text": "select a.age as age, avg(b.rate) as avgrate \nfrom t_user a join t_rating b on a.userid\u003db.userid \nwhere b.movieid\u003d2116 \ngroup by a.age;",
       "user": "anonymous",
-      "dateUpdated": "2021-10-21 07:54:53.619",
+      "dateUpdated": "2021-10-30 10:29:00.339",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -421,6 +485,34 @@
                   "tableColumnTypeState": {
                     "names": {
                       "tab_name": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          },
+          "1": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "age": "string",
+                      "avgrate": "string"
                     },
                     "updated": false
                   },

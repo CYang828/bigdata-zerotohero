@@ -103,8 +103,6 @@
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-
 <!-- GETTING STARTED -->
 ## 快速开始
 
@@ -118,6 +116,7 @@ docker-compose up
 ```
 
 ### 步骤1，导入数据到 HDFS 中
+```bash
 docker cp dataset/ namenode:/hadoop-data/ 
 docker cp dataset/ml-1m namenode:/hadoop-data/ 
 docker cp dataset/shakespeare.txt namenode:/hadoop-data/ 
@@ -127,17 +126,15 @@ hdfs dfs -mkdir /dataset
 hdfs dfs -put /hadoop-data/dataset/ml-latest/ /dataset/
 hdfs dfs -put /hadoop-data/ml-1m/ /dataset/
 hdfs dfs -put /hadoop-data/shakespeare.txt /dataset/
+```
 
-### 步骤2，导入数据到 Hive 中
-course/hive/import-movielens.zpln
+### 步骤2，导入数据到 Hive 中 
+- 进入 [zeppelin](http://localhost:8085/) 导入 movielens 数据
+- 使用 hive 探索 movielens 数据
 
-### 步骤3，数据分析/探索
-https://www.kaggle.com/rpbarros/sql-movielens/notebook 
-一些数据分析的 case
-一些可视化操作
+### 步骤3，spark 基础
+- 进入 [zeppelin](http://localhost:8085/) 开启 spark 教程
 
-### 步骤4，spark 基础
-http://localhost:8085/#
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -192,7 +189,9 @@ MIT 协议. 查看 `LICENSE.txt` 获取更多信息。
 <!-- CONTACT -->
 ## 联系
 
-Aimaksen - 公众号 @Aimaksen - zhangchunyang_pri@126.com
+![](images/wechat.jpg)
+
+知乎 @张春阳 - zhangchunyang_pri@126.com
 
 Project Link: [https://github.com/BSlience/bigdata-zerotohero/](https://github.com/BSlience/bigdata-zerotohero/)
 
