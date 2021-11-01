@@ -108,8 +108,6 @@
 
 快速开始体验大数据环境。
 
-## 快速开始
-
 ```bash
 cd bigdata-environment/
 docker-compose up
@@ -132,12 +130,14 @@ hdfs dfs -put /hadoop-data/shakespeare.txt /dataset/
 - 进入 [zeppelin](http://localhost:8085/) 导入 movielens 数据
 - 使用 hive 探索 movielens 数据
 
-### 步骤3，spark 基础
-- 进入 [zeppelin](http://localhost:8085/) 开启 spark 教程
+### 步骤3, Hbase 的使用
+- 进入 [zeppelin](http://localhost:8085/) 进入 hbase 教程
+
+### 步骤4，spark 基础
+- 进入 [zeppelin](http://localhost:8085/) 进入 spark 教程
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
 
 
 <!-- USAGE EXAMPLES -->

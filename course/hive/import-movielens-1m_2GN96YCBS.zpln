@@ -3,7 +3,7 @@
     {
       "text": "create table t_user(\nuserid bigint,\nsex string,\nage int,\noccupation string,\nzipcode string) \nrow format serde \u0027org.apache.hadoop.hive.serde2.RegexSerDe\u0027 \nwith serdeproperties(\u0027input.regex\u0027\u003d\u0027(.*)::(.*)::(.*)::(.*)::(.*)\u0027,\u0027output.format.string\u0027\u003d\u0027%1$s %2$s %3$s %4$s %5$s\u0027)\nstored as textfile;",
       "user": "anonymous",
-      "dateUpdated": "2021-10-21 04:42:36.872",
+      "dateUpdated": "2021-10-30 11:50:01.763",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -36,14 +36,82 @@
       "jobName": "paragraph_1634791320512_1783410820",
       "id": "paragraph_1634791320512_1783410820",
       "dateCreated": "2021-10-21 04:42:00.512",
-      "dateStarted": "2021-10-21 04:42:36.877",
-      "dateFinished": "2021-10-21 04:42:37.040",
+      "dateStarted": "2021-10-30 11:50:01.769",
+      "dateFinished": "2021-10-30 11:50:02.240",
+      "status": "FINISHED"
+    },
+    {
+      "text": "show tables;",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-30 11:50:31.554",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "tab_name": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "tab_name\nt_user\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1635594626681_1217033540",
+      "id": "paragraph_1635594626681_1217033540",
+      "dateCreated": "2021-10-30 11:50:26.681",
+      "dateStarted": "2021-10-30 11:50:30.878",
+      "dateFinished": "2021-10-30 11:50:30.950",
       "status": "FINISHED"
     },
     {
       "text": "load data inpath \"/dataset/ml-1m/users.dat\" into table t_user;",
       "user": "anonymous",
-      "dateUpdated": "2021-10-21 04:43:19.400",
+      "dateUpdated": "2021-10-30 11:50:56.662",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -76,14 +144,86 @@
       "jobName": "paragraph_1634791356875_1716848373",
       "id": "paragraph_1634791356875_1716848373",
       "dateCreated": "2021-10-21 04:42:36.875",
-      "dateStarted": "2021-10-21 04:43:19.406",
-      "dateFinished": "2021-10-21 04:43:19.804",
+      "dateStarted": "2021-10-30 11:50:56.664",
+      "dateFinished": "2021-10-30 11:50:57.211",
+      "status": "FINISHED"
+    },
+    {
+      "text": "select * from t_user limit 10;",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-30 11:51:18.817",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "userid": "string",
+                      "sex": "string",
+                      "age": "string",
+                      "occupation": "string",
+                      "zipcode": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "userid\tsex\tage\toccupation\tzipcode\n1\tF\t1\t10\t48067\n2\tM\t56\t16\t70072\n3\tM\t25\t15\t55117\n4\tM\t45\t7\t02460\n5\tM\t25\t20\t55455\n6\tF\t50\t9\t55117\n7\tM\t35\t1\t06810\n8\tM\t25\t12\t11413\n9\tM\t25\t17\t61614\n10\tF\t35\t1\t95370\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1635594666156_1776960249",
+      "id": "paragraph_1635594666156_1776960249",
+      "dateCreated": "2021-10-30 11:51:06.156",
+      "dateStarted": "2021-10-30 11:51:17.023",
+      "dateFinished": "2021-10-30 11:51:18.091",
       "status": "FINISHED"
     },
     {
       "text": "create table t_movie(\nmovieid bigint,\nmoviename string,\nmovietype string) \nrow format serde \u0027org.apache.hadoop.hive.serde2.RegexSerDe\u0027 \nwith serdeproperties(\u0027input.regex\u0027\u003d\u0027(.*)::(.*)::(.*)\u0027,\u0027output.format.string\u0027\u003d\u0027%1$s %2$s %3$s\u0027)\nstored as textfile;",
       "user": "anonymous",
-      "dateUpdated": "2021-10-21 04:43:32.063",
+      "dateUpdated": "2021-10-30 11:52:15.823",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -116,14 +256,14 @@
       "jobName": "paragraph_1634791372420_683180341",
       "id": "paragraph_1634791372420_683180341",
       "dateCreated": "2021-10-21 04:42:52.420",
-      "dateStarted": "2021-10-21 04:43:32.068",
-      "dateFinished": "2021-10-21 04:43:32.213",
+      "dateStarted": "2021-10-30 11:52:15.829",
+      "dateFinished": "2021-10-30 11:52:15.889",
       "status": "FINISHED"
     },
     {
       "text": "load data inpath \"/dataset/ml-1m/movies.dat\" into table t_movie;",
       "user": "anonymous",
-      "dateUpdated": "2021-10-21 04:43:50.821",
+      "dateUpdated": "2021-10-30 11:52:18.961",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -156,14 +296,143 @@
       "jobName": "paragraph_1634791412066_1199757545",
       "id": "paragraph_1634791412066_1199757545",
       "dateCreated": "2021-10-21 04:43:32.066",
-      "dateStarted": "2021-10-21 04:43:50.826",
-      "dateFinished": "2021-10-21 04:43:51.160",
+      "dateStarted": "2021-10-30 11:52:18.968",
+      "dateFinished": "2021-10-30 11:52:19.240",
+      "status": "FINISHED"
+    },
+    {
+      "text": "show tables;\nselect * from t_movie limit 10;",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-01 07:03:10.236",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "tab_name": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          },
+          "1": {
+            "graph": {
+              "mode": "stackedAreaChart",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "movieid": "string",
+                      "moviename": "string",
+                      "movietype": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                },
+                "multiBarChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                },
+                "stackedAreaChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                }
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "movieid",
+                  "index": 0.0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [],
+              "values": [
+                {
+                  "name": "moviename",
+                  "index": 1.0,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "tab_name\nt_movie\nt_user\n"
+          },
+          {
+            "type": "TABLE",
+            "data": "movieid\tmoviename\tmovietype\n1\tToy Story (1995)\tAnimation|Children\u0027s|Comedy\n2\tJumanji (1995)\tAdventure|Children\u0027s|Fantasy\n3\tGrumpier Old Men (1995)\tComedy|Romance\n4\tWaiting to Exhale (1995)\tComedy|Drama\n5\tFather of the Bride Part II (1995)\tComedy\n6\tHeat (1995)\tAction|Crime|Thriller\n7\tSabrina (1995)\tComedy|Romance\n8\tTom and Huck (1995)\tAdventure|Children\u0027s\n9\tSudden Death (1995)\tAction\n10\tGoldenEye (1995)\tAction|Adventure|Thriller\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1635594747982_152401999",
+      "id": "paragraph_1635594747982_152401999",
+      "dateCreated": "2021-10-30 11:52:27.982",
+      "dateStarted": "2021-10-30 11:53:05.560",
+      "dateFinished": "2021-10-30 11:53:05.665",
       "status": "FINISHED"
     },
     {
       "text": "create table t_rating(\nuserid bigint,\nmovieid bigint,\nrate double,\ntimes string) \nrow format serde \u0027org.apache.hadoop.hive.serde2.RegexSerDe\u0027 \nwith serdeproperties(\u0027input.regex\u0027\u003d\u0027(.*)::(.*)::(.*)::(.*)\u0027,\u0027output.format.string\u0027\u003d\u0027%1$s %2$s %3$s %4$s\u0027)\nstored as textfile;",
       "user": "anonymous",
-      "dateUpdated": "2021-10-21 04:44:01.061",
+      "dateUpdated": "2021-10-30 11:53:33.326",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -196,14 +465,14 @@
       "jobName": "paragraph_1634791430824_1434673223",
       "id": "paragraph_1634791430824_1434673223",
       "dateCreated": "2021-10-21 04:43:50.824",
-      "dateStarted": "2021-10-21 04:44:01.067",
-      "dateFinished": "2021-10-21 04:44:01.223",
+      "dateStarted": "2021-10-30 11:53:33.333",
+      "dateFinished": "2021-10-30 11:53:33.390",
       "status": "FINISHED"
     },
     {
       "text": "load data inpath \"/dataset/ml-1m/ratings.dat\" into table t_rating;",
       "user": "anonymous",
-      "dateUpdated": "2021-10-21 04:44:26.712",
+      "dateUpdated": "2021-10-30 11:53:36.627",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -236,8 +505,101 @@
       "jobName": "paragraph_1634791441065_926849793",
       "id": "paragraph_1634791441065_926849793",
       "dateCreated": "2021-10-21 04:44:01.065",
-      "dateStarted": "2021-10-21 04:44:26.717",
-      "dateFinished": "2021-10-21 04:44:27.059",
+      "dateStarted": "2021-10-30 11:53:36.634",
+      "dateFinished": "2021-10-30 11:53:36.880",
+      "status": "FINISHED"
+    },
+    {
+      "text": "select * from t_rating limit 10;",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-01 07:03:12.690",
+      "progress": 0,
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "multiBarChart",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "userid": "string",
+                      "movieid": "string",
+                      "rate": "string",
+                      "times": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                },
+                "multiBarChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                }
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "userid",
+                  "index": 0.0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [],
+              "values": [
+                {
+                  "name": "movieid",
+                  "index": 1.0,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/sql"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "userid\tmovieid\trate\ttimes\n1\t1193\t5.0\t978300760\n1\t661\t3.0\t978302109\n1\t914\t3.0\t978301968\n1\t3408\t4.0\t978300275\n1\t2355\t5.0\t978824291\n1\t1197\t3.0\t978302268\n1\t1287\t5.0\t978302039\n1\t2804\t5.0\t978300719\n1\t594\t4.0\t978302268\n1\t919\t4.0\t978301368\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1634791466716_839367459",
+      "id": "paragraph_1634791466716_839367459",
+      "dateCreated": "2021-10-21 04:44:26.716",
+      "dateStarted": "2021-10-30 11:53:49.745",
+      "dateFinished": "2021-10-30 11:53:49.879",
       "status": "FINISHED"
     },
     {
@@ -251,9 +613,9 @@
       "apps": [],
       "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1634791466716_839367459",
-      "id": "paragraph_1634791466716_839367459",
-      "dateCreated": "2021-10-21 04:44:26.716",
+      "jobName": "paragraph_1635594829743_1456963398",
+      "id": "paragraph_1635594829743_1456963398",
+      "dateCreated": "2021-10-30 11:53:49.743",
       "status": "READY"
     }
   ],

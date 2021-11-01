@@ -230,8 +230,7 @@ services:
       - hive-server
       - namenode
     volumes:
-      - ../course/hive:/opt/zeppelin/notebook/hive/
-      - ../course/spark:/opt/zeppelin/notebook/spark/
+      - ../course/notebook/:/opt/zeppelin/notebook/
 
   datascience-lab:
     build: ./datascience-lab/ 

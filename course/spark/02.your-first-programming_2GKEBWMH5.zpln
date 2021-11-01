@@ -37,7 +37,7 @@
     {
       "text": "%pyspark\n\nshakespeare_path \u003d \"hdfs://namenode:9000/dataset/shakespeare.txt\"\nshakespeare_rdd \u003d sc.textFile(shakespeare_path)\nshakespeare_rdd.take(10)\n",
       "user": "anonymous",
-      "dateUpdated": "2021-10-22 07:35:50.975",
+      "dateUpdated": "2021-10-30 14:25:35.448",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -75,7 +75,7 @@
           "group": "spark",
           "values": [
             {
-              "jobUrl": "http://7cc9fe5456b4:4040/jobs/job?id\u003d0"
+              "jobUrl": "http://7cc9fe5456b4:4040/jobs/job?id\u003d1"
             }
           ],
           "interpreterSettingId": "spark"
@@ -85,26 +85,27 @@
       "jobName": "paragraph_1634885316158_1055626005",
       "id": "20211022-064836_1102530837",
       "dateCreated": "2021-10-22 06:48:36.158",
-      "dateStarted": "2021-10-22 07:35:50.984",
-      "dateFinished": "2021-10-22 07:35:52.781",
+      "dateStarted": "2021-10-30 14:25:35.455",
+      "dateFinished": "2021-10-30 14:25:37.674",
       "status": "FINISHED"
     },
     {
       "text": "%pyspark\n# 获取数据集的行数\nshakespeare_rdd.count()",
       "user": "anonymous",
-      "dateUpdated": "2021-10-22 07:36:12.381",
+      "dateUpdated": "2021-10-30 14:26:49.607",
       "progress": 0,
       "config": {
-        "editorMode": "ace/mode/text",
+        "editorMode": "ace/mode/python",
         "editorHide": false,
         "colWidth": 12.0,
         "fontSize": 9.0,
         "enabled": true,
         "results": {},
         "editorSetting": {
-          "language": "text",
+          "language": "python",
           "editOnDblClick": false,
-          "completionSupport": true
+          "completionSupport": true,
+          "completionKey": "TAB"
         }
       },
       "settings": {
@@ -129,7 +130,7 @@
           "group": "spark",
           "values": [
             {
-              "jobUrl": "http://7cc9fe5456b4:4040/jobs/job?id\u003d1"
+              "jobUrl": "http://7cc9fe5456b4:4040/jobs/job?id\u003d2"
             }
           ],
           "interpreterSettingId": "spark"
@@ -139,14 +140,14 @@
       "jobName": "paragraph_1634885316158_804565964",
       "id": "20211022-064836_1221917025",
       "dateCreated": "2021-10-22 06:48:36.158",
-      "dateStarted": "2021-10-22 07:36:12.395",
-      "dateFinished": "2021-10-22 07:36:14.220",
+      "dateStarted": "2021-10-30 14:26:49.609",
+      "dateFinished": "2021-10-30 14:26:51.142",
       "status": "FINISHED"
     },
     {
-      "text": "%python\n# 移除所有的标点符号\n# 把所有的单词转换成小写\ndef lower_clean_str(x):\n    punc\u003d\u0027!\"#$%\u0026\\\u0027()*+,./:;\u003c\u003d\u003e?@[\\\\]^_`{|}~-\u0027\n    lowercased_str \u003d x.lower()\n    for ch in punc:\n        lowercased_str \u003d lowercased_str.replace(ch, \u0027\u0027)\n    return lowercased_str\n    \n",
+      "text": "%pyspark\n# 移除所有的标点符号\n# 把所有的单词转换成小写\ndef lower_clean_str(x):\n    punc\u003d\u0027!\"#$%\u0026\\\u0027()*+,./:;\u003c\u003d\u003e?@[\\\\]^_`{|}~-\u0027\n    lowercased_str \u003d x.lower()\n    for ch in punc:\n        lowercased_str \u003d lowercased_str.replace(ch, \u0027\u0027)\n    return lowercased_str\n    \n",
       "user": "anonymous",
-      "dateUpdated": "2021-10-22 07:36:50.710",
+      "dateUpdated": "2021-10-30 14:29:42.515",
       "progress": 0,
       "config": {
         "editorMode": "ace/mode/text",
@@ -176,14 +177,14 @@
       "jobName": "paragraph_1634885316158_1792344772",
       "id": "20211022-064836_311417994",
       "dateCreated": "2021-10-22 06:48:36.158",
-      "dateStarted": "2021-10-22 07:36:50.720",
-      "dateFinished": "2021-10-22 07:36:52.805",
+      "dateStarted": "2021-10-30 14:29:42.522",
+      "dateFinished": "2021-10-30 14:29:42.536",
       "status": "FINISHED"
     },
     {
-      "text": "%python\n\nsentence \u003d \u0027You are An apple.\u0027\nlower_clean_str(sentence)",
+      "text": "%pyspark\n\nsentence \u003d \u0027You are An apple.\u0027\nlower_clean_str(sentence)",
       "user": "anonymous",
-      "dateUpdated": "2021-10-22 07:36:52.724",
+      "dateUpdated": "2021-10-30 14:29:46.773",
       "progress": 0,
       "config": {
         "editorMode": "ace/mode/python",
@@ -195,7 +196,8 @@
         "editorSetting": {
           "language": "python",
           "editOnDblClick": false,
-          "completionSupport": true
+          "completionSupport": true,
+          "completionKey": "TAB"
         }
       },
       "settings": {
@@ -217,14 +219,14 @@
       "jobName": "paragraph_1634885316158_68962941",
       "id": "20211022-064836_1309136773",
       "dateCreated": "2021-10-22 06:48:36.158",
-      "dateStarted": "2021-10-22 07:36:52.727",
-      "dateFinished": "2021-10-22 07:36:52.818",
+      "dateStarted": "2021-10-30 14:29:46.780",
+      "dateFinished": "2021-10-30 14:29:46.805",
       "status": "FINISHED"
     },
     {
       "text": "%pyspark\n# 给文本中的所有行，都执行 lower_clean_str 方法\nshakespeare_rdd \u003d shakespeare_rdd.map(lower_clean_str)\n# 读取转换后的数据\nshakespeare_rdd.take(10)",
       "user": "anonymous",
-      "dateUpdated": "2021-10-22 07:37:01.165",
+      "dateUpdated": "2021-10-30 14:29:48.315",
       "progress": 0,
       "config": {
         "editorMode": "ace/mode/python",
@@ -262,7 +264,7 @@
           "group": "spark",
           "values": [
             {
-              "jobUrl": "http://7cc9fe5456b4:4040/jobs/job?id\u003d2"
+              "jobUrl": "http://7cc9fe5456b4:4040/jobs/job?id\u003d3"
             }
           ],
           "interpreterSettingId": "spark"
@@ -272,14 +274,14 @@
       "jobName": "paragraph_1634885316158_1569862318",
       "id": "20211022-064836_897826993",
       "dateCreated": "2021-10-22 06:48:36.158",
-      "dateStarted": "2021-10-22 07:37:01.175",
-      "dateFinished": "2021-10-22 07:37:02.766",
+      "dateStarted": "2021-10-30 14:29:48.322",
+      "dateFinished": "2021-10-30 14:29:49.955",
       "status": "FINISHED"
     },
     {
       "text": "%pyspark\n# 使用 split 方法，把每一行中的单词分开（分词），并且把原来一行一行的数据“拉平”\nshakespeare_rdd \u003d shakespeare_rdd.flatMap(lambda satir: satir.split(\" \"))\nshakespeare_rdd.take(15)",
       "user": "anonymous",
-      "dateUpdated": "2021-10-22 07:37:16.640",
+      "dateUpdated": "2021-10-30 14:32:09.806",
       "progress": 0,
       "config": {
         "editorMode": "ace/mode/python",
@@ -317,7 +319,7 @@
           "group": "spark",
           "values": [
             {
-              "jobUrl": "http://7cc9fe5456b4:4040/jobs/job?id\u003d3"
+              "jobUrl": "http://7cc9fe5456b4:4040/jobs/job?id\u003d4"
             }
           ],
           "interpreterSettingId": "spark"
@@ -327,14 +329,14 @@
       "jobName": "paragraph_1634885316158_36084613",
       "id": "20211022-064836_1525885073",
       "dateCreated": "2021-10-22 06:48:36.158",
-      "dateStarted": "2021-10-22 07:37:16.650",
-      "dateFinished": "2021-10-22 07:37:18.213",
+      "dateStarted": "2021-10-30 14:32:09.813",
+      "dateFinished": "2021-10-30 14:32:11.446",
       "status": "FINISHED"
     },
     {
       "text": "%pyspark\n# 使用 filter 方法，把分词后出现的空格符给过滤掉\nshakespeare_rdd \u003d shakespeare_rdd.filter(lambda x: x!\u003d\u0027\u0027)\nshakespeare_rdd.take(15)",
       "user": "anonymous",
-      "dateUpdated": "2021-10-22 07:37:28.754",
+      "dateUpdated": "2021-10-30 14:32:53.236",
       "progress": 0,
       "config": {
         "editorMode": "ace/mode/python",
@@ -372,7 +374,7 @@
           "group": "spark",
           "values": [
             {
-              "jobUrl": "http://7cc9fe5456b4:4040/jobs/job?id\u003d4"
+              "jobUrl": "http://7cc9fe5456b4:4040/jobs/job?id\u003d5"
             }
           ],
           "interpreterSettingId": "spark"
@@ -382,8 +384,8 @@
       "jobName": "paragraph_1634885316158_1822288914",
       "id": "20211022-064836_913622217",
       "dateCreated": "2021-10-22 06:48:36.158",
-      "dateStarted": "2021-10-22 07:37:28.763",
-      "dateFinished": "2021-10-22 07:37:30.354",
+      "dateStarted": "2021-10-30 14:32:53.244",
+      "dateFinished": "2021-10-30 14:32:54.873",
       "status": "FINISHED"
     },
     {
@@ -431,175 +433,7 @@
     {
       "text": "%pyspark\n# 为了能够统计单词出现的次数，我们需要先把原来的 rdd 转换成 (word, 1) 这样的一对对的 rdd\nshakespeare_count \u003d shakespeare_rdd.map(lambda  word: (word,1))\nshakespeare_count.take(15)",
       "user": "anonymous",
-      "dateUpdated": "2021-10-22 07:37:41.559",
-      "progress": 0,
-      "config": {
-        "editorMode": "ace/mode/text",
-        "editorHide": false,
-        "colWidth": 12.0,
-        "fontSize": 9.0,
-        "enabled": true,
-        "results": {},
-        "editorSetting": {
-          "language": "text",
-          "editOnDblClick": false,
-          "completionSupport": true
-        }
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
-      },
-      "results": {
-        "code": "SUCCESS",
-        "msg": [
-          {
-            "type": "TEXT",
-            "data": "[(\u0027the\u0027, 1), (\u0027sonnets\u0027, 1), (\u0027by\u0027, 1), (\u0027william\u0027, 1), (\u0027shakespeare\u0027, 1), (\u0027from\u0027, 1), (\u0027fairest\u0027, 1), (\u0027creatures\u0027, 1), (\u0027we\u0027, 1), (\u0027desire\u0027, 1), (\u0027increase\u0027, 1), (\u0027that\u0027, 1), (\u0027thereby\u0027, 1), (\u0027beautys\u0027, 1), (\u0027rose\u0027, 1)]\n"
-          }
-        ]
-      },
-      "apps": [],
-      "runtimeInfos": {
-        "jobUrl": {
-          "propertyName": "jobUrl",
-          "label": "SPARK JOB",
-          "tooltip": "View in Spark web UI",
-          "group": "spark",
-          "values": [
-            {
-              "jobUrl": "http://7cc9fe5456b4:4040/jobs/job?id\u003d5"
-            }
-          ],
-          "interpreterSettingId": "spark"
-        }
-      },
-      "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1634885316158_109121620",
-      "id": "20211022-064836_1829912659",
-      "dateCreated": "2021-10-22 06:48:36.158",
-      "dateStarted": "2021-10-22 07:37:41.564",
-      "dateFinished": "2021-10-22 07:37:43.330",
-      "status": "FINISHED"
-    },
-    {
-      "text": "%pyspark\n# 使用 reduceByKey 来统计出每个单词出现的次数\nshakespeare_count_rbk \u003d shakespeare_count.reduceByKey(lambda x,y:(x+y)).sortByKey()\nshakespeare_count_rbk.take(10)",
-      "user": "anonymous",
-      "dateUpdated": "2021-10-22 07:38:03.784",
-      "progress": 0,
-      "config": {
-        "editorMode": "ace/mode/text",
-        "editorHide": false,
-        "colWidth": 12.0,
-        "fontSize": 9.0,
-        "enabled": true,
-        "results": {},
-        "editorSetting": {
-          "language": "text",
-          "editOnDblClick": false,
-          "completionSupport": true
-        }
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
-      },
-      "results": {
-        "code": "SUCCESS",
-        "msg": [
-          {
-            "type": "TEXT",
-            "data": "[(\u0027a\u0027, 163), (\u0027abhor\u0027, 2), (\u0027abide\u0027, 2), (\u0027able\u0027, 1), (\u0027about\u0027, 1), (\u0027above\u0027, 4), (\u0027absence\u0027, 5), (\u0027absent\u0027, 3), (\u0027abundance\u0027, 4), (\u0027abundant\u0027, 1)]\n"
-          }
-        ]
-      },
-      "apps": [],
-      "runtimeInfos": {
-        "jobUrl": {
-          "propertyName": "jobUrl",
-          "label": "SPARK JOB",
-          "tooltip": "View in Spark web UI",
-          "group": "spark",
-          "values": [
-            {
-              "jobUrl": "http://7cc9fe5456b4:4040/jobs/job?id\u003d6"
-            },
-            {
-              "jobUrl": "http://7cc9fe5456b4:4040/jobs/job?id\u003d7"
-            },
-            {
-              "jobUrl": "http://7cc9fe5456b4:4040/jobs/job?id\u003d8"
-            }
-          ],
-          "interpreterSettingId": "spark"
-        }
-      },
-      "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1634885316158_1586460302",
-      "id": "20211022-064836_778455744",
-      "dateCreated": "2021-10-22 06:48:36.158",
-      "dateStarted": "2021-10-22 07:38:03.786",
-      "dateFinished": "2021-10-22 07:38:07.318",
-      "status": "FINISHED"
-    },
-    {
-      "text": "%pyspark\n# 为了能够得到使用频次倒序排列的结果，我们要先把 shakespeare_count 转换成 (count, word)\nshakespeare_count_rbk \u003d shakespeare_count_rbk.map(lambda x:(x[1],x[0]))\nshakespeare_count_rbk.take(15)",
-      "user": "anonymous",
-      "dateUpdated": "2021-10-22 07:38:16.282",
-      "progress": 0,
-      "config": {
-        "editorMode": "ace/mode/text",
-        "editorHide": false,
-        "colWidth": 12.0,
-        "fontSize": 9.0,
-        "enabled": true,
-        "results": {},
-        "editorSetting": {
-          "language": "text",
-          "editOnDblClick": false,
-          "completionSupport": true
-        }
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
-      },
-      "results": {
-        "code": "SUCCESS",
-        "msg": [
-          {
-            "type": "TEXT",
-            "data": "[(163, \u0027a\u0027), (2, \u0027abhor\u0027), (2, \u0027abide\u0027), (1, \u0027able\u0027), (1, \u0027about\u0027), (4, \u0027above\u0027), (5, \u0027absence\u0027), (3, \u0027absent\u0027), (4, \u0027abundance\u0027), (1, \u0027abundant\u0027), (3, \u0027abuse\u0027), (1, \u0027abused\u0027), (1, \u0027abuses\u0027), (1, \u0027abysm\u0027), (1, \u0027accents\u0027)]\n"
-          }
-        ]
-      },
-      "apps": [],
-      "runtimeInfos": {
-        "jobUrl": {
-          "propertyName": "jobUrl",
-          "label": "SPARK JOB",
-          "tooltip": "View in Spark web UI",
-          "group": "spark",
-          "values": [
-            {
-              "jobUrl": "http://7cc9fe5456b4:4040/jobs/job?id\u003d9"
-            }
-          ],
-          "interpreterSettingId": "spark"
-        }
-      },
-      "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1634885316158_1338824167",
-      "id": "20211022-064836_1042583881",
-      "dateCreated": "2021-10-22 06:48:36.158",
-      "dateStarted": "2021-10-22 07:38:16.285",
-      "dateFinished": "2021-10-22 07:38:16.356",
-      "status": "FINISHED"
-    },
-    {
-      "text": "%pyspark\n# 使用 sortByKey 来获取 key 的倒序结果\nshakespeare_count_rbk.sortByKey(False).take(100)",
-      "user": "anonymous",
-      "dateUpdated": "2021-10-22 07:38:26.497",
+      "dateUpdated": "2021-10-30 14:33:43.806",
       "progress": 0,
       "config": {
         "editorMode": "ace/mode/python",
@@ -624,7 +458,123 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "[(490, \u0027and\u0027), (432, \u0027the\u0027), (408, \u0027to\u0027), (393, \u0027my\u0027), (370, \u0027of\u0027), (344, \u0027i\u0027), (323, \u0027in\u0027), (322, \u0027that\u0027), (287, \u0027thy\u0027), (235, \u0027thou\u0027), (181, \u0027with\u0027), (171, \u0027for\u0027), (168, \u0027is\u0027), (167, \u0027not\u0027), (164, \u0027me\u0027), (163, \u0027a\u0027), (163, \u0027but\u0027), (162, \u0027love\u0027), (162, \u0027thee\u0027), (145, \u0027so\u0027), (142, \u0027be\u0027), (121, \u0027as\u0027), (117, \u0027all\u0027), (112, \u0027you\u0027), (111, \u0027it\u0027), (108, \u0027which\u0027), (107, \u0027his\u0027), (106, \u0027when\u0027), (105, \u0027this\u0027), (100, \u0027your\u0027), (94, \u0027by\u0027), (88, \u0027doth\u0027), (84, \u0027do\u0027), (82, \u0027from\u0027), (80, \u0027on\u0027), (79, \u0027no\u0027), (79, \u0027or\u0027), (77, \u0027self\u0027), (76, \u0027have\u0027), (74, \u0027then\u0027), (70, \u0027what\u0027), (69, \u0027are\u0027), (68, \u0027if\u0027), (64, \u0027more\u0027), (64, \u0027will\u0027), (63, \u0027mine\u0027), (63, \u0027their\u0027), (59, \u0027shall\u0027), (56, \u0027eyes\u0027), (55, \u0027sweet\u0027), (53, \u0027time\u0027), (52, \u0027beauty\u0027), (52, \u0027nor\u0027), (52, \u0027they\u0027), (51, \u0027art\u0027), (51, \u0027her\u0027), (51, \u0027yet\u0027), (50, \u0027heart\u0027), (50, \u0027o\u0027), (48, \u0027than\u0027), (46, \u0027now\u0027), (44, \u0027can\u0027), (44, \u0027should\u0027), (44, \u0027thine\u0027), (43, \u0027fair\u0027), (43, \u0027hath\u0027), (43, \u0027he\u0027), (43, \u0027make\u0027), (43, \u0027one\u0027), (41, \u0027still\u0027), (40, \u0027how\u0027), (40, \u0027where\u0027), (38, \u0027him\u0027), (37, \u0027eye\u0027), (37, \u0027true\u0027), (35, \u0027am\u0027), (35, \u0027see\u0027), (34, \u0027like\u0027), (34, \u0027loves\u0027), (33, \u0027she\u0027), (33, \u0027those\u0027), (33, \u0027though\u0027), (32, \u0027being\u0027), (31, \u0027some\u0027), (31, \u0027such\u0027), (30, \u0027own\u0027), (29, \u0027dost\u0027), (29, \u0027every\u0027), (29, \u0027live\u0027), (29, \u0027may\u0027), (29, \u0027upon\u0027), (29, \u0027was\u0027), (29, \u0027were\u0027), (29, \u0027who\u0027), (28, \u0027praise\u0027), (28, \u0027say\u0027), (27, \u0027give\u0027), (27, \u0027most\u0027), (27, \u0027world\u0027), (26, \u0027at\u0027)]\n"
+            "data": "[(\u0027the\u0027, 1), (\u0027sonnets\u0027, 1), (\u0027by\u0027, 1), (\u0027william\u0027, 1), (\u0027shakespeare\u0027, 1), (\u0027from\u0027, 1), (\u0027fairest\u0027, 1), (\u0027creatures\u0027, 1), (\u0027we\u0027, 1), (\u0027desire\u0027, 1), (\u0027increase\u0027, 1), (\u0027that\u0027, 1), (\u0027thereby\u0027, 1), (\u0027beautys\u0027, 1), (\u0027rose\u0027, 1)]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://7cc9fe5456b4:4040/jobs/job?id\u003d6"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1634885316158_109121620",
+      "id": "20211022-064836_1829912659",
+      "dateCreated": "2021-10-22 06:48:36.158",
+      "dateStarted": "2021-10-30 14:33:43.813",
+      "dateFinished": "2021-10-30 14:33:43.924",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%pyspark\n# 使用 reduceByKey 来统计出每个单词出现的次数\nshakespeare_count_rbk \u003d shakespeare_count.reduceByKey(lambda x,y:(x+y)).sortByKey()\nshakespeare_count_rbk.take(10)",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-30 14:34:13.218",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false,
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "completionKey": "TAB"
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "[(\u0027a\u0027, 163), (\u0027abhor\u0027, 2), (\u0027abide\u0027, 2), (\u0027able\u0027, 1), (\u0027about\u0027, 1), (\u0027above\u0027, 4), (\u0027absence\u0027, 5), (\u0027absent\u0027, 3), (\u0027abundance\u0027, 4), (\u0027abundant\u0027, 1)]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://7cc9fe5456b4:4040/jobs/job?id\u003d7"
+            },
+            {
+              "jobUrl": "http://7cc9fe5456b4:4040/jobs/job?id\u003d8"
+            },
+            {
+              "jobUrl": "http://7cc9fe5456b4:4040/jobs/job?id\u003d9"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1634885316158_1586460302",
+      "id": "20211022-064836_778455744",
+      "dateCreated": "2021-10-22 06:48:36.158",
+      "dateStarted": "2021-10-30 14:34:13.225",
+      "dateFinished": "2021-10-30 14:34:18.345",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%pyspark\n# 为了能够得到使用频次倒序排列的结果，我们要先把 shakespeare_count 转换成 (count, word)\nshakespeare_count_rbk \u003d shakespeare_count_rbk.map(lambda x:(x[1],x[0]))\nshakespeare_count_rbk.take(15)",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-30 14:34:49.065",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false,
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "completionKey": "TAB"
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "[(163, \u0027a\u0027), (2, \u0027abhor\u0027), (2, \u0027abide\u0027), (1, \u0027able\u0027), (1, \u0027about\u0027), (4, \u0027above\u0027), (5, \u0027absence\u0027), (3, \u0027absent\u0027), (4, \u0027abundance\u0027), (1, \u0027abundant\u0027), (3, \u0027abuse\u0027), (1, \u0027abused\u0027), (1, \u0027abuses\u0027), (1, \u0027abysm\u0027), (1, \u0027accents\u0027)]\n"
           }
         ]
       },
@@ -638,12 +588,67 @@
           "values": [
             {
               "jobUrl": "http://7cc9fe5456b4:4040/jobs/job?id\u003d10"
-            },
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1634885316158_1338824167",
+      "id": "20211022-064836_1042583881",
+      "dateCreated": "2021-10-22 06:48:36.158",
+      "dateStarted": "2021-10-30 14:34:49.067",
+      "dateFinished": "2021-10-30 14:34:49.136",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%pyspark\n# 使用 sortByKey 来获取 key 的倒序结果\nshakespeare_count_rbk.sortByKey(False).take(100)",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-30 14:35:02.216",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false,
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "completionKey": "TAB"
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "[(490, \u0027and\u0027), (432, \u0027the\u0027), (408, \u0027to\u0027), (393, \u0027my\u0027), (370, \u0027of\u0027), (344, \u0027i\u0027), (323, \u0027in\u0027), (322, \u0027that\u0027), (287, \u0027thy\u0027), (235, \u0027thou\u0027), (181, \u0027with\u0027), (171, \u0027for\u0027), (168, \u0027is\u0027), (167, \u0027not\u0027), (164, \u0027me\u0027), (163, \u0027a\u0027), (163, \u0027but\u0027), (162, \u0027love\u0027), (162, \u0027thee\u0027), (145, \u0027so\u0027), (142, \u0027be\u0027), (121, \u0027as\u0027), (117, \u0027all\u0027), (112, \u0027you\u0027), (111, \u0027it\u0027), (108, \u0027which\u0027), (107, \u0027his\u0027), (106, \u0027when\u0027), (105, \u0027this\u0027), (100, \u0027your\u0027), (94, \u0027by\u0027), (88, \u0027doth\u0027), (84, \u0027do\u0027), (82, \u0027from\u0027), (80, \u0027on\u0027), (79, \u0027no\u0027), (79, \u0027or\u0027), (77, \u0027self\u0027), (76, \u0027have\u0027), (74, \u0027then\u0027), (70, \u0027what\u0027), (69, \u0027are\u0027), (68, \u0027if\u0027), (64, \u0027more\u0027), (64, \u0027will\u0027), (63, \u0027mine\u0027), (63, \u0027their\u0027), (59, \u0027shall\u0027), (56, \u0027eyes\u0027), (55, \u0027sweet\u0027), (53, \u0027time\u0027), (52, \u0027nor\u0027), (52, \u0027they\u0027), (52, \u0027beauty\u0027), (51, \u0027her\u0027), (51, \u0027yet\u0027), (51, \u0027art\u0027), (50, \u0027o\u0027), (50, \u0027heart\u0027), (48, \u0027than\u0027), (46, \u0027now\u0027), (44, \u0027should\u0027), (44, \u0027thine\u0027), (44, \u0027can\u0027), (43, \u0027make\u0027), (43, \u0027one\u0027), (43, \u0027fair\u0027), (43, \u0027hath\u0027), (43, \u0027he\u0027), (41, \u0027still\u0027), (40, \u0027how\u0027), (40, \u0027where\u0027), (38, \u0027him\u0027), (37, \u0027true\u0027), (37, \u0027eye\u0027), (35, \u0027see\u0027), (35, \u0027am\u0027), (34, \u0027like\u0027), (34, \u0027loves\u0027), (33, \u0027she\u0027), (33, \u0027those\u0027), (33, \u0027though\u0027), (32, \u0027being\u0027), (31, \u0027some\u0027), (31, \u0027such\u0027), (30, \u0027own\u0027), (29, \u0027live\u0027), (29, \u0027may\u0027), (29, \u0027upon\u0027), (29, \u0027was\u0027), (29, \u0027were\u0027), (29, \u0027who\u0027), (29, \u0027dost\u0027), (29, \u0027every\u0027), (28, \u0027praise\u0027), (28, \u0027say\u0027), (27, \u0027most\u0027), (27, \u0027world\u0027), (27, \u0027give\u0027), (26, \u0027let\u0027)]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
             {
               "jobUrl": "http://7cc9fe5456b4:4040/jobs/job?id\u003d11"
             },
             {
               "jobUrl": "http://7cc9fe5456b4:4040/jobs/job?id\u003d12"
+            },
+            {
+              "jobUrl": "http://7cc9fe5456b4:4040/jobs/job?id\u003d13"
             }
           ],
           "interpreterSettingId": "spark"
@@ -653,8 +658,8 @@
       "jobName": "paragraph_1634885316158_1967054901",
       "id": "20211022-064836_68347022",
       "dateCreated": "2021-10-22 06:48:36.158",
-      "dateStarted": "2021-10-22 07:38:26.507",
-      "dateFinished": "2021-10-22 07:38:27.693",
+      "dateStarted": "2021-10-30 14:35:02.217",
+      "dateFinished": "2021-10-30 14:35:03.886",
       "status": "FINISHED"
     },
     {
