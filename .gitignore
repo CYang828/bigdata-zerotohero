@@ -11,3 +11,5 @@ docker-environment/zeppelin-lab/zeppelin-0.9.0-bin-all.tgz
 course/~Trash/
 
 course/spark/spark-py-notebooks
+dataset/kddcup.data_10_percent.gz
+dataset/kddcup.data.gz

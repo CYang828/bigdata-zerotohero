@@ -116,14 +116,11 @@ docker-compose up
 ### 步骤1，导入数据到 HDFS 中
 ```bash
 docker cp dataset/ namenode:/hadoop-data/ 
-docker cp dataset/ml-1m namenode:/hadoop-data/ 
-docker cp dataset/shakespeare.txt namenode:/hadoop-data/ 
 
 docker exec -it namenode bash
 hdfs dfs -mkdir /dataset
-hdfs dfs -put /hadoop-data/dataset/ml-latest/ /dataset/
-hdfs dfs -put /hadoop-data/ml-1m/ /dataset/
-hdfs dfs -put /hadoop-data/shakespeare.txt /dataset/
+hdfs dfs -put /hadoop-data/dataset/* /dataset/
+hdfs dfs -ls /dataset
 ```
 
 ### 步骤2，导入数据到 Hive 中 
