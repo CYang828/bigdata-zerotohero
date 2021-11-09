@@ -220,7 +220,7 @@ services:
     env_file:
       - ./hbase-distributed-local.env
     environment:
-      HBASE_CONF_hbase_regionserver_hostname: hbase-region
+      HBASE_CONF_hbase_regionserver_hostname: hbase-region1
       SERVICE_PRECONDITION: "namenode:9870 datanode1:9864 datanode2:9864 datanode3:9864 zoo:2181 hbase-master:16010"
     ports:
       - 16030:16030
@@ -232,7 +232,7 @@ services:
     env_file:
       - ./hbase-distributed-local.env
     environment:
-      HBASE_CONF_hbase_regionserver_hostname: hbase-region
+      HBASE_CONF_hbase_regionserver_hostname: hbase-region2
       SERVICE_PRECONDITION: "namenode:9870 datanode1:9864 datanode2:9864 datanode3:9864 zoo:2181 hbase-master:16010"
     ports:
       - 16031:16030
