@@ -41,4 +41,3 @@ ENV PYTHONPATH=/usr/local/spark/python:/usr/local/spark/python/lib/py4j-0.10.9-s
     SPARK_OPTS="--driver-java-options=-Xms1024M --driver-java-options=-Xmx4096M --driver-java-options=-Dlog4j.logLevel=info" \
     PATH=/usr/local/spark:/usr/local/spark/bin:$PATH
 
-EXPOSE 8889

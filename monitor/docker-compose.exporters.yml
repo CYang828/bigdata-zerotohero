@@ -3,7 +3,7 @@ version: '2.1'
 services:
 
   nodeexporter:
-    image: prom/node-exporter:v1.1.2
+    image: prom/node-exporter:v1.2.2
     container_name: nodeexporter
     volumes:
       - /proc:/host/proc:ro
@@ -13,18 +13,21 @@ services:
       - '--path.procfs=/host/proc'
       - '--path.rootfs=/rootfs'
       - '--path.sysfs=/host/sys'
-      - '--collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc)($$|/)'
+      - '--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)'
     restart: unless-stopped
     network_mode: host
     labels:
       org.label-schema.group: "monitoring"
 
   cadvisor:
-    image: gcr.io/cadvisor/cadvisor:v0.39.0
+    image: gcr.io/cadvisor/cadvisor:v0.43.0
     container_name: cadvisor
+    privileged: true
+    devices:
+      - /dev/kmsg:/dev/kmsg
     volumes:
       - /:/rootfs:ro
-      - /var/run:/var/run:rw
+      - /var/run:/var/run:ro
       - /sys:/sys:ro
       - /var/lib/docker/:/var/lib/docker:ro
       - /cgroup:/cgroup:ro
