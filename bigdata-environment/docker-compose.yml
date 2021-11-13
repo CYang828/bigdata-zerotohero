@@ -1,18 +1,25 @@
 version: "3"
 
 services:
+  # 节点名称
   namenode:
+    # 镜像来源
     image: bde2020/hadoop-namenode:2.0.0-hadoop3.2.1-java8
+    # docker容器名
     container_name: namenode
     restart: always
+    # 对外映射端口
     ports:
       - 9870:9870
       - 9010:9000
+    # 数据映射服务器位置
     volumes:
       - hadoop_namenode:/hadoop/dfs/name
+    # 环境变量
     environment:
       - CLUSTER_NAME=hadoop-cluster
       - CORE_CONF_fs_defaultFS=hdfs://namenode:9000
+    # 配置环境文件位置
     env_file:
       - ./hadoop.env
 
@@ -23,6 +30,7 @@ services:
     volumes:
       - hadoop_datanode1:/hadoop/dfs/data
     environment:
+      # datanode依赖namenode
       SERVICE_PRECONDITION: "namenode:9870"
       CORE_CONF_fs_defaultFS: hdfs://namenode:9000
     ports:
@@ -44,34 +52,51 @@ services:
     env_file:
       - ./hadoop.env
 
+  datanode3:
+    image: bde2020/hadoop-datanode:2.0.0-hadoop3.2.1-java8
+    container_name: datanode3
+    restart: always
+    volumes:
+      - hadoop_datanode3:/hadoop/dfs/data
+    environment:
+      SERVICE_PRECONDITION: "namenode:9870"
+      CORE_CONF_fs_defaultFS: hdfs://namenode:9000
+    ports:
+      - "9866:9864"
+    env_file:
+      - ./hadoop.env
+
+  # hadoop集群管理组件
   resourcemanager:
     image: bde2020/hadoop-resourcemanager:2.0.0-hadoop3.2.1-java8
     container_name: resourcemanager
     restart: always
     environment:
-      SERVICE_PRECONDITION: "namenode:9000 namenode:9870 datanode1:9864 datanode2:9864"
+      SERVICE_PRECONDITION: "namenode:9000 namenode:9870 datanode1:9864 datanode2:9864 datanode3:9864"
     ports:
         - "8088:8088"
     env_file:
       - ./hadoop.env
 
+  # 节点管理组件
   nodemanager:
     image: bde2020/hadoop-nodemanager:2.0.0-hadoop3.2.1-java8
     container_name: nodemanager
     restart: always
     environment:
-      SERVICE_PRECONDITION: "namenode:9000 namenode:9870 datanode1:9864 datanode2:9864 resourcemanager:8088"
+      SERVICE_PRECONDITION: "namenode:9000 namenode:9870 datanode1:9864 datanode2:9864 datanode3:9864 resourcemanager:8088"
     ports:
         - "8042:8042"
     env_file:
       - ./hadoop.env
 
+  # 计算和查询历史记录存储服务
   historyserver:
     image: bde2020/hadoop-historyserver:2.0.0-hadoop3.2.1-java8
     container_name: historyserver
     restart: always
     environment:
-      SERVICE_PRECONDITION: "namenode:9000 namenode:9870 datanode1:9864 datanode2:9864 resourcemanager:8088"
+      SERVICE_PRECONDITION: "namenode:9000 namenode:9870 datanode1:9864 datanode2:9864 datanode3:9864 resourcemanager:8088"
     volumes:
       - hadoop_historyserver:/hadoop/yarn/timeline
     ports:
@@ -86,6 +111,7 @@ services:
       - namenode
       - datanode1
       - datanode2
+      - datanode3
     ports:
       - "8080:8080"
       - "7077:7077"
@@ -115,6 +141,7 @@ services:
   spark-worker-2:
     image: bde2020/spark-worker:3.0.2-hadoop3.2
     container_name: spark-worker-2
+    hostname: spark-worker-2
     depends_on:
       - spark-master
     ports:
@@ -125,7 +152,7 @@ services:
     volumes:
       - shared-workspace:/opt/workspace
       
-
+  # hive服务，依赖于hadoop
   hive-server:
     image: bde2020/hive:2.3.2-postgresql-metastore
     container_name: hive-server
@@ -133,6 +160,7 @@ services:
       - namenode
       - datanode1
       - datanode2
+      - datanode3
     env_file:
       - ./hadoop-hive.env
     environment:
@@ -143,6 +171,7 @@ services:
     volumes:
       - ./startup.sh:/usr/local/bin/startup.sh
 
+  # hive元数据存储服务
   hive-metastore:
     image: bde2020/hive:2.3.2-postgresql-metastore
     container_name: hive-metastore
@@ -150,7 +179,7 @@ services:
       - ./hadoop-hive.env
     command: /opt/hive/bin/hive --service metastore
     environment:
-      SERVICE_PRECONDITION: "namenode:9870 datanode1:9864 datanode2:9864"
+      SERVICE_PRECONDITION: "namenode:9870 datanode1:9864 datanode2:9864 datanode3:9864"
     ports:
       - "9083:9083"
 
@@ -180,21 +209,33 @@ services:
     env_file:
       - ./hbase-distributed-local.env
     environment:
-      SERVICE_PRECONDITION: "namenode:9870 datanode1:9864 datanode2:9864 zoo:2181"
+      SERVICE_PRECONDITION: "namenode:9870 datanode1:9864 datanode2:9864 datanode3:9864 zoo:2181"
     ports:
       - 16010:16010
 
-  hbase-region:
+  hbase-region1:
     image: bde2020/hbase-regionserver:1.0.0-hbase1.2.6
-    container_name: hbase-regionserver
-    hostname: hbase-regionserver
+    container_name: hbase-regionserver1
+    hostname: hbase-regionserver1
     env_file:
       - ./hbase-distributed-local.env
     environment:
-      HBASE_CONF_hbase_regionserver_hostname: hbase-region
-      SERVICE_PRECONDITION: "namenode:9870 datanode1:9864 datanode2:9864 zoo:2181 hbase-master:16010"
+      HBASE_CONF_hbase_regionserver_hostname: hbase-region1
+      SERVICE_PRECONDITION: "namenode:9870 datanode1:9864 datanode2:9864 datanode3:9864 zoo:2181 hbase-master:16010"
     ports:
       - 16030:16030
+
+  hbase-region2:
+    image: bde2020/hbase-regionserver:1.0.0-hbase1.2.6
+    container_name: hbase-regionserver2
+    hostname: hbase-regionserver2
+    env_file:
+      - ./hbase-distributed-local.env
+    environment:
+      HBASE_CONF_hbase_regionserver_hostname: hbase-region2
+      SERVICE_PRECONDITION: "namenode:9870 datanode1:9864 datanode2:9864 datanode3:9864 zoo:2181 hbase-master:16010"
+    ports:
+      - 16031:16030
 
   hue:
     image: gethue/hue:latest
@@ -221,6 +262,7 @@ services:
         MYSQL_ROOT_PASSWORD: secret
         MYSQL_DATABASE: hue
 
+  # lab实验平台
   zeepelin-lab:
     image: bslience/zeeplin-lab:latest
     container_name: zeepelin-lab
@@ -230,7 +272,7 @@ services:
       - hive-server
       - namenode
     volumes:
-      - ../course/notebook/:/opt/zeppelin/notebook/
+      - ../course/:/opt/zeppelin/notebook/
 
   datascience-lab:
     build: ./datascience-lab/ 
@@ -298,6 +340,7 @@ volumes:
   hadoop_namenode:
   hadoop_datanode1:
   hadoop_datanode2:
+  hadoop_datanode3:
   hadoop_historyserver:
   shared-workspace:
   data:
