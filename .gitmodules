@@ -1,9 +1,12 @@
 [submodule "hive-zerotohero"]
-	path = hive-zerotohero
+	path = course/notebook/hive-zerotohero
 	url = https://github.com/BSlience/hive-zerotohero.git
 [submodule "spark-zerotohero"]
-	path = spark-zerotohero
+	path = course/notebook/spark-zerotohero
 	url = https://github.com/BSlience/spark-zerotohero.git
 [submodule "recommend-system-zerotohero"]
-	path = recommend-system-zerotohero
+	path = course/notebook/recommend-system-zerotohero
 	url = https://github.com/BSlience/recommend-system-zerotohero.git
+[submodule "hbase-zerotohero"]
+	path = course/notebook/hbase-zerotohero
+	url = https://github.com/BSlience/hbase-zerotohero.git
