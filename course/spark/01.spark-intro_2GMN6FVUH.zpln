@@ -1,0 +1,514 @@
+{
+  "paragraphs": [
+    {
+      "text": "%md\n# 参考文档\n\u003cdiv align\u003d\"center\"\u003e\u003cimg src\u003d\"http://localhost:9999/image/1613718500797.jpg\" /\u003e\u003c/div\u003e\n\n- [Spark Documentation](http://spark.apache.org/docs/latest/)\n- [Spark Programming Guide](http://spark.apache.org/docs/latest/programming-guide.html)\n- [Pyspark](https://github.com/jupyter/docker-stacks)\n- [Conda](https://docs.conda.io/en/latest/)",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-22 09:33:09.817",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/markdown",
+        "colWidth": 12.0,
+        "editorHide": true,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch1\u003e参考文档\u003c/h1\u003e\n\u003cdiv align\u003d\"center\"\u003e\u003cimg src\u003d\"http://localhost:9999/image/1613718500797.jpg\" /\u003e\u003c/div\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href\u003d\"http://spark.apache.org/docs/latest/\"\u003eSpark Documentation\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href\u003d\"http://spark.apache.org/docs/latest/programming-guide.html\"\u003eSpark Programming Guide\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href\u003d\"https://github.com/jupyter/docker-stacks\"\u003ePyspark\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href\u003d\"https://docs.conda.io/en/latest/\"\u003eConda\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1634807446115_431891962",
+      "id": "20211021-082059_993117844",
+      "dateCreated": "2021-10-21 09:10:46.115",
+      "dateStarted": "2021-10-22 09:33:09.819",
+      "dateFinished": "2021-10-22 09:33:09.830",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n# 一个简单的测试",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-22 06:38:41.734",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {}
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch1\u003e一个简单的测试\u003c/h1\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1634807446116_1973537562",
+      "id": "20211021-082059_137256183",
+      "dateCreated": "2021-10-21 09:10:46.116",
+      "status": "READY"
+    },
+    {
+      "text": "%pyspark\nsc\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-30 13:32:06.561",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/text",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u003cSparkContext master\u003dspark://spark-master:7077 appName\u003dspark-shared_process\u003e\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1635600710246_723404095",
+      "id": "paragraph_1635600710246_723404095",
+      "dateCreated": "2021-10-30 13:31:50.246",
+      "dateStarted": "2021-10-30 13:32:06.570",
+      "dateFinished": "2021-10-30 13:32:06.580",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%pyspark\n\nimport random\n\n\nnum_samples \u003d 100000000\n\ndef inside(p):     \n  x, y \u003d random.random(), random.random()\n  return x*x + y*y \u003c 1\n\nprint(sc)\ncount \u003d sc.parallelize(range(0, num_samples)).filter(inside).count()\n\npi \u003d 4 * count / num_samples\nprint(pi)",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-30 13:38:08.028",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "completionKey": "TAB"
+        },
+        "editorMode": "ace/mode/python",
+        "colWidth": 12.0,
+        "editorHide": false,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u003cSparkContext master\u003dspark://spark-master:7077 appName\u003dspark-shared_process\u003e\n3.14159944\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://7cc9fe5456b4:4040/jobs/job?id\u003d0"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1634807446116_1761895034",
+      "id": "20211021-082059_1317687751",
+      "dateCreated": "2021-10-21 09:10:46.116",
+      "dateStarted": "2021-10-30 13:38:08.030",
+      "dateFinished": "2021-10-30 13:39:04.046",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n# 概述",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-22 06:38:55.987",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch1\u003e概述\u003c/h1\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1634807446117_376568009",
+      "id": "20211021-082059_282693765",
+      "dateCreated": "2021-10-21 09:10:46.117",
+      "dateStarted": "2021-10-22 06:23:32.034",
+      "dateFinished": "2021-10-22 06:23:32.051",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n## Spark 是什么？\n\nSpark 是一种基于内存的快速、通用、可扩展的大数据分析计算引擎。\n\n![]()\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-22 06:38:57.785",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/markdown",
+        "colWidth": 12.0,
+        "editorHide": true,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eSpark 是什么？\u003c/h2\u003e\n\u003cp\u003eSpark 是一种基于内存的快速、通用、可扩展的大数据分析计算引擎。\u003c/p\u003e\n\u003cp\u003e\u003cimg src\u003d\"\" alt\u003d\"\" /\u003e\u003c/p\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1634807446117_173125523",
+      "id": "20211021-082059_205651760",
+      "dateCreated": "2021-10-21 09:10:46.117",
+      "dateStarted": "2021-10-22 06:32:53.350",
+      "dateFinished": "2021-10-22 06:32:53.360",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n## Spark 和 Hadoop 的区别\n\n\n相信大家都听说过火的不能再火、炒得不能再炒的新一代大数据处理框架 Spark. 那么 Spark 是何方神圣？为何大有取代 Hadoop 的势头？Spark 内部又是如何工作的呢？我们会用几篇文章为大家一一介绍。\n\n**Hadoop：我不想知道我是怎么来的，我就想知道我是怎么没的？**\n\n还是从 Hadoop 处理海量数据的架构说起，一个 Hadoop job 通常都是这样的：\n\n- 从 HDFS 读取输入数据；\n- 在 Map 阶段使用用户定义的 mapper function, 然后把结果写入磁盘；\n- 在 Reduce 阶段，从各个处于 Map 阶段的机器中读取 Map 计算的中间结果，使用用户定义的 reduce function, 通常最后把结果写回 HDFS; \n\n不知道大家是否注意到，一个 Hadoop job 进行了多次磁盘读写，比如写入机器本地磁盘，或是写入分布式文件系统中（这个过程包含磁盘的读写以及网络传输）。考虑到磁盘读取比内存读取慢了几个数量级，所以像 Hadoop 这样高度依赖磁盘读写的架构就一定会有性能瓶颈。\n\n在实际应用中，我们通常需要设计复杂算法处理海量数据，比如之前提过的 Google crawling indexing ranking, 显然不是一个 Hadoop job 可以完成的。再比如现在风生水起的机器学习领域，大量使用迭代的方法训练机器学习模型。而像 Hadoop 的基本模型就只包括了一个 Map 和 一个 Reduce 阶段，想要完成复杂运算就需要切分出无数单独的 Hadoop jobs, 而且每个 Hadoop job 都是磁盘读写大户，这就让 Hadoop 显得力不从心。\n\n随着业界对大数据使用越来越深入，大家都呼唤一个更强大的处理框架，能够真正解决更多复杂的大数据问题。\n\n**Spark 横空出世**\n2009年，美国加州大学伯克利分校的 AMPLab 设计并开发了名叫 Spark 的大数据处理框架。真如其名，Spark 像燎原之火，迅猛占领大数据处理框架市场。\n\n**性能优秀**\nSpark 没有像 Hadoop 一样使用磁盘读写，而转用性能高得多的内存存储输入数据、处理中间结果、和存储最终结果。在大数据的场景中，很多计算都有循环往复的特点，像 Spark 这样允许在内存中缓存输入输出，上一个 job 的结果马上可以被下一个使用，性能自然要比 Hadoop MapReduce 好得多。\n\n同样重要的是，Spark 提供了更多灵活可用的数据操作，比如 filter, union, join, 以及各种对 key value pair 的方便操作，甚至提供了一个通用接口，让用户根据需要开发定制的数据操作。\n\n此外，Spark 本身作为平台也开发了 streaming 处理框架 spark streaming, SQL 处理框架 Dataframe, 机器学习库 MLlib, 和图处理库 GraphX. 如此强大，如此开放，基于 Spark 的操作，应有尽有。\n\n**Hadoop 的 MapReduce 为什么不使用内存存储？选择依赖 HDFS，岂不给了后来者据上的机会？**\n\n历史原因。当初 MapReduce 选择磁盘，除了要保证数据存储安全以外，更重要的是当时企业级数据中心购买大容量内存的成本非常高，选择基于内存的架构并不现实；现在 Spark 真的赶上了好时候，企业可以轻松部署多台大内存机器，内存大到可以装载所有要处理的数据。\n\n更加上这两年机器学习算法越来越丰富，越来越成熟，真正能够为企业解决问题。那当一个企业想要使用大数据处理框架时，是使用拿来就可以用、强大支持的 Spark ？还是去改进 Hadoop 的性能和通用性？显然是前者。\n\n基于以上种种原因，我们看 Spark 被炒得这么火，也就不足为奇了。\n\n**只要把 Hadoop 的 MapReduce 转为基于内存的架构不就解决了？听起来没有本质变化嘛。**\n\n非也。MapReduce 定死了 Map 和 Reduce 两种运算以及之间 shuffle 的数据搬运工作。就是 Hadoop 运算无论多么灵活，你都要走 map -\u003e shuffle -\u003e reduce 这条路。要支持各类不同的运算，以及优化性能，还真不是改个存储介质这么简单。AMPLab 为此做了精心设计，让各种数据处理都能得心应手。",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-30 13:49:21.978",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eSpark 和 Hadoop 的区别\u003c/h2\u003e\n\u003cp\u003e相信大家都听说过火的不能再火、炒得不能再炒的新一代大数据处理框架 Spark. 那么 Spark 是何方神圣？为何大有取代 Hadoop 的势头？Spark 内部又是如何工作的呢？我们会用几篇文章为大家一一介绍。\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003eHadoop：我不想知道我是怎么来的，我就想知道我是怎么没的？\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003e还是从 Hadoop 处理海量数据的架构说起，一个 Hadoop job 通常都是这样的：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e从 HDFS 读取输入数据；\u003c/li\u003e\n\u003cli\u003e在 Map 阶段使用用户定义的 mapper function, 然后把结果写入磁盘；\u003c/li\u003e\n\u003cli\u003e在 Reduce 阶段，从各个处于 Map 阶段的机器中读取 Map 计算的中间结果，使用用户定义的 reduce function, 通常最后把结果写回 HDFS;\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e不知道大家是否注意到，一个 Hadoop job 进行了多次磁盘读写，比如写入机器本地磁盘，或是写入分布式文件系统中（这个过程包含磁盘的读写以及网络传输）。考虑到磁盘读取比内存读取慢了几个数量级，所以像 Hadoop 这样高度依赖磁盘读写的架构就一定会有性能瓶颈。\u003c/p\u003e\n\u003cp\u003e在实际应用中，我们通常需要设计复杂算法处理海量数据，比如之前提过的 Google crawling indexing ranking, 显然不是一个 Hadoop job 可以完成的。再比如现在风生水起的机器学习领域，大量使用迭代的方法训练机器学习模型。而像 Hadoop 的基本模型就只包括了一个 Map 和 一个 Reduce 阶段，想要完成复杂运算就需要切分出无数单独的 Hadoop jobs, 而且每个 Hadoop job 都是磁盘读写大户，这就让 Hadoop 显得力不从心。\u003c/p\u003e\n\u003cp\u003e随着业界对大数据使用越来越深入，大家都呼唤一个更强大的处理框架，能够真正解决更多复杂的大数据问题。\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003eSpark 横空出世\u003c/strong\u003e\u003cbr /\u003e\n2009年，美国加州大学伯克利分校的 AMPLab 设计并开发了名叫 Spark 的大数据处理框架。真如其名，Spark 像燎原之火，迅猛占领大数据处理框架市场。\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003e性能优秀\u003c/strong\u003e\u003cbr /\u003e\nSpark 没有像 Hadoop 一样使用磁盘读写，而转用性能高得多的内存存储输入数据、处理中间结果、和存储最终结果。在大数据的场景中，很多计算都有循环往复的特点，像 Spark 这样允许在内存中缓存输入输出，上一个 job 的结果马上可以被下一个使用，性能自然要比 Hadoop MapReduce 好得多。\u003c/p\u003e\n\u003cp\u003e同样重要的是，Spark 提供了更多灵活可用的数据操作，比如 filter, union, join, 以及各种对 key value pair 的方便操作，甚至提供了一个通用接口，让用户根据需要开发定制的数据操作。\u003c/p\u003e\n\u003cp\u003e此外，Spark 本身作为平台也开发了 streaming 处理框架 spark streaming, SQL 处理框架 Dataframe, 机器学习库 MLlib, 和图处理库 GraphX. 如此强大，如此开放，基于 Spark 的操作，应有尽有。\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003eHadoop 的 MapReduce 为什么不使用内存存储？选择依赖 HDFS，岂不给了后来者据上的机会？\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003e历史原因。当初 MapReduce 选择磁盘，除了要保证数据存储安全以外，更重要的是当时企业级数据中心购买大容量内存的成本非常高，选择基于内存的架构并不现实；现在 Spark 真的赶上了好时候，企业可以轻松部署多台大内存机器，内存大到可以装载所有要处理的数据。\u003c/p\u003e\n\u003cp\u003e更加上这两年机器学习算法越来越丰富，越来越成熟，真正能够为企业解决问题。那当一个企业想要使用大数据处理框架时，是使用拿来就可以用、强大支持的 Spark ？还是去改进 Hadoop 的性能和通用性？显然是前者。\u003c/p\u003e\n\u003cp\u003e基于以上种种原因，我们看 Spark 被炒得这么火，也就不足为奇了。\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003e只要把 Hadoop 的 MapReduce 转为基于内存的架构不就解决了？听起来没有本质变化嘛。\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003e非也。MapReduce 定死了 Map 和 Reduce 两种运算以及之间 shuffle 的数据搬运工作。就是 Hadoop 运算无论多么灵活，你都要走 map -\u0026gt; shuffle -\u0026gt; reduce 这条路。要支持各类不同的运算，以及优化性能，还真不是改个存储介质这么简单。AMPLab 为此做了精心设计，让各种数据处理都能得心应手。\u003c/p\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1634807446117_1408890542",
+      "id": "20211021-082059_358427577",
+      "dateCreated": "2021-10-21 09:10:46.117",
+      "dateStarted": "2021-10-30 13:49:21.978",
+      "dateFinished": "2021-10-30 13:49:21.993",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n## Spark 和 Hadoop 对比\n\n- 时间\n    - Hadoop\n        1. 2006 年 1 月，Doug Cutting 加入 Yahoo，领导 Hadoop 的开发\n        2. 2008年1月，Hadoop成为Apache顶级项目\n        3. 2011年1.0正式发布\n        4. 2012年3月稳定版发布\n        5. 2013 年 10 月发布 2.X (Y arn)版本\n    - Spark\n        1. 2009年，Spark诞生于伯克利大学的AMPLab实验室\n        2. 2010年，伯克利大学正式开源了Spark项目\n        3. 2013年6月，Spark成为了Apache基金会下的项目\n        4. 2014年2月，Spark以飞快的速度成为了Apache的顶级项目\n        5. 2015年至今，Spark变得愈发火爆，大量的国内公司开始重点部署或者使用Spark\n\n    \n\n- 功能\n    - Hadoop\n        1. Hadoop是由java语言编写的，在分布式服务器集群上存储海量数据并运行分布式分析应用的开源框架\n        2. 作为 Hadoop 分布式文件系统，HDFS 处于 Hadoop 生态圈的最下层，存储着所有的数据，支持着 Hadoop 的所有服务。它的理论基础源于 Google 的TheGoogleFileSystem 这篇论文，它是 GFS 的开源实现。\n        3. MapReduce是一种编程模型，Hadoop根据Google的MapReduce论文将其实现， 作为 Hadoop 的分布式计算模型，是 Hadoop 的核心。基于这个框架，分布式并行 程序的编写变得异常简单。综合了 HDFS 的分布式存储和 MapReduce 的分布式计 算，Hadoop 在处理海量数据时，性能横向扩展变得非常容易。\n        4. HBase是对Google的Bigtable的开源实现，但又和Bigtable存在许多不同之处。 HBase 是一个基于 HDFS 的分布式数据库，擅长实时地随机读/写超大规模数据集。 它也是 Hadoop 非常重要的组件。\n    - Spark\n        1. Spark是一种由Scala语言开发的快速、通用、可扩展的大数据分析引擎\n        2. SparkCore中提供了Spark最基础与最核心的功能\n        3. Spark SQL是Spark用来操作结构化数据的组件。通过Spark SQL，用户可以使用 SQL 或者 Apache Hive 版本的 SQL 方言(HQL)来查询数据。\n        4. Spark Streaming 是 Spark 平台上针对实时数据进行流式计算的组件，提供了丰富的处理数据流的 API。",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-22 06:39:06.377",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {}
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eSpark 和 Hadoop 对比\u003c/h2\u003e\n\u003cul\u003e\n  \u003cli\u003e\n    \u003cp\u003e时间\u003c/p\u003e\n    \u003cul\u003e\n      \u003cli\u003eHadoop\n        \u003col\u003e\n          \u003cli\u003e2006 年 1 月，Doug Cutting 加入 Yahoo，领导 Hadoop 的开发\u003c/li\u003e\n          \u003cli\u003e2008年1月，Hadoop成为Apache顶级项目\u003c/li\u003e\n          \u003cli\u003e2011年1.0正式发布\u003c/li\u003e\n          \u003cli\u003e2012年3月稳定版发布\u003c/li\u003e\n          \u003cli\u003e2013 年 10 月发布 2.X (Y arn)版本\u003c/li\u003e\n        \u003c/ol\u003e\n      \u003c/li\u003e\n      \u003cli\u003eSpark\n        \u003col\u003e\n          \u003cli\u003e2009年，Spark诞生于伯克利大学的AMPLab实验室\u003c/li\u003e\n          \u003cli\u003e2010年，伯克利大学正式开源了Spark项目\u003c/li\u003e\n          \u003cli\u003e2013年6月，Spark成为了Apache基金会下的项目\u003c/li\u003e\n          \u003cli\u003e2014年2月，Spark以飞快的速度成为了Apache的顶级项目\u003c/li\u003e\n          \u003cli\u003e2015年至今，Spark变得愈发火爆，大量的国内公司开始重点部署或者使用Spark\u003c/li\u003e\n        \u003c/ol\u003e\n      \u003c/li\u003e\n    \u003c/ul\u003e\n  \u003c/li\u003e\n  \u003cli\u003e\n    \u003cp\u003e功能\u003c/p\u003e\n    \u003cul\u003e\n      \u003cli\u003eHadoop\n        \u003col\u003e\n          \u003cli\u003eHadoop是由java语言编写的，在分布式服务器集群上存储海量数据并运行分布式分析应用的开源框架\u003c/li\u003e\n          \u003cli\u003e作为 Hadoop 分布式文件系统，HDFS 处于 Hadoop 生态圈的最下层，存储着所有的数据，支持着 Hadoop 的所有服务。它的理论基础源于 Google 的TheGoogleFileSystem 这篇论文，它是 GFS 的开源实现。\u003c/li\u003e\n          \u003cli\u003eMapReduce是一种编程模型，Hadoop根据Google的MapReduce论文将其实现， 作为 Hadoop 的分布式计算模型，是 Hadoop 的核心。基于这个框架，分布式并行 程序的编写变得异常简单。综合了 HDFS 的分布式存储和 MapReduce 的分布式计 算，Hadoop 在处理海量数据时，性能横向扩展变得非常容易。\u003c/li\u003e\n          \u003cli\u003eHBase是对Google的Bigtable的开源实现，但又和Bigtable存在许多不同之处。 HBase 是一个基于 HDFS 的分布式数据库，擅长实时地随机读/写超大规模数据集。 它也是 Hadoop 非常重要的组件。\u003c/li\u003e\n        \u003c/ol\u003e\n      \u003c/li\u003e\n      \u003cli\u003eSpark\n        \u003col\u003e\n          \u003cli\u003eSpark是一种由Scala语言开发的快速、通用、可扩展的大数据分析引擎\u003c/li\u003e\n          \u003cli\u003eSparkCore中提供了Spark最基础与最核心的功能\u003c/li\u003e\n          \u003cli\u003eSpark SQL是Spark用来操作结构化数据的组件。通过Spark SQL，用户可以使用 SQL 或者 Apache Hive 版本的 SQL 方言(HQL)来查询数据。\u003c/li\u003e\n          \u003cli\u003eSpark Streaming 是 Spark 平台上针对实时数据进行流式计算的组件，提供了丰富的处理数据流的 API。\u003c/li\u003e\n        \u003c/ol\u003e\n      \u003c/li\u003e\n    \u003c/ul\u003e\n  \u003c/li\u003e\n\u003c/ul\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1634807446118_1339443899",
+      "id": "20211021-082059_1198240109",
+      "dateCreated": "2021-10-21 09:10:46.118",
+      "status": "READY"
+    },
+    {
+      "text": "%md\n## 使用 Spark 还是 Hadoop ？\n\nHadoop 的 MR 框架和 Spark 框架都是数据处理框架，那么我们在使用时如何选择呢?\n\n- Hadoop MapReduce 由于其设计初衷并不是为了满足循环迭代式数据流处理，因此在多 并行运行的数据可复用场景(如:机器学习、图挖掘算法、交互式数据挖掘算法)中存 在诸多计算效率等问题。所以 Spark 应运而生，Spark 就是在传统的 MapReduce 计算框 架的基础上，利用其计算过程的优化，从而大大加快了数据分析、挖掘的运行和读写速度，并将计算单元缩小到更适合并行计算和重复使用的 RDD 计算模型。\n- 机器学习中 ALS、凸优化梯度下降等。这些都需要基于数据集或者数据集的衍生数据 反复查询反复操作。MR 这种模式不太合适，即使多 MR 串行处理，性能和时间也是一个问题。数据的共享依赖于磁盘。另外一种是交互式数据挖掘，MR 显然不擅长。而 Spark 所基于的 scala 语言恰恰擅长函数的处理。\n- Spark 是一个分布式数据快速分析项目。它的核心技术是弹性分布式数据集(Resilient Distributed Datasets)，提供了比 MapReduce 丰富的模型，可以快速在内存中对数据集 进行多次迭代，来支持复杂的数据挖掘算法和图计算算法。\n- Spark 和 Hadoop 的根本差异是多个作业之间的数据通信问题 : Spark 多个作业之间数据通信是基于内存，而 Hadoop 是基于磁盘。\n- Spark Task 的启动时间快。Spark 采用 fork 线程的方式，而 Hadoop 采用创建新的进程的方式。\n- Spark 只有在 shuffle 的时候将数据写入磁盘，而 Hadoop 中多个 MR 作业之间的数据交互都要依赖于磁盘交互\n- Spark 的缓存机制比 HDFS 的缓存机制高效。\n\n经过上面的比较，我们可以看出在绝大多数的数据计算场景中，Spark 确实会比 MapReduce 更有优势。但是 Spark 是基于内存的，所以在实际的生产环境中，由于内存的限制，可能会 由于内存资源不够导致 Job 执行失败，此时，MapReduce 其实是一个更好的选择，所以 Spark 并不能完全替代 MR。",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-30 14:01:32.476",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003e使用 Spark 还是 Hadoop ？\u003c/h2\u003e\n\u003cp\u003eHadoop 的 MR 框架和 Spark 框架都是数据处理框架，那么我们在使用时如何选择呢?\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eHadoop MapReduce 由于其设计初衷并不是为了满足循环迭代式数据流处理，因此在多 并行运行的数据可复用场景(如:机器学习、图挖掘算法、交互式数据挖掘算法)中存 在诸多计算效率等问题。所以 Spark 应运而生，Spark 就是在传统的 MapReduce 计算框 架的基础上，利用其计算过程的优化，从而大大加快了数据分析、挖掘的运行和读写速度，并将计算单元缩小到更适合并行计算和重复使用的 RDD 计算模型。\u003c/li\u003e\n\u003cli\u003e机器学习中 ALS、凸优化梯度下降等。这些都需要基于数据集或者数据集的衍生数据 反复查询反复操作。MR 这种模式不太合适，即使多 MR 串行处理，性能和时间也是一个问题。数据的共享依赖于磁盘。另外一种是交互式数据挖掘，MR 显然不擅长。而 Spark 所基于的 scala 语言恰恰擅长函数的处理。\u003c/li\u003e\n\u003cli\u003eSpark 是一个分布式数据快速分析项目。它的核心技术是弹性分布式数据集(Resilient Distributed Datasets)，提供了比 MapReduce 丰富的模型，可以快速在内存中对数据集 进行多次迭代，来支持复杂的数据挖掘算法和图计算算法。\u003c/li\u003e\n\u003cli\u003eSpark 和 Hadoop 的根本差异是多个作业之间的数据通信问题 : Spark 多个作业之间数据通信是基于内存，而 Hadoop 是基于磁盘。\u003c/li\u003e\n\u003cli\u003eSpark Task 的启动时间快。Spark 采用 fork 线程的方式，而 Hadoop 采用创建新的进程的方式。\u003c/li\u003e\n\u003cli\u003eSpark 只有在 shuffle 的时候将数据写入磁盘，而 Hadoop 中多个 MR 作业之间的数据交互都要依赖于磁盘交互\u003c/li\u003e\n\u003cli\u003eSpark 的缓存机制比 HDFS 的缓存机制高效。\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e经过上面的比较，我们可以看出在绝大多数的数据计算场景中，Spark 确实会比 MapReduce 更有优势。但是 Spark 是基于内存的，所以在实际的生产环境中，由于内存的限制，可能会 由于内存资源不够导致 Job 执行失败，此时，MapReduce 其实是一个更好的选择，所以 Spark 并不能完全替代 MR。\u003c/p\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1634807446118_1193838958",
+      "id": "20211021-082059_976679404",
+      "dateCreated": "2021-10-21 09:10:46.118",
+      "dateStarted": "2021-10-30 14:01:32.478",
+      "dateFinished": "2021-10-30 14:01:32.488",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n## Spark 的核心模块\n\n\u003cdiv align\u003d\"center\"\u003e \u003cimg  width\u003d\"600px\" src\u003d\"https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/spark-stack.png\"/\u003e \u003c/div\u003e\n\n### 3.1 Spark  SQL\n\nSpark SQL 主要用于结构化数据的处理。其具有以下特点：\n\n- 能够将 SQL 查询与 Spark 程序无缝混合，允许您使用 SQL 或 DataFrame API 对结构化数据进行查询；\n- 支持多种数据源，包括 Hive，Avro，Parquet，ORC，JSON 和 JDBC；\n- 支持 HiveQL 语法以及用户自定义函数 (UDF)，允许你访问现有的 Hive 仓库；\n- 支持标准的 JDBC 和 ODBC 连接；\n- 支持优化器，列式存储和代码生成等特性，以提高查询效率。\n\n### 3.2 Spark Streaming\n\nSpark Streaming 主要用于快速构建可扩展，高吞吐量，高容错的流处理程序。支持从 HDFS，Flume，Kafka，Twitter 和 ZeroMQ 读取数据，并进行处理。\n\n\u003cdiv align\u003d\"center\"\u003e \u003cimg width\u003d\"600px\" src\u003d\"https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/spark-streaming-arch.png\"/\u003e \u003c/div\u003e\n\n Spark Streaming 的本质是微批处理，它将数据流进行极小粒度的拆分，拆分为多个批处理，从而达到接近于流处理的效果。\n\n\u003cdiv align\u003d\"center\"\u003e \u003cimg width\u003d\"600px\"   src\u003d\"https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/spark-streaming-flow.png\"/\u003e \u003c/div\u003e\n\n\n\n### 3.3 MLlib\n\nMLlib 是 Spark 的机器学习库。其设计目标是使得机器学习变得简单且可扩展。它提供了以下工具：\n\n+ **常见的机器学习算法**：如分类，回归，聚类和协同过滤；\n+ **特征化**：特征提取，转换，降维和选择；\n+ **管道**：用于构建，评估和调整 ML 管道的工具；\n+ **持久性**：保存和加载算法，模型，管道数据；\n+ **实用工具**：线性代数，统计，数据处理等。\n\n### 3.4 Graphx\n\nGraphX 是 Spark 中用于图形计算和图形并行计算的新组件。在高层次上，GraphX 通过引入一个新的图形抽象来扩展 RDD(一种具有附加到每个顶点和边缘的属性的定向多重图形)。为了支持图计算，GraphX 提供了一组基本运算符（如： subgraph，joinVertices 和 aggregateMessages）以及优化后的 Pregel API。此外，GraphX 还包括越来越多的图形算法和构建器，以简化图形分析任务。\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-30 14:07:22.405",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eSpark 的核心模块\u003c/h2\u003e\n\u003cdiv align\u003d\"center\"\u003e \u003cimg  width\u003d\"600px\" src\u003d\"https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/spark-stack.png\"/\u003e \u003c/div\u003e\n\u003ch3\u003e3.1 Spark  SQL\u003c/h3\u003e\n\u003cp\u003eSpark SQL 主要用于结构化数据的处理。其具有以下特点：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e能够将 SQL 查询与 Spark 程序无缝混合，允许您使用 SQL 或 DataFrame API 对结构化数据进行查询；\u003c/li\u003e\n\u003cli\u003e支持多种数据源，包括 Hive，Avro，Parquet，ORC，JSON 和 JDBC；\u003c/li\u003e\n\u003cli\u003e支持 HiveQL 语法以及用户自定义函数 (UDF)，允许你访问现有的 Hive 仓库；\u003c/li\u003e\n\u003cli\u003e支持标准的 JDBC 和 ODBC 连接；\u003c/li\u003e\n\u003cli\u003e支持优化器，列式存储和代码生成等特性，以提高查询效率。\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3\u003e3.2 Spark Streaming\u003c/h3\u003e\n\u003cp\u003eSpark Streaming 主要用于快速构建可扩展，高吞吐量，高容错的流处理程序。支持从 HDFS，Flume，Kafka，Twitter 和 ZeroMQ 读取数据，并进行处理。\u003c/p\u003e\n\u003cdiv align\u003d\"center\"\u003e \u003cimg width\u003d\"600px\" src\u003d\"https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/spark-streaming-arch.png\"/\u003e \u003c/div\u003e\n\u003cp\u003eSpark Streaming 的本质是微批处理，它将数据流进行极小粒度的拆分，拆分为多个批处理，从而达到接近于流处理的效果。\u003c/p\u003e\n\u003cdiv align\u003d\"center\"\u003e \u003cimg width\u003d\"600px\"   src\u003d\"https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/spark-streaming-flow.png\"/\u003e \u003c/div\u003e\n\u003ch3\u003e3.3 MLlib\u003c/h3\u003e\n\u003cp\u003eMLlib 是 Spark 的机器学习库。其设计目标是使得机器学习变得简单且可扩展。它提供了以下工具：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003cstrong\u003e常见的机器学习算法\u003c/strong\u003e：如分类，回归，聚类和协同过滤；\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003e特征化\u003c/strong\u003e：特征提取，转换，降维和选择；\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003e管道\u003c/strong\u003e：用于构建，评估和调整 ML 管道的工具；\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003e持久性\u003c/strong\u003e：保存和加载算法，模型，管道数据；\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003e实用工具\u003c/strong\u003e：线性代数，统计，数据处理等。\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3\u003e3.4 Graphx\u003c/h3\u003e\n\u003cp\u003eGraphX 是 Spark 中用于图形计算和图形并行计算的新组件。在高层次上，GraphX 通过引入一个新的图形抽象来扩展 RDD(一种具有附加到每个顶点和边缘的属性的定向多重图形)。为了支持图计算，GraphX 提供了一组基本运算符（如： subgraph，joinVertices 和 aggregateMessages）以及优化后的 Pregel API。此外，GraphX 还包括越来越多的图形算法和构建器，以简化图形分析任务。\u003c/p\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1634807446118_981224863",
+      "id": "20211021-082059_1305951329",
+      "dateCreated": "2021-10-21 09:10:46.118",
+      "dateStarted": "2021-10-30 14:07:22.407",
+      "dateFinished": "2021-10-30 14:07:22.422",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n# 集群架构\n\n| Term（术语）    | Meaning（含义）                                              |\n| --------------- | ------------------------------------------------------------ |\n| Application     | Spark 应用程序，由集群上的一个 Driver 节点和多个 Executor 节点组成。 |\n| Driver program  | 主运用程序，该进程运行应用的 main() 方法并且创建  SparkContext |\n| Cluster manager | 集群资源管理器（例如，Standlone Manager，Mesos，YARN）       |\n| Worker node     | 执行计算任务的工作节点                                       |\n| Executor        | 位于工作节点上的应用进程，负责执行计算任务并且将输出数据保存到内存或者磁盘中 |\n| Task            | 被发送到 Executor 中的工作单元                                 |\n\n\u003cdiv align\u003d\"center\"\u003e \u003cimg src\u003d\"https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/spark-集群模式.png\"/\u003e \u003c/div\u003e\n\n**执行过程**：\n\n1. 用户程序创建 SparkContext 后，它会连接到集群资源管理器，集群资源管理器会为用户程序分配计算资源，并启动 Executor；\n2. Driver 将计算程序划分为不同的执行阶段和多个 Task，之后将 Task 发送给 Executor；\n3. Executor 负责执行 Task，并将执行状态汇报给 Driver，同时也会将当前节点资源的使用情况汇报给集群资源管理器。\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-22 06:37:55.682",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch1\u003e集群架构\u003c/h1\u003e\n\u003ctable\u003e\n\u003cthead\u003e\n\u003ctr\u003e\u003cth\u003eTerm（术语）\u003c/th\u003e\u003cth\u003eMeaning（含义）\u003c/th\u003e\u003c/tr\u003e\n\u003c/thead\u003e\n\u003ctbody\u003e\n\u003ctr\u003e\u003ctd\u003eApplication\u003c/td\u003e\u003ctd\u003eSpark 应用程序，由集群上的一个 Driver 节点和多个 Executor 节点组成。\u003c/td\u003e\u003c/tr\u003e\n\u003ctr\u003e\u003ctd\u003eDriver program\u003c/td\u003e\u003ctd\u003e主运用程序，该进程运行应用的 main() 方法并且创建  SparkContext\u003c/td\u003e\u003c/tr\u003e\n\u003ctr\u003e\u003ctd\u003eCluster manager\u003c/td\u003e\u003ctd\u003e集群资源管理器（例如，Standlone Manager，Mesos，YARN）\u003c/td\u003e\u003c/tr\u003e\n\u003ctr\u003e\u003ctd\u003eWorker node\u003c/td\u003e\u003ctd\u003e执行计算任务的工作节点\u003c/td\u003e\u003c/tr\u003e\n\u003ctr\u003e\u003ctd\u003eExecutor\u003c/td\u003e\u003ctd\u003e位于工作节点上的应用进程，负责执行计算任务并且将输出数据保存到内存或者磁盘中\u003c/td\u003e\u003c/tr\u003e\n\u003ctr\u003e\u003ctd\u003eTask\u003c/td\u003e\u003ctd\u003e被发送到 Executor 中的工作单元\u003c/td\u003e\u003c/tr\u003e\n\u003c/tbody\u003e\n\u003c/table\u003e\n\u003cdiv align\u003d\"center\"\u003e \u003cimg src\u003d\"https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/spark-集群模式.png\"/\u003e \u003c/div\u003e\n\u003cp\u003e\u003cstrong\u003e执行过程\u003c/strong\u003e：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e用户程序创建 SparkContext 后，它会连接到集群资源管理器，集群资源管理器会为用户程序分配计算资源，并启动 Executor；\u003c/li\u003e\n\u003cli\u003eDriver 将计算程序划分为不同的执行阶段和多个 Task，之后将 Task 发送给 Executor；\u003c/li\u003e\n\u003cli\u003eExecutor 负责执行 Task，并将执行状态汇报给 Driver，同时也会将当前节点资源的使用情况汇报给集群资源管理器。\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1634884418866_1040081342",
+      "id": "paragraph_1634884418866_1040081342",
+      "dateCreated": "2021-10-22 06:33:38.866",
+      "dateStarted": "2021-10-22 06:36:45.180",
+      "dateFinished": "2021-10-22 06:36:45.205",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-22 06:37:23.624",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "editorHide": false,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1634884550670_174685430",
+      "id": "paragraph_1634884550670_174685430",
+      "dateCreated": "2021-10-22 06:35:50.670",
+      "status": "READY"
+    }
+  ],
+  "name": "01.spark-intro",
+  "id": "2GMN6FVUH",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.9.0",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}

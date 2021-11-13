@@ -1,0 +1,9 @@
+[submodule "hive-zerotohero"]
+	path = hive-zerotohero
+	url = https://github.com/BSlience/hive-zerotohero.git
+[submodule "spark-zerotohero"]
+	path = spark-zerotohero
+	url = https://github.com/BSlience/spark-zerotohero.git
+[submodule "recommend-system-zerotohero"]
+	path = recommend-system-zerotohero
+	url = https://github.com/BSlience/recommend-system-zerotohero.git

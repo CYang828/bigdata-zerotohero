@@ -1,0 +1,235 @@
+{
+  "paragraphs": [
+    {
+      "text": "%md\n## Local 模式\n\n想啥呢，你之前一直在使用的模式可不是 Local 模式哟。所谓的 Local 模式，就是不需要其他任何节点资源就可以在本地执行 Spark 代码的环境，一般用于教学，调试，演示等，我们之前使用的并不是这种。",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-22 07:40:58.505",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eLocal 模式\u003c/h2\u003e\n\u003cp\u003e想啥呢，你之前一直在使用的模式可不是 Local 模式哟。所谓的 Local 模式，就是不需要其他任何节点资源就可以在本地执行 Spark 代码的环境，一般用于教学，调试，演示等，我们之前使用的并不是这种。\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1634888458505_875380717",
+      "id": "20211022-074058_807773328",
+      "dateCreated": "2021-10-22 07:40:58.505",
+      "status": "READY"
+    },
+    {
+      "text": "%md\n## Standalone 模式\n\nlocal 本地模式毕竟只是用来进行练习演示的，真实工作中还是要将应用提交到对应的集群中去执行，这里我们来看看只使用 Spark 自身节点运行的集群模式，也就是我们所谓的 独立部署(Standalone)模式。Spark 的 Standalone 模式体现了经典的 master-slave 模式。 集群规划:\n\n\u003cdiv align\u003d\"center\"\u003e\u003cimg src\u003d\"asset/1613725147329.jpg\" /\u003e\u003c/div\u003e\n\n这也是我们部署的方式，这种方式，当我们在部署的机器上运行 jps 时，会有以下的一些进程。\n\n```\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003dlinux1\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n3330 Jps\n3238 Worker\n3163 Master\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003dlinux2\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n2966 Jps\n2908 Worker\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003dlinux3\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n2978 Worker\n3036 Jps\n```\n\n使用这种方式的时候，我们可以使用 Spark 自带的 UI 界面来管理 Job， UI 界面的地址为 http://\u003cspark_host\u003e:8080/.",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-22 07:40:58.505",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eStandalone 模式\u003c/h2\u003e\n\u003cp\u003elocal 本地模式毕竟只是用来进行练习演示的，真实工作中还是要将应用提交到对应的集群中去执行，这里我们来看看只使用 Spark 自身节点运行的集群模式，也就是我们所谓的 独立部署(Standalone)模式。Spark 的 Standalone 模式体现了经典的 master-slave 模式。 集群规划:\u003c/p\u003e\n\u003cdiv align\u003d\"center\"\u003e\u003cimg src\u003d\"asset/1613725147329.jpg\" /\u003e\u003c/div\u003e\n\u003cp\u003e这也是我们部署的方式，这种方式，当我们在部署的机器上运行 jps 时，会有以下的一些进程。\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003dlinux1\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n3330 Jps\n3238 Worker\n3163 Master\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003dlinux2\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n2966 Jps\n2908 Worker\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003dlinux3\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n2978 Worker\n3036 Jps\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e使用这种方式的时候，我们可以使用 Spark 自带的 UI 界面来管理 Job， UI 界面的地址为 http://\u003cspark_host\u003e:8080/.\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1634888458505_943067274",
+      "id": "20211022-074058_577753267",
+      "dateCreated": "2021-10-22 07:40:58.505",
+      "status": "READY"
+    },
+    {
+      "text": "%md\n## 配置高可用(HA)\n\n所谓的高可用是因为当前集群中的 Master 节点只有一个，所以会存在单点故障问题。所以为了解决单点故障问题，需要在集群中配置多个 Master 节点，一旦处于活动状态的 Master 发生故障时，由备用 Master 提供服务，保证作业可以继续执行。这里的高可用一般采用 Zookeeper 设置, 集群规划：\n\n\u003cdiv align\u003d\"center\"\u003e\u003cimg src\u003d\"http://localhost:9999/image/1613725521838.jpg\" /\u003e\u003c/div\u003e\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-22 09:35:07.867",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/markdown",
+        "colWidth": 12.0,
+        "editorHide": true,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003e配置高可用(HA)\u003c/h2\u003e\n\u003cp\u003e所谓的高可用是因为当前集群中的 Master 节点只有一个，所以会存在单点故障问题。所以为了解决单点故障问题，需要在集群中配置多个 Master 节点，一旦处于活动状态的 Master 发生故障时，由备用 Master 提供服务，保证作业可以继续执行。这里的高可用一般采用 Zookeeper 设置, 集群规划：\u003c/p\u003e\n\u003cdiv align\u003d\"center\"\u003e\u003cimg src\u003d\"http://localhost:9999/image/1613725521838.jpg\" /\u003e\u003c/div\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1634888458505_1227778677",
+      "id": "20211022-074058_1355585800",
+      "dateCreated": "2021-10-22 07:40:58.505",
+      "dateStarted": "2021-10-22 09:35:07.868",
+      "dateFinished": "2021-10-22 09:35:07.879",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n## Yarn 模式\n\n独立部署(Standalone)模式由 Spark 自身提供计算资源，无需其他框架提供资源。这种方式降低了和其他第三方资源框架的耦合性，独立性非常强。但是你也要记住，Spark 主 要是计算框架，而不是资源调度框架，所以本身提供的资源调度并不是它的强项，所以还是 和其他专业的资源调度框架集成会更靠谱一些。所以接下来我们来学习在强大的 Yarn 环境 下 Spark 是如何工作的(其实是因为在国内工作中，Yarn 使用的非常多)。",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-22 07:40:58.505",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eYarn 模式\u003c/h2\u003e\n\u003cp\u003e独立部署(Standalone)模式由 Spark 自身提供计算资源，无需其他框架提供资源。这种方式降低了和其他第三方资源框架的耦合性，独立性非常强。但是你也要记住，Spark 主 要是计算框架，而不是资源调度框架，所以本身提供的资源调度并不是它的强项，所以还是 和其他专业的资源调度框架集成会更靠谱一些。所以接下来我们来学习在强大的 Yarn 环境 下 Spark 是如何工作的(其实是因为在国内工作中，Yarn 使用的非常多)。\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1634888458505_302247354",
+      "id": "20211022-074058_1430541603",
+      "dateCreated": "2021-10-22 07:40:58.505",
+      "status": "READY"
+    },
+    {
+      "text": "%md\n## K8S \u0026 Mesos 模式\n\nMesos 是 Apache 下的开源分布式资源管理框架，它被称为是分布式系统的内核,在 Twitter 得到广泛使用,管理着 Twitter 超过 30,0000 台服务器上的应用部署，但是在国内，依然使用着传统的 Hadoop 大数据框架，所以国内使用 Mesos 框架的并不多，但是原理其实都差不多，这里我们就不做过多讲解了。\n\n\u003cdiv align\u003d\"center\"\u003e\u003cimg src\u003d\"asset/1613725831934.jpg\" /\u003e\u003c/div\u003e\n\n容器化部署是目前业界很流行的一项技术，基于 Docker 镜像运行能够让用户更加方便 地对应用进行管理和运维。容器管理工具中最为流行的就是 Kubernetes(k8s)，而 Spark 也在最近的版本中支持了 k8s 部署模式。这里我们也不做过多的讲解。给个链接大家自己感受一下:https://spark.apache.org/docs/latest/running-on-kubernetes.html\n\n\u003cdiv align\u003d\"center\"\u003e\u003cimg src\u003d\"asset/1613725936826.jpg\" /\u003e\u003c/div\u003e",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-22 09:58:25.357",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/markdown",
+        "colWidth": 12.0,
+        "editorHide": true,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eK8S \u0026amp; Mesos 模式\u003c/h2\u003e\n\u003cp\u003eMesos 是 Apache 下的开源分布式资源管理框架，它被称为是分布式系统的内核,在 Twitter 得到广泛使用,管理着 Twitter 超过 30,0000 台服务器上的应用部署，但是在国内，依然使用着传统的 Hadoop 大数据框架，所以国内使用 Mesos 框架的并不多，但是原理其实都差不多，这里我们就不做过多讲解了。\u003c/p\u003e\n\u003cdiv align\u003d\"center\"\u003e\u003cimg src\u003d\"asset/1613725831934.jpg\" /\u003e\u003c/div\u003e\n\u003cp\u003e容器化部署是目前业界很流行的一项技术，基于 Docker 镜像运行能够让用户更加方便 地对应用进行管理和运维。容器管理工具中最为流行的就是 Kubernetes(k8s)，而 Spark 也在最近的版本中支持了 k8s 部署模式。这里我们也不做过多的讲解。给个链接大家自己感受一下:\u003ca href\u003d\"https://spark.apache.org/docs/latest/running-on-kubernetes.html\"\u003ehttps://spark.apache.org/docs/latest/running-on-kubernetes.html\u003c/a\u003e\u003c/p\u003e\n\u003cdiv align\u003d\"center\"\u003e\u003cimg src\u003d\"asset/1613725936826.jpg\" /\u003e\u003c/div\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1634888458505_379974513",
+      "id": "20211022-074058_1757346889",
+      "dateCreated": "2021-10-22 07:40:58.505",
+      "dateStarted": "2021-10-22 09:58:25.359",
+      "dateFinished": "2021-10-22 09:58:25.368",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n## 部署模式对比\n\n\u003cdiv align\u003d\"center\"\u003e\u003cimg src\u003d\"asset/1613726084985.jpg\" /\u003e\u003c/div\u003e\n\n**使用到的一些端口号**\n\n- Spark查看当前Spark-shell运行任务情况端口号:4040(计算)\n- Spark Master 内部通信服务端口号:7077\n- Standalone模式下，SparkMasterWeb端口号:8080(资源)\n- Spark历史服务器端口号:18080\n- HadoopYARN任务运行情况查看端口号:8088",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-22 07:40:58.505",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003e部署模式对比\u003c/h2\u003e\n\u003cdiv align\u003d\"center\"\u003e\u003cimg src\u003d\"asset/1613726084985.jpg\" /\u003e\u003c/div\u003e\n\u003cp\u003e\u003cstrong\u003e使用到的一些端口号\u003c/strong\u003e\u003c/p\u003e\n\u003cul\u003e\n  \u003cli\u003eSpark查看当前Spark-shell运行任务情况端口号:4040(计算)\u003c/li\u003e\n  \u003cli\u003eSpark Master 内部通信服务端口号:7077\u003c/li\u003e\n  \u003cli\u003eStandalone模式下，SparkMasterWeb端口号:8080(资源)\u003c/li\u003e\n  \u003cli\u003eSpark历史服务器端口号:18080\u003c/li\u003e\n  \u003cli\u003eHadoopYARN任务运行情况查看端口号:8088\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1634888458505_2105247248",
+      "id": "20211022-074058_207277237",
+      "dateCreated": "2021-10-22 07:40:58.505",
+      "status": "READY"
+    }
+  ],
+  "name": "03.spark-runtime-environment",
+  "id": "2GK8X5D7P",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.9.0",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}
