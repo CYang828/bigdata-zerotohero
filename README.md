@@ -109,8 +109,10 @@
 快速开始体验大数据环境。
 
 ```bash
+git clone --recursive https://github.com/BSlience/bigdata-zerotohero.git
 cd bigdata-environment/
-docker-compose up
+docker network create bigdata-net
+docker-compose up -d
 ```
 
 ### 步骤1，导入数据到 HDFS 中

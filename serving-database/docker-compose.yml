@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: bigdata
+      MONGO_INITDB_ROOT_PASSWORD: bigdata123
+    volumes:
+      - ./mongo/data/:/data/db/
+      - ./mongo/logs/:/data/logs/
+    ports: 
+      - 27016:27017
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8083:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: bigdata
+      ME_CONFIG_MONGODB_ADMINPASSWORD: bigdata123
+      ME_CONFIG_MONGODB_URL: mongodb://bigdata:bigdata123@mongo:27017/
+
+networks:
+  custom_net:
+   external:
+      name: bigdata-net

@@ -10,3 +10,9 @@
 [submodule "hbase-zerotohero"]
 	path = course/notebook/hbase-zerotohero
 	url = https://github.com/BSlience/hbase-zerotohero.git
+[submodule "machine-learning-zerotohero"]
+	path = course/notebook/machine-learning-zerotohero
+	url = https://github.com/BSlience/machine-learning-zerotohero.git
+[submodule "tensorflow-developer-certificate"]
+	path = course/notebook/tensorflow-developer-certificate
+	url = https://github.com/BSlience/tensorflow-developer-certificate.git

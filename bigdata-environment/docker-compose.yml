@@ -275,29 +275,17 @@ services:
       - ../course/:/opt/zeppelin/notebook/
 
   datascience-lab:
-    build: ./datascience-lab/ 
+    image: tensorflow/tensorflow:2.6.0rc1-gpu-jupyter
     container_name: datascience-lab
+    environment: 
+      JUPYTER_ENABLE_LAB: 'yes'
+      PASSWORD: bigdata123
     ports:
       - "8889:8888"
+    volumes:
+      - ../course/notebook/tensorflow-developer-certificate:/tf/tensorflow-developer-certificate/
+      - ../course/notebook/recommend-system-zerotohero:/tf/recommend-system-zerotohero/
 
-  mongo:
-    image: mongo
-    restart: always
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: bigdata
-      MONGO_INITDB_ROOT_PASSWORD: bigdata123
-    ports: 
-      - 27016:27017
-
-  mongo-express:
-    image: mongo-express
-    restart: always
-    ports:
-      - 8083:8081
-    environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: bigdata
-      ME_CONFIG_MONGODB_ADMINPASSWORD: bigdata123
-      ME_CONFIG_MONGODB_URL: mongodb://bigdata:bigdata123@mongo:27017/
 
   elasticsearch:
     image: elasticsearch:7.8.0
@@ -345,3 +333,8 @@ volumes:
   shared-workspace:
   data:
 
+
+networks:
+  custom_net:
+   external:
+      name: bigdata-net
