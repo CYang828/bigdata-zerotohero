@@ -28,7 +28,7 @@
 
   <p align="center">
     从零开始学习大数据
-    <br />
+    <!-- <br />
     <a href="https://github.com/othneildrew/Best-README-Template"><strong>查看文档 »</strong></a>
     <br />
     <br />
@@ -36,7 +36,7 @@
     ·
     <a href="https://github.com/othneildrew/Best-README-Template/issues">反馈 Bug</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">提交 Pull Request</a>
+    <a href="https://github.com/othneildrew/Best-README-Template/issues">提交 Pull Request</a> -->
   </p>
 </div>
 
