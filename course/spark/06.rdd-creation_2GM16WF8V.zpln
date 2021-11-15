@@ -1,0 +1,361 @@
+{
+  "paragraphs": [
+    {
+      "text": "%python\n# 为了能够让 python 找到 pyspark，使用 findspark\nimport findspark\nfindspark.init()\n\n# 为了使用 RDDs，创建 SparkSession\nfrom pyspark.sql import SparkSession\nfrom pyspark.conf import SparkConf\n\n# 创建 SparkConf 和 SparkSession\nconf\u003dSparkConf()\\\n        .setMaster(\u0027local[*]\u0027)\\\n        .setAppName(\"~\")\\\n        .setExecutorEnv(\"spark.executor.memory\",\"2g\")\\\n        .setExecutorEnv(\"spark.driver.memory\",\"2g\")\n\nspark\u003dSparkSession.builder\\\n        .config(conf\u003dconf)\\\n        .getOrCreate()\n\n# 获取 SparkContext\nsc\u003dspark.sparkContext",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-09 12:14:49.174",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "completionKey": "TAB"
+        },
+        "editorMode": "ace/mode/python",
+        "colWidth": 12.0,
+        "editorHide": false,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Fail to execute line 3: import findspark\nTraceback (most recent call last):\n  File \"/tmp/1636459995938-0/zeppelin_python.py\", line 153, in \u003cmodule\u003e\n    exec(code, _zcUserQueryNameSpace)\n  File \"\u003cstdin\u003e\", line 3, in \u003cmodule\u003e\nImportError: No module named findspark\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636459969325_1153345327",
+      "id": "20211109-121249_2131317053",
+      "dateCreated": "2021-11-09 12:12:49.325",
+      "dateStarted": "2021-11-09 12:14:49.179",
+      "dateFinished": "2021-11-09 12:14:49.187",
+      "status": "ERROR"
+    },
+    {
+      "text": "%pyspark\nsc",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-09 12:20:29.710",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "completionKey": "TAB"
+        },
+        "editorMode": "ace/mode/python",
+        "colWidth": 12.0,
+        "editorHide": false,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u003cSparkContext master\u003dspark://spark-master:7077 appName\u003dspark-shared_process\u003e\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636459969325_1683461063",
+      "id": "20211109-121249_1443567543",
+      "dateCreated": "2021-11-09 12:12:49.326",
+      "dateStarted": "2021-11-09 12:20:29.715",
+      "dateFinished": "2021-11-09 12:20:29.733",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n### RDD 创建\n\n在 Spark 中创建 RDD 的创建方式可以分为四种:",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-09 12:12:49.326",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003eRDD 创建\u003c/h3\u003e\n\u003cp\u003e在 Spark 中创建 RDD 的创建方式可以分为四种:\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636459969326_940487223",
+      "id": "20211109-121249_877047176",
+      "dateCreated": "2021-11-09 12:12:49.326",
+      "status": "READY"
+    },
+    {
+      "text": "%pyspark\n# ①\n# 从集合(内存)中创建 RDD\nd \u003d [1, 2,3,4]\nrdd1 \u003d sc.parallelize(d)\nrdd1",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-09 12:21:13.563",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "completionKey": "TAB"
+        },
+        "editorMode": "ace/mode/python",
+        "colWidth": 12.0,
+        "editorHide": false,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "ParallelCollectionRDD[0] at readRDDFromFile at PythonRDD.scala:262\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636459969326_70761471",
+      "id": "20211109-121249_921835512",
+      "dateCreated": "2021-11-09 12:12:49.326",
+      "dateStarted": "2021-11-09 12:19:01.877",
+      "dateFinished": "2021-11-09 12:19:03.297",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%pyspark\nrdd1.collect()",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-09 12:19:25.376",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "completionKey": "TAB"
+        },
+        "editorMode": "ace/mode/python",
+        "colWidth": 12.0,
+        "editorHide": false,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "[1, 2, 3, 4]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://413678f8121a:4040/jobs/job?id\u003d0"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636459969326_1248159825",
+      "id": "20211109-121249_1333517829",
+      "dateCreated": "2021-11-09 12:12:49.326",
+      "dateStarted": "2021-11-09 12:19:25.379",
+      "dateFinished": "2021-11-09 12:19:33.814",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%pyspark\n# ②\n# 从外部存储(文件)创建 RDD\n# 由外部存储系统的数据集创建 RDD 包括:本地的文件系统，所有 Hadoop 支持的数据集， 比如 HDFS、HBase 等。\nrdd2 \u003d sc.textFile(\u0027hdfs://namenode:9000/dataset/shakespeare.txt\u0027)\nrdd2",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-09 12:32:29.411",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "completionKey": "TAB"
+        },
+        "editorMode": "ace/mode/python",
+        "colWidth": 12.0,
+        "editorHide": false,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "hdfs://namenode:9000/dataset/shakespeare.txt MapPartitionsRDD[4] at textFile at NativeMethodAccessorImpl.java:0\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636459969326_778866072",
+      "id": "20211109-121249_456451286",
+      "dateCreated": "2021-11-09 12:12:49.326",
+      "dateStarted": "2021-11-09 12:32:29.419",
+      "dateFinished": "2021-11-09 12:32:29.479",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%pyspark\nrdd2.take(10)",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-09 12:32:31.137",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "completionKey": "TAB"
+        },
+        "editorMode": "ace/mode/python",
+        "colWidth": 12.0,
+        "editorHide": false,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "[\u0027THE SONNETS\u0027, \u0027\u0027, \u0027by William Shakespeare\u0027, \u0027\u0027, \u0027From fairest creatures we desire increase,\u0027, \"That thereby beauty\u0027s rose might never die,\", \u0027But as the riper should by time decease,\u0027, \u0027His tender heir might bear his memory:\u0027, \u0027But thou contracted to thine own bright eyes,\u0027, \"Feed\u0027st thy light\u0027s flame with self-substantial fuel,\"]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://413678f8121a:4040/jobs/job?id\u003d1"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636459969326_1378829576",
+      "id": "20211109-121249_854569615",
+      "dateCreated": "2021-11-09 12:12:49.326",
+      "dateStarted": "2021-11-09 12:32:31.140",
+      "dateFinished": "2021-11-09 12:32:33.626",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n③从其他 RDD 创建\n主要是通过一个 RDD 运算完后，再产生新的 RDD。详情请参考后续章节\n\n④直接创建 RDD\n一般由 Spark 框架自身使用。",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-09 12:12:49.326",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003e③从其他 RDD 创建\u003cbr/\u003e主要是通过一个 RDD 运算完后，再产生新的 RDD。详情请参考后续章节\u003c/p\u003e\n\u003cp\u003e④直接创建 RDD\u003cbr/\u003e一般由 Spark 框架自身使用。\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636459969326_1867134203",
+      "id": "20211109-121249_344207101",
+      "dateCreated": "2021-11-09 12:12:49.326",
+      "status": "READY"
+    }
+  ],
+  "name": "06.rdd-creation",
+  "id": "2GM16WF8V",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.9.0",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}

@@ -1,0 +1,88 @@
+{
+  "paragraphs": [
+    {
+      "text": "%md\n# Spark 核心编程\n\nSpark 计算框架为了能够进行高并发和高吞吐的数据处理，封装了三大数据结构，用于处理不同的应用场景。三大数据结构分别是:\n\n- RDD : 弹性分布式数据集\n- 累加器:分布式共享只写变量\n- 广播变量:分布式共享只读变量 \n\n接下来我们一起看看这三大数据结构是如何在数据处理中使用的。",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-09 11:51:02.583",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/markdown",
+        "colWidth": 12.0,
+        "editorHide": true,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch1\u003eSpark 核心编程\u003c/h1\u003e\n\u003cp\u003eSpark 计算框架为了能够进行高并发和高吞吐的数据处理，封装了三大数据结构，用于处理不同的应用场景。三大数据结构分别是:\u003c/p\u003e\n\u003cul\u003e\n  \u003cli\u003eRDD : 弹性分布式数据集\u003c/li\u003e\n  \u003cli\u003e累加器:分布式共享只写变量\u003c/li\u003e\n  \u003cli\u003e广播变量:分布式共享只读变量\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e接下来我们一起看看这三大数据结构是如何在数据处理中使用的。\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636457510018_333981328",
+      "id": "20211109-113149_1486753774",
+      "dateCreated": "2021-11-09 11:31:50.018",
+      "status": "READY"
+    },
+    {
+      "text": "%md\n## RDD\n\n### 什么是 RDD\n\nRDD(Resilient Distributed Dataset)叫做弹性分布式数据集，是 Spark 中最基本的数据处理模型。代码中是一个抽象类，它代表一个弹性的、不可变、可分区、里面的元素可并行计算的集合。\n\n- 弹性\n    - 存储的弹性:内存与磁盘的自动切换; \n    - 容错的弹性:数据丢失可以自动恢复; \n    - 计算的弹性:计算出错重试机制;\n    - 分片的弹性:可根据需要重新分片。\n    \n    \n- 分布式:数据存储在大数据集群不同节点上\n- 数据集:RDD封装了计算逻辑，并不保存数据\n- 数据抽象:RDD是一个抽象类，需要子类具体实现\n- 不可变:RDD封装了计算逻辑，是不可以改变的，想要改变，只能产生新的RDD，在新的 RDD 里面封装计算逻辑\n- 可分区、并行计算\n\n### RDD 的核心属性\n\n- 分区列表\n\n    RDD 数据结构中存在分区列表，用于执行任务时并行计算，是实现分布式计算的重要属性。\n    \n- 分区计算函数\n\n    Spark 在计算时，是使用分区函数对每一个分区进行计算\n    \n- RDD之间的依赖关系\n    \n    RDD 是计算模型的封装，当需求中需要将多个计算模型进行组合时，就需要将多个 RDD 建 立依赖关系\n    \n- 分区器(可选)\n    \n    当数据为 KV 类型数据时，可以通过设定分区器自定义数据的分区\n    \n- 首选位置(可选)\n\n    计算数据时，可以根据计算节点的状态选择不同的节点位置进行计算\n    \n### RDD 执行原理\n\n从计算的角度来讲，数据处理过程中需要计算资源(内存 \u0026 CPU)和计算模型(逻辑)。执行时，需要将计算资源和计算模型进行协调和整合。Spark 框架在执行时，先申请资源，然后将应用程序的数据处理逻辑分解成一个一个的计算任务。然后将任务发到已经分配资源的计算节点上, 按照指定的计算模型进行数据计算。最后得到计算结果。RDD 是 Spark 框架中用于数据处理的核心模型，接下来我们看看，在 Yarn 环境中，RDD 的工作原理:\n\n1. 启动 Yarn 集群环境\n\n2. Spark 通过申请资源创建调度节点和计算节点\n\n3. Spark 框架根据需求将计算逻辑根据分区划分成不同的任务\n\n4. 调度节点将任务根据计算节点状态发送到对应的计算节点进行计算\n\n从以上流程可以看出 RDD 在整个流程中主要用于将逻辑进行封装，并生成 Task 发送给 Executor 节点执行计算，接下来我们就一起看看 Spark 框架中 RDD 是具体是如何进行数据处理的。",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-09 11:31:50.019",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eRDD\u003c/h2\u003e\n\u003ch3\u003e什么是 RDD\u003c/h3\u003e\n\u003cp\u003eRDD(Resilient Distributed Dataset)叫做弹性分布式数据集，是 Spark 中最基本的数据处理模型。代码中是一个抽象类，它代表一个弹性的、不可变、可分区、里面的元素可并行计算的集合。\u003c/p\u003e\n\u003cul\u003e\n  \u003cli\u003e\n    \u003cp\u003e弹性\u003c/p\u003e\n    \u003cul\u003e\n      \u003cli\u003e存储的弹性:内存与磁盘的自动切换;\u003c/li\u003e\n      \u003cli\u003e容错的弹性:数据丢失可以自动恢复;\u003c/li\u003e\n      \u003cli\u003e计算的弹性:计算出错重试机制;\u003c/li\u003e\n      \u003cli\u003e分片的弹性:可根据需要重新分片。\u003c/li\u003e\n    \u003c/ul\u003e\n  \u003c/li\u003e\n  \u003cli\u003e\n  \u003cp\u003e分布式:数据存储在大数据集群不同节点上\u003c/p\u003e\u003c/li\u003e\n  \u003cli\u003e数据集:RDD封装了计算逻辑，并不保存数据\u003c/li\u003e\n  \u003cli\u003e数据抽象:RDD是一个抽象类，需要子类具体实现\u003c/li\u003e\n  \u003cli\u003e不可变:RDD封装了计算逻辑，是不可以改变的，想要改变，只能产生新的RDD，在新的 RDD 里面封装计算逻辑\u003c/li\u003e\n  \u003cli\u003e可分区、并行计算\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3\u003eRDD 的核心属性\u003c/h3\u003e\n\u003cul\u003e\n  \u003cli\u003e\n    \u003cp\u003e分区列表\u003c/p\u003e\n    \u003cp\u003eRDD 数据结构中存在分区列表，用于执行任务时并行计算，是实现分布式计算的重要属性。\u003c/p\u003e\n  \u003c/li\u003e\n  \u003cli\u003e\n    \u003cp\u003e分区计算函数\u003c/p\u003e\n    \u003cp\u003eSpark 在计算时，是使用分区函数对每一个分区进行计算\u003c/p\u003e\n  \u003c/li\u003e\n  \u003cli\u003e\n    \u003cp\u003eRDD之间的依赖关系\u003c/p\u003e\n    \u003cp\u003eRDD 是计算模型的封装，当需求中需要将多个计算模型进行组合时，就需要将多个 RDD 建 立依赖关系\u003c/p\u003e\n  \u003c/li\u003e\n  \u003cli\u003e\n    \u003cp\u003e分区器(可选)\u003c/p\u003e\n    \u003cp\u003e当数据为 KV 类型数据时，可以通过设定分区器自定义数据的分区\u003c/p\u003e\n  \u003c/li\u003e\n  \u003cli\u003e\n    \u003cp\u003e首选位置(可选)\u003c/p\u003e\n    \u003cp\u003e计算数据时，可以根据计算节点的状态选择不同的节点位置进行计算\u003c/p\u003e\n  \u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3\u003eRDD 执行原理\u003c/h3\u003e\n\u003cp\u003e从计算的角度来讲，数据处理过程中需要计算资源(内存 \u0026amp; CPU)和计算模型(逻辑)。执行时，需要将计算资源和计算模型进行协调和整合。Spark 框架在执行时，先申请资源，然后将应用程序的数据处理逻辑分解成一个一个的计算任务。然后将任务发到已经分配资源的计算节点上, 按照指定的计算模型进行数据计算。最后得到计算结果。RDD 是 Spark 框架中用于数据处理的核心模型，接下来我们看看，在 Yarn 环境中，RDD 的工作原理:\u003c/p\u003e\n\u003col\u003e\n  \u003cli\u003e\n  \u003cp\u003e启动 Yarn 集群环境\u003c/p\u003e\u003c/li\u003e\n  \u003cli\u003e\n  \u003cp\u003eSpark 通过申请资源创建调度节点和计算节点\u003c/p\u003e\u003c/li\u003e\n  \u003cli\u003e\n  \u003cp\u003eSpark 框架根据需求将计算逻辑根据分区划分成不同的任务\u003c/p\u003e\u003c/li\u003e\n  \u003cli\u003e\n  \u003cp\u003e调度节点将任务根据计算节点状态发送到对应的计算节点进行计算\u003c/p\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e从以上流程可以看出 RDD 在整个流程中主要用于将逻辑进行封装，并生成 Task 发送给 Executor 节点执行计算，接下来我们就一起看看 Spark 框架中 RDD 是具体是如何进行数据处理的。\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636457510019_551093713",
+      "id": "20211109-113150_425290204",
+      "dateCreated": "2021-11-09 11:31:50.019",
+      "status": "READY"
+    }
+  ],
+  "name": "05.what-is-rdd",
+  "id": "2GPF248KA",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.9.0",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}

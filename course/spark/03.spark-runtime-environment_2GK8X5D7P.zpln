@@ -37,15 +37,20 @@
     {
       "text": "%md\n## Standalone 模式\n\nlocal 本地模式毕竟只是用来进行练习演示的，真实工作中还是要将应用提交到对应的集群中去执行，这里我们来看看只使用 Spark 自身节点运行的集群模式，也就是我们所谓的 独立部署(Standalone)模式。Spark 的 Standalone 模式体现了经典的 master-slave 模式。 集群规划:\n\n\u003cdiv align\u003d\"center\"\u003e\u003cimg src\u003d\"asset/1613725147329.jpg\" /\u003e\u003c/div\u003e\n\n这也是我们部署的方式，这种方式，当我们在部署的机器上运行 jps 时，会有以下的一些进程。\n\n```\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003dlinux1\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n3330 Jps\n3238 Worker\n3163 Master\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003dlinux2\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n2966 Jps\n2908 Worker\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003dlinux3\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n2978 Worker\n3036 Jps\n```\n\n使用这种方式的时候，我们可以使用 Spark 自带的 UI 界面来管理 Job， UI 界面的地址为 http://\u003cspark_host\u003e:8080/.",
       "user": "anonymous",
-      "dateUpdated": "2021-10-22 07:40:58.505",
+      "dateUpdated": "2021-11-09 06:32:47.198",
       "progress": 0,
       "config": {
         "editorMode": "ace/mode/markdown",
-        "editorHide": true,
+        "editorHide": false,
         "editorSetting": {
           "language": "markdown",
-          "editOnDblClick": true
-        }
+          "editOnDblClick": true,
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {}
       },
       "settings": {
         "params": {},
@@ -71,7 +76,7 @@
     {
       "text": "%md\n## 配置高可用(HA)\n\n所谓的高可用是因为当前集群中的 Master 节点只有一个，所以会存在单点故障问题。所以为了解决单点故障问题，需要在集群中配置多个 Master 节点，一旦处于活动状态的 Master 发生故障时，由备用 Master 提供服务，保证作业可以继续执行。这里的高可用一般采用 Zookeeper 设置, 集群规划：\n\n\u003cdiv align\u003d\"center\"\u003e\u003cimg src\u003d\"http://localhost:9999/image/1613725521838.jpg\" /\u003e\u003c/div\u003e\n",
       "user": "anonymous",
-      "dateUpdated": "2021-10-22 09:35:07.867",
+      "dateUpdated": "2021-11-09 07:26:43.158",
       "progress": 0,
       "config": {
         "tableHide": false,
@@ -82,7 +87,7 @@
         },
         "editorMode": "ace/mode/markdown",
         "colWidth": 12.0,
-        "editorHide": true,
+        "editorHide": false,
         "fontSize": 9.0,
         "results": {},
         "enabled": true
@@ -147,7 +152,7 @@
     {
       "text": "%md\n## K8S \u0026 Mesos 模式\n\nMesos 是 Apache 下的开源分布式资源管理框架，它被称为是分布式系统的内核,在 Twitter 得到广泛使用,管理着 Twitter 超过 30,0000 台服务器上的应用部署，但是在国内，依然使用着传统的 Hadoop 大数据框架，所以国内使用 Mesos 框架的并不多，但是原理其实都差不多，这里我们就不做过多讲解了。\n\n\u003cdiv align\u003d\"center\"\u003e\u003cimg src\u003d\"asset/1613725831934.jpg\" /\u003e\u003c/div\u003e\n\n容器化部署是目前业界很流行的一项技术，基于 Docker 镜像运行能够让用户更加方便 地对应用进行管理和运维。容器管理工具中最为流行的就是 Kubernetes(k8s)，而 Spark 也在最近的版本中支持了 k8s 部署模式。这里我们也不做过多的讲解。给个链接大家自己感受一下:https://spark.apache.org/docs/latest/running-on-kubernetes.html\n\n\u003cdiv align\u003d\"center\"\u003e\u003cimg src\u003d\"asset/1613725936826.jpg\" /\u003e\u003c/div\u003e",
       "user": "anonymous",
-      "dateUpdated": "2021-10-22 09:58:25.357",
+      "dateUpdated": "2021-11-09 07:29:39.063",
       "progress": 0,
       "config": {
         "tableHide": false,
@@ -158,7 +163,7 @@
         },
         "editorMode": "ace/mode/markdown",
         "colWidth": 12.0,
-        "editorHide": true,
+        "editorHide": false,
         "fontSize": 9.0,
         "results": {},
         "enabled": true
@@ -189,15 +194,20 @@
     {
       "text": "%md\n## 部署模式对比\n\n\u003cdiv align\u003d\"center\"\u003e\u003cimg src\u003d\"asset/1613726084985.jpg\" /\u003e\u003c/div\u003e\n\n**使用到的一些端口号**\n\n- Spark查看当前Spark-shell运行任务情况端口号:4040(计算)\n- Spark Master 内部通信服务端口号:7077\n- Standalone模式下，SparkMasterWeb端口号:8080(资源)\n- Spark历史服务器端口号:18080\n- HadoopYARN任务运行情况查看端口号:8088",
       "user": "anonymous",
-      "dateUpdated": "2021-10-22 07:40:58.505",
+      "dateUpdated": "2021-11-09 07:31:57.604",
       "progress": 0,
       "config": {
         "editorMode": "ace/mode/markdown",
-        "editorHide": true,
+        "editorHide": false,
         "editorSetting": {
           "language": "markdown",
           "editOnDblClick": true
-        }
+        },
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "tableHide": false
       },
       "settings": {
         "params": {},

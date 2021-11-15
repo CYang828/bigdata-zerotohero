@@ -1,0 +1,850 @@
+{
+  "paragraphs": [
+    {
+      "text": "status;",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-09 03:38:09.546",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "editOnDblClick": false,
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/undefined",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "1 active master, 0 backup masters, 2 servers, 2 dead, 2.0000 average load\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636028517379_1700298501",
+      "id": "paragraph_1636028517379_1700298501",
+      "dateCreated": "2021-11-04 12:21:57.379",
+      "dateStarted": "2021-11-09 03:38:09.552",
+      "dateFinished": "2021-11-09 03:38:09.562",
+      "status": "FINISHED"
+    },
+    {
+      "title": "表操作（DDL）",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-04 12:23:03.244",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "editOnDblClick": false,
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/undefined",
+        "fontSize": 9.0,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636028565100_478619373",
+      "id": "paragraph_1636028565100_478619373",
+      "dateCreated": "2021-11-04 12:22:45.100",
+      "status": "READY"
+    },
+    {
+      "title": "新建表（create）",
+      "text": "# 新建一个test表，包含两个列族cf1和cf2\ncreate \u0027test1\u0027, \u0027cf1\u0027, \u0027cf2\u0027\t\t",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-09 03:38:13.638",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "editOnDblClick": false,
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/undefined",
+        "fontSize": 9.0,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "0 row(s) in 1.3540 seconds\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636028586591_69090918",
+      "id": "paragraph_1636028586591_69090918",
+      "dateCreated": "2021-11-04 12:23:06.591",
+      "dateStarted": "2021-11-09 03:38:13.644",
+      "dateFinished": "2021-11-09 03:38:15.037",
+      "status": "FINISHED"
+    },
+    {
+      "text": "create \u0027userinfo\u0027, \u0027loginInfo\u0027, \u0027detail\u0027",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-09 03:38:48.474",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "editOnDblClick": false,
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/undefined",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\nERROR: Table already exists: userinfo!\n\nHere is some help for this command:\nCreates a table. Pass a table name, and a set of column family\nspecifications (at least one), and, optionally, table configuration.\nColumn specification can be a simple string (name), or a dictionary\n(dictionaries are described below in main help output), necessarily \nincluding NAME attribute. \nExamples:\n\nCreate a table with namespace\u003dns1 and table qualifier\u003dt1\n  hbase\u003e create \u0027ns1:t1\u0027, {NAME \u003d\u003e \u0027f1\u0027, VERSIONS \u003d\u003e 5}\n\nCreate a table with namespace\u003ddefault and table qualifier\u003dt1\n  hbase\u003e create \u0027t1\u0027, {NAME \u003d\u003e \u0027f1\u0027}, {NAME \u003d\u003e \u0027f2\u0027}, {NAME \u003d\u003e \u0027f3\u0027}\n  hbase\u003e # The above in shorthand would be the following:\n  hbase\u003e create \u0027t1\u0027, \u0027f1\u0027, \u0027f2\u0027, \u0027f3\u0027\n  hbase\u003e create \u0027t1\u0027, {NAME \u003d\u003e \u0027f1\u0027, VERSIONS \u003d\u003e 1, TTL \u003d\u003e 2592000, BLOCKCACHE \u003d\u003e true}\n  hbase\u003e create \u0027t1\u0027, {NAME \u003d\u003e \u0027f1\u0027, CONFIGURATION \u003d\u003e {\u0027hbase.hstore.blockingStoreFiles\u0027 \u003d\u003e \u002710\u0027}}\n  \nTable configuration options can be put at the end.\nExamples:\n\n  hbase\u003e create \u0027ns1:t1\u0027, \u0027f1\u0027, SPLITS \u003d\u003e [\u002710\u0027, \u002720\u0027, \u002730\u0027, \u002740\u0027]\n  hbase\u003e create \u0027t1\u0027, \u0027f1\u0027, SPLITS \u003d\u003e [\u002710\u0027, \u002720\u0027, \u002730\u0027, \u002740\u0027]\n  hbase\u003e create \u0027t1\u0027, \u0027f1\u0027, SPLITS_FILE \u003d\u003e \u0027splits.txt\u0027, OWNER \u003d\u003e \u0027johndoe\u0027\n  hbase\u003e create \u0027t1\u0027, {NAME \u003d\u003e \u0027f1\u0027, VERSIONS \u003d\u003e 5}, METADATA \u003d\u003e { \u0027mykey\u0027 \u003d\u003e \u0027myvalue\u0027 }\n  hbase\u003e # Optionally pre-split the table into NUMREGIONS, using\n  hbase\u003e # SPLITALGO (\"HexStringSplit\", \"UniformSplit\" or classname)\n  hbase\u003e create \u0027t1\u0027, \u0027f1\u0027, {NUMREGIONS \u003d\u003e 15, SPLITALGO \u003d\u003e \u0027HexStringSplit\u0027}\n  hbase\u003e create \u0027t1\u0027, \u0027f1\u0027, {NUMREGIONS \u003d\u003e 15, SPLITALGO \u003d\u003e \u0027HexStringSplit\u0027, REGION_REPLICATION \u003d\u003e 2, CONFIGURATION \u003d\u003e {\u0027hbase.hregion.scan.loadColumnFamiliesOnDemand\u0027 \u003d\u003e \u0027true\u0027}}\n  hbase\u003e create \u0027t1\u0027, {NAME \u003d\u003e \u0027f1\u0027, DFS_REPLICATION \u003d\u003e 1}\n\nYou can also keep around a reference to the created table:\n\n  hbase\u003e t1 \u003d create \u0027t1\u0027, \u0027f1\u0027\n\nWhich gives you a reference to the table named \u0027t1\u0027, on which you can then\ncall methods.\n\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636028608385_542180161",
+      "id": "paragraph_1636028608385_542180161",
+      "dateCreated": "2021-11-04 12:23:28.385",
+      "dateStarted": "2021-11-09 03:38:48.479",
+      "dateFinished": "2021-11-09 03:38:48.936",
+      "status": "FINISHED"
+    },
+    {
+      "title": "查看数据表（list）",
+      "text": "list",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-09 03:38:58.857",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "editOnDblClick": false,
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/undefined",
+        "fontSize": 9.0,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "TABLE\ntest\ntest1\nuserinfo\n3 row(s) in 0.0170 seconds\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636028711176_2033304720",
+      "id": "paragraph_1636028711176_2033304720",
+      "dateCreated": "2021-11-04 12:25:11.176",
+      "dateStarted": "2021-11-09 03:38:58.861",
+      "dateFinished": "2021-11-09 03:38:58.885",
+      "status": "FINISHED"
+    },
+    {
+      "title": "查看表属性（describe）",
+      "text": "describe \u0027test\u0027",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-04 12:28:31.804",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "editOnDblClick": false,
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/undefined",
+        "fontSize": 9.0,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Table test is ENABLED\ntest\nCOLUMN FAMILIES DESCRIPTION\n{NAME \u003d\u003e \u0027cf1\u0027, BLOOMFILTER \u003d\u003e \u0027ROW\u0027, VERSIONS \u003d\u003e \u00271\u0027, IN_MEMORY \u003d\u003e \u0027false\u0027, KEEP_DELETED_CELLS \u003d\u003e \u0027FALSE\u0027, DATA_BLOCK_ENCODING \u003d\u003e \u0027NONE\u0027, TTL \u003d\u003e \u0027FOREVER\u0027, COMPRESSION \u003d\u003e \u0027NONE\u0027, MIN_VERSIONS \u003d\u003e \u00270\u0027, BLOCKCACHE \u003d\u003e \u0027true\u0027, BLOCKSIZE \u003d\u003e \u002765536\u0027, REPLICATION_SCOPE \u003d\u003e \u00270\u0027}\n{NAME \u003d\u003e \u0027cf2\u0027, BLOOMFILTER \u003d\u003e \u0027ROW\u0027, VERSIONS \u003d\u003e \u00271\u0027, IN_MEMORY \u003d\u003e \u0027false\u0027, KEEP_DELETED_CELLS \u003d\u003e \u0027FALSE\u0027, DATA_BLOCK_ENCODING \u003d\u003e \u0027NONE\u0027, TTL \u003d\u003e \u0027FOREVER\u0027, COMPRESSION \u003d\u003e \u0027NONE\u0027, MIN_VERSIONS \u003d\u003e \u00270\u0027, BLOCKCACHE \u003d\u003e \u0027true\u0027, BLOCKSIZE \u003d\u003e \u002765536\u0027, REPLICATION_SCOPE \u003d\u003e \u00270\u0027}\n2 row(s) in 0.1080 seconds\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636028806976_815899674",
+      "id": "paragraph_1636028806976_815899674",
+      "dateCreated": "2021-11-04 12:26:46.976",
+      "dateStarted": "2021-11-04 12:28:22.829",
+      "dateFinished": "2021-11-04 12:28:22.942",
+      "status": "FINISHED"
+    },
+    {
+      "title": "删除表（drop）",
+      "text": "# 第一步先停用\ndisable \"test1\"\n#第二步在删除\ndrop \"test1\"",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-04 12:46:40.486",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "editOnDblClick": false,
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/undefined",
+        "fontSize": 9.0,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "0 row(s) in 2.3590 seconds\n\n0 row(s) in 1.2750 seconds\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636028891516_1131050272",
+      "id": "paragraph_1636028891516_1131050272",
+      "dateCreated": "2021-11-04 12:28:11.516",
+      "dateStarted": "2021-11-04 12:46:40.489",
+      "dateFinished": "2021-11-04 12:46:44.139",
+      "status": "FINISHED"
+    },
+    {
+      "text": "list",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-04 12:48:03.503",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "editOnDblClick": false,
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/undefined",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "TABLE\ntest\nuserinfo\n2 row(s) in 0.0060 seconds\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636030078594_236006114",
+      "id": "paragraph_1636030078594_236006114",
+      "dateCreated": "2021-11-04 12:47:58.594",
+      "dateStarted": "2021-11-04 12:48:03.506",
+      "dateFinished": "2021-11-04 12:48:03.518",
+      "status": "FINISHED"
+    },
+    {
+      "title": "修改表（alter）",
+      "text": "#新增列族\nalter \"test\",\t\"cf3\"",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-04 13:02:15.581",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "editOnDblClick": false,
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/undefined",
+        "fontSize": 9.0,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Updating all regions with the new schema...\n1/1 regions updated.\nDone.\n0 row(s) in 1.9820 seconds\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636030112738_20667335",
+      "id": "paragraph_1636030112738_20667335",
+      "dateCreated": "2021-11-04 12:48:32.738",
+      "dateStarted": "2021-11-04 13:02:15.587",
+      "dateFinished": "2021-11-04 13:02:17.588",
+      "status": "FINISHED"
+    },
+    {
+      "text": "describe \u0027test\u0027",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-04 13:02:36.408",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "editOnDblClick": false,
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/undefined",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Table test is ENABLED\ntest\nCOLUMN FAMILIES DESCRIPTION\n{NAME \u003d\u003e \u0027cf1\u0027, BLOOMFILTER \u003d\u003e \u0027ROW\u0027, VERSIONS \u003d\u003e \u00271\u0027, IN_MEMORY \u003d\u003e \u0027false\u0027, KEEP_DELETED_CELLS \u003d\u003e \u0027FALSE\u0027, DATA_BLOCK_ENCODING \u003d\u003e \u0027NONE\u0027, TTL \u003d\u003e \u0027FOREVER\u0027, COMPRESSION \u003d\u003e \u0027NONE\u0027, MIN_VERSIONS \u003d\u003e \u00270\u0027, BLOCKCACHE \u003d\u003e \u0027true\u0027, BLOCKSIZE \u003d\u003e \u002765536\u0027, REPLICATION_SCOPE \u003d\u003e \u00270\u0027}\n{NAME \u003d\u003e \u0027cf2\u0027, BLOOMFILTER \u003d\u003e \u0027ROW\u0027, VERSIONS \u003d\u003e \u00271\u0027, IN_MEMORY \u003d\u003e \u0027false\u0027, KEEP_DELETED_CELLS \u003d\u003e \u0027FALSE\u0027, DATA_BLOCK_ENCODING \u003d\u003e \u0027NONE\u0027, TTL \u003d\u003e \u0027FOREVER\u0027, COMPRESSION \u003d\u003e \u0027NONE\u0027, MIN_VERSIONS \u003d\u003e \u00270\u0027, BLOCKCACHE \u003d\u003e \u0027true\u0027, BLOCKSIZE \u003d\u003e \u002765536\u0027, REPLICATION_SCOPE \u003d\u003e \u00270\u0027}\n{NAME \u003d\u003e \u0027cf3\u0027, BLOOMFILTER \u003d\u003e \u0027ROW\u0027, VERSIONS \u003d\u003e \u00271\u0027, IN_MEMORY \u003d\u003e \u0027false\u0027, KEEP_DELETED_CELLS \u003d\u003e \u0027FALSE\u0027, DATA_BLOCK_ENCODING \u003d\u003e \u0027NONE\u0027, TTL \u003d\u003e \u0027FOREVER\u0027, COMPRESSION \u003d\u003e \u0027NONE\u0027, MIN_VERSIONS \u003d\u003e \u00270\u0027, BLOCKCACHE \u003d\u003e \u0027true\u0027, BLOCKSIZE \u003d\u003e \u002765536\u0027, REPLICATION_SCOPE \u003d\u003e \u00270\u0027}\n3 row(s) in 0.0190 seconds\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636030943300_627427317",
+      "id": "paragraph_1636030943300_627427317",
+      "dateCreated": "2021-11-04 13:02:23.300",
+      "dateStarted": "2021-11-04 13:02:36.413",
+      "dateFinished": "2021-11-04 13:02:36.441",
+      "status": "FINISHED"
+    },
+    {
+      "text": "#修改多个属性\nalter \"test\", \"cf1\", {NAME\u003d\u003e\"f1\",IN_MEMORY\u003d\u003etrue}",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-04 13:03:18.198",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "editOnDblClick": false,
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/undefined",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Updating all regions with the new schema...\n1/1 regions updated.\nDone.\nUpdating all regions with the new schema...\n1/1 regions updated.\nDone.\n0 row(s) in 3.7990 seconds\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636029983977_388488636",
+      "id": "paragraph_1636029983977_388488636",
+      "dateCreated": "2021-11-04 12:46:23.977",
+      "dateStarted": "2021-11-04 13:03:18.203",
+      "dateFinished": "2021-11-04 13:03:22.010",
+      "status": "FINISHED"
+    },
+    {
+      "text": "describe \u0027test\u0027",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-04 13:03:28.125",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "editOnDblClick": false,
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/undefined",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Table test is ENABLED\ntest\nCOLUMN FAMILIES DESCRIPTION\n{NAME \u003d\u003e \u0027cf1\u0027, BLOOMFILTER \u003d\u003e \u0027ROW\u0027, VERSIONS \u003d\u003e \u00271\u0027, IN_MEMORY \u003d\u003e \u0027false\u0027, KEEP_DELETED_CELLS \u003d\u003e \u0027FALSE\u0027, DATA_BLOCK_ENCODING \u003d\u003e \u0027NONE\u0027, TTL \u003d\u003e \u0027FOREVER\u0027, COMPRESSION \u003d\u003e \u0027NONE\u0027, MIN_VERSIONS \u003d\u003e \u00270\u0027, BLOCKCACHE \u003d\u003e \u0027true\u0027, BLOCKSIZE \u003d\u003e \u002765536\u0027, REPLICATION_SCOPE \u003d\u003e \u00270\u0027}\n{NAME \u003d\u003e \u0027cf2\u0027, BLOOMFILTER \u003d\u003e \u0027ROW\u0027, VERSIONS \u003d\u003e \u00271\u0027, IN_MEMORY \u003d\u003e \u0027false\u0027, KEEP_DELETED_CELLS \u003d\u003e \u0027FALSE\u0027, DATA_BLOCK_ENCODING \u003d\u003e \u0027NONE\u0027, TTL \u003d\u003e \u0027FOREVER\u0027, COMPRESSION \u003d\u003e \u0027NONE\u0027, MIN_VERSIONS \u003d\u003e \u00270\u0027, BLOCKCACHE \u003d\u003e \u0027true\u0027, BLOCKSIZE \u003d\u003e \u002765536\u0027, REPLICATION_SCOPE \u003d\u003e \u00270\u0027}\n{NAME \u003d\u003e \u0027cf3\u0027, BLOOMFILTER \u003d\u003e \u0027ROW\u0027, VERSIONS \u003d\u003e \u00271\u0027, IN_MEMORY \u003d\u003e \u0027false\u0027, KEEP_DELETED_CELLS \u003d\u003e \u0027FALSE\u0027, DATA_BLOCK_ENCODING \u003d\u003e \u0027NONE\u0027, TTL \u003d\u003e \u0027FOREVER\u0027, COMPRESSION \u003d\u003e \u0027NONE\u0027, MIN_VERSIONS \u003d\u003e \u00270\u0027, BLOCKCACHE \u003d\u003e \u0027true\u0027, BLOCKSIZE \u003d\u003e \u002765536\u0027, REPLICATION_SCOPE \u003d\u003e \u00270\u0027}\n{NAME \u003d\u003e \u0027f1\u0027, BLOOMFILTER \u003d\u003e \u0027ROW\u0027, VERSIONS \u003d\u003e \u00271\u0027, IN_MEMORY \u003d\u003e \u0027true\u0027, KEEP_DELETED_CELLS \u003d\u003e \u0027FALSE\u0027, DATA_BLOCK_ENCODING \u003d\u003e \u0027NONE\u0027, TTL \u003d\u003e \u0027FOREVER\u0027, COMPRESSION \u003d\u003e \u0027NONE\u0027, MIN_VERSIONS \u003d\u003e \u00270\u0027, BLOCKCACHE \u003d\u003e \u0027true\u0027, BLOCKSIZE \u003d\u003e \u002765536\u0027, REPLICATION_SCOPE \u003d\u003e \u00270\u0027}\n4 row(s) in 0.0140 seconds\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636031004781_384548204",
+      "id": "paragraph_1636031004781_384548204",
+      "dateCreated": "2021-11-04 13:03:24.781",
+      "dateStarted": "2021-11-04 13:03:28.128",
+      "dateFinished": "2021-11-04 13:03:28.146",
+      "status": "FINISHED"
+    },
+    {
+      "text": "#删除列族\nalter \"test\", NAME\u003d\u003e\"cf1\",METHOD\u003d\u003e\"delete\"",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-04 13:05:24.270",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "editOnDblClick": false,
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/undefined",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Updating all regions with the new schema...\n1/1 regions updated.\nDone.\n0 row(s) in 2.1760 seconds\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636030998202_1444497225",
+      "id": "paragraph_1636030998202_1444497225",
+      "dateCreated": "2021-11-04 13:03:18.202",
+      "dateStarted": "2021-11-04 13:05:24.274",
+      "dateFinished": "2021-11-04 13:05:26.466",
+      "status": "FINISHED"
+    },
+    {
+      "text": "describe \u0027test\u0027",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-04 13:05:34.392",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "editOnDblClick": false,
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/undefined",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Table test is ENABLED\ntest\nCOLUMN FAMILIES DESCRIPTION\n{NAME \u003d\u003e \u0027cf2\u0027, BLOOMFILTER \u003d\u003e \u0027ROW\u0027, VERSIONS \u003d\u003e \u00271\u0027, IN_MEMORY \u003d\u003e \u0027false\u0027, KEEP_DELETED_CELLS \u003d\u003e \u0027FALSE\u0027, DATA_BLOCK_ENCODING \u003d\u003e \u0027NONE\u0027, TTL \u003d\u003e \u0027FOREVER\u0027, COMPRESSION \u003d\u003e \u0027NONE\u0027, MIN_VERSIONS \u003d\u003e \u00270\u0027, BLOCKCACHE \u003d\u003e \u0027true\u0027, BLOCKSIZE \u003d\u003e \u002765536\u0027, REPLICATION_SCOPE \u003d\u003e \u00270\u0027}\n{NAME \u003d\u003e \u0027cf3\u0027, BLOOMFILTER \u003d\u003e \u0027ROW\u0027, VERSIONS \u003d\u003e \u00271\u0027, IN_MEMORY \u003d\u003e \u0027false\u0027, KEEP_DELETED_CELLS \u003d\u003e \u0027FALSE\u0027, DATA_BLOCK_ENCODING \u003d\u003e \u0027NONE\u0027, TTL \u003d\u003e \u0027FOREVER\u0027, COMPRESSION \u003d\u003e \u0027NONE\u0027, MIN_VERSIONS \u003d\u003e \u00270\u0027, BLOCKCACHE \u003d\u003e \u0027true\u0027, BLOCKSIZE \u003d\u003e \u002765536\u0027, REPLICATION_SCOPE \u003d\u003e \u00270\u0027}\n{NAME \u003d\u003e \u0027f1\u0027, BLOOMFILTER \u003d\u003e \u0027ROW\u0027, VERSIONS \u003d\u003e \u00271\u0027, IN_MEMORY \u003d\u003e \u0027true\u0027, KEEP_DELETED_CELLS \u003d\u003e \u0027FALSE\u0027, DATA_BLOCK_ENCODING \u003d\u003e \u0027NONE\u0027, TTL \u003d\u003e \u0027FOREVER\u0027, COMPRESSION \u003d\u003e \u0027NONE\u0027, MIN_VERSIONS \u003d\u003e \u00270\u0027, BLOCKCACHE \u003d\u003e \u0027true\u0027, BLOCKSIZE \u003d\u003e \u002765536\u0027, REPLICATION_SCOPE \u003d\u003e \u00270\u0027}\n3 row(s) in 0.0130 seconds\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636031131826_161119574",
+      "id": "paragraph_1636031131826_161119574",
+      "dateCreated": "2021-11-04 13:05:31.826",
+      "dateStarted": "2021-11-04 13:05:34.395",
+      "dateFinished": "2021-11-04 13:05:34.419",
+      "status": "FINISHED"
+    },
+    {
+      "title": "数据操作（DML）",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-04 13:19:52.744",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "editOnDblClick": false,
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/undefined",
+        "fontSize": 9.0,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636031987460_695063005",
+      "id": "paragraph_1636031987460_695063005",
+      "dateCreated": "2021-11-04 13:19:47.460",
+      "status": "READY"
+    },
+    {
+      "title": "插入（put）",
+      "text": "#put 表名 rowkey 列族:列 具体值\nput \"test\", \"row1\", \"cf2:name\", \"jack\"",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-04 13:20:07.900",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "editOnDblClick": false,
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/undefined",
+        "fontSize": 9.0,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "0 row(s) in 0.1060 seconds\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636031832272_2117271286",
+      "id": "paragraph_1636031832272_2117271286",
+      "dateCreated": "2021-11-04 13:17:12.273",
+      "dateStarted": "2021-11-04 13:18:47.074",
+      "dateFinished": "2021-11-04 13:18:47.192",
+      "status": "FINISHED"
+    },
+    {
+      "text": "put \"test\", \"row1\", \"cf2:phone\", \"13123456789\"",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-04 13:21:08.052",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "editOnDblClick": false,
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/undefined",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "0 row(s) in 0.0410 seconds\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636032048903_1667852903",
+      "id": "paragraph_1636032048903_1667852903",
+      "dateCreated": "2021-11-04 13:20:48.903",
+      "dateStarted": "2021-11-04 13:21:08.057",
+      "dateFinished": "2021-11-04 13:21:08.106",
+      "status": "FINISHED"
+    },
+    {
+      "title": "查看（scan）",
+      "text": "scan \"test\",{STARTROW\u003d\u003e\"row1\"}",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-04 13:41:11.483",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "editOnDblClick": false,
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/undefined",
+        "fontSize": 9.0,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "ROW  COLUMN+CELL\n row1 column\u003dcf2:name, timestamp\u003d1636031927172, value\u003djack\n row1 column\u003dcf2:phone, timestamp\u003d1636032068067, value\u003d13123456789\n1 row(s) in 0.0200 seconds\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636031951663_908376143",
+      "id": "paragraph_1636031951663_908376143",
+      "dateCreated": "2021-11-04 13:19:11.663",
+      "dateStarted": "2021-11-04 13:41:11.487",
+      "dateFinished": "2021-11-04 13:41:11.517",
+      "status": "FINISHED"
+    },
+    {
+      "title": "获取单条数据（get）",
+      "text": "get \"test\",\"row1\",{COLUMN\u003d\u003e\"cf2:name\"}",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-04 13:32:50.617",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "editOnDblClick": false,
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/undefined",
+        "fontSize": 9.0,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "COLUMN  CELL\n cf2:name timestamp\u003d1636031927172, value\u003djack\n1 row(s) in 0.0440 seconds\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636031124273_146100892",
+      "id": "paragraph_1636031124273_146100892",
+      "dateCreated": "2021-11-04 13:05:24.273",
+      "dateStarted": "2021-11-04 13:32:50.621",
+      "dateFinished": "2021-11-04 13:32:50.678",
+      "status": "FINISHED"
+    },
+    {
+      "title": "删除单元格数据（delete）",
+      "text": "#删除某一单元格数据\ndelete \"test\",\"row2\",\"cf2:name\"",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-04 14:00:44.255",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "editOnDblClick": false,
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/undefined",
+        "fontSize": 9.0,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "0 row(s) in 0.0440 seconds\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636032761660_602816885",
+      "id": "paragraph_1636032761660_602816885",
+      "dateCreated": "2021-11-04 13:32:41.660",
+      "dateStarted": "2021-11-04 14:00:44.262",
+      "dateFinished": "2021-11-04 14:00:44.317",
+      "status": "FINISHED"
+    },
+    {
+      "title": "删除整行数据（deleteall）",
+      "text": "deleteall \"test\",\"row2\"",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-04 14:00:48.766",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "editOnDblClick": false,
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/undefined",
+        "fontSize": 9.0,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "0 row(s) in 0.0100 seconds\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636033946713_581578",
+      "id": "paragraph_1636033946713_581578",
+      "dateCreated": "2021-11-04 13:52:26.713",
+      "dateStarted": "2021-11-04 14:00:48.770",
+      "dateFinished": "2021-11-04 14:00:48.784",
+      "status": "FINISHED"
+    },
+    {
+      "user": "anonymous",
+      "progress": 0,
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636034420947_1555036128",
+      "id": "paragraph_1636034420947_1555036128",
+      "dateCreated": "2021-11-04 14:00:20.947",
+      "status": "READY"
+    }
+  ],
+  "name": "01.basic-operation",
+  "id": "2GMDH1BXT",
+  "defaultInterpreterGroup": "hbase",
+  "version": "0.9.0",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}

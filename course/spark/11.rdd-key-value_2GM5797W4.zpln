@@ -1,0 +1,1280 @@
+{
+  "paragraphs": [
+    {
+      "text": "%python\n# 为了能够让 python 找到 pyspark，使用 findspark\nimport findspark\nfindspark.init()\n\n# 为了使用 RDDs，创建 SparkSession\nfrom pyspark.sql import SparkSession\nfrom pyspark.conf import SparkConf\n\n# 创建 SparkConf 和 SparkSession\nconf\u003dSparkConf()\\\n        .setMaster(\u0027local[*]\u0027)\\\n        .setAppName(\"~\")\\\n        .setExecutorEnv(\"spark.executor.memory\",\"2g\")\\\n        .setExecutorEnv(\"spark.driver.memory\",\"2g\")\n\nspark\u003dSparkSession.builder\\\n        .config(conf\u003dconf)\\\n        .getOrCreate()\n\n# 获取 SparkContext\nsc\u003dspark.sparkContext",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:39:43.579",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594783579_99822841",
+      "id": "20211111-013943_158418587",
+      "dateCreated": "2021-11-11 01:39:43.579",
+      "status": "READY"
+    },
+    {
+      "text": "%md\n# Working with key/value pair RDDs",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:39:43.579",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch1\u003eWorking with key/value pair RDDs\u003c/h1\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594783579_563277676",
+      "id": "20211111-013943_2131781891",
+      "dateCreated": "2021-11-11 01:39:43.579",
+      "status": "READY"
+    },
+    {
+      "text": "%md\nSpark provides specific functions to deal with RDDs which elements are key/value pairs. They are usually used to perform aggregations and other processings by key.  ",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:39:43.579",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eSpark provides specific functions to deal with RDDs which elements are key/value pairs. They are usually used to perform aggregations and other processings by key. \u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594783579_2082344837",
+      "id": "20211111-013943_1697476392",
+      "dateCreated": "2021-11-11 01:39:43.579",
+      "status": "READY"
+    },
+    {
+      "text": "%md\nIn this notebook we will show how, by working with key/value pairs, we can process our network interactions dataset in a more practical and powerful way than that used in previous notebooks. Key/value pair aggregations will show to be particularly effective when trying to explore each type of tag in our network attacks, in an individual way.  ",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:39:43.579",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eIn this notebook we will show how, by working with key/value pairs, we can process our network interactions dataset in a more practical and powerful way than that used in previous notebooks. Key/value pair aggregations will show to be particularly effective when trying to explore each type of tag in our network attacks, in an individual way. \u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594783579_1148638447",
+      "id": "20211111-013943_720407033",
+      "dateCreated": "2021-11-11 01:39:43.579",
+      "status": "READY"
+    },
+    {
+      "text": "%md\n## Getting the data and creating the RDD",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:39:43.579",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eGetting the data and creating the RDD\u003c/h2\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594783579_753774705",
+      "id": "20211111-013943_280692807",
+      "dateCreated": "2021-11-11 01:39:43.579",
+      "status": "READY"
+    },
+    {
+      "text": "%md\nAs we did in our first notebook, we will use the reduced dataset (10 percent) provided for the [KDD Cup 1999](http://kdd.ics.uci.edu/databases/kddcup99/kddcup99.html), containing nearly half million network interactions. The file is provided as a Gzip file that we will download locally.  ",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:39:43.579",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eAs we did in our first notebook, we will use the reduced dataset (10 percent) provided for the \u003ca href\u003d\"http://kdd.ics.uci.edu/databases/kddcup99/kddcup99.html\"\u003eKDD Cup 1999\u003c/a\u003e, containing nearly half million network interactions. The file is provided as a Gzip file that we will download locally. \u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594783579_1789185145",
+      "id": "20211111-013943_1323494299",
+      "dateCreated": "2021-11-11 01:39:43.579",
+      "status": "READY"
+    },
+    {
+      "text": "%python\nimport urllib\nf \u003d urllib.urlretrieve (\"http://kdd.ics.uci.edu/databases/kddcup99/kddcup.data_10_percent.gz\", \"kddcup.data_10_percent.gz\")",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:39:43.579",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594783579_2099874195",
+      "id": "20211111-013943_1085839680",
+      "dateCreated": "2021-11-11 01:39:43.579",
+      "status": "READY"
+    },
+    {
+      "text": "%pyspark\ndata_file \u003d \"hdfs://namenode:9000/dataset/kddcup.data_10_percent.gz\"\nraw_data \u003d sc.textFile(data_file)",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-12 08:45:52.759",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false,
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "completionKey": "TAB"
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594783579_2143329469",
+      "id": "20211111-013943_1856597999",
+      "dateCreated": "2021-11-11 01:39:43.579",
+      "dateStarted": "2021-11-12 08:45:52.765",
+      "dateFinished": "2021-11-12 08:45:52.972",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n## Creating a pair RDD for interaction types",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:39:43.579",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eCreating a pair RDD for interaction types\u003c/h2\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594783579_1753290920",
+      "id": "20211111-013943_639155021",
+      "dateCreated": "2021-11-11 01:39:43.579",
+      "status": "READY"
+    },
+    {
+      "text": "%md\nIn this notebook we want to do some exploratory data analysis on our network interactions dataset. More concretely we want to profile each network interaction type in terms of some of its variables such as duration. In order to do so, we first need to create the RDD suitable for that, where each interaction is parsed as a CSV row representing the value, and is put together with its corresponding tag as a key.  ",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:39:43.579",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eIn this notebook we want to do some exploratory data analysis on our network interactions dataset. More concretely we want to profile each network interaction type in terms of some of its variables such as duration. In order to do so, we first need to create the RDD suitable for that, where each interaction is parsed as a CSV row representing the value, and is put together with its corresponding tag as a key. \u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594783579_359345120",
+      "id": "20211111-013943_2147426854",
+      "dateCreated": "2021-11-11 01:39:43.579",
+      "status": "READY"
+    },
+    {
+      "text": "%md\nNormally we create key/value pair RDDs by applying a function using `map` to the original data. This function returns the corresponding pair for a given RDD element. We can proceed as follows.  ",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:39:43.579",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eNormally we create key/value pair RDDs by applying a function using \u003ccode\u003emap\u003c/code\u003e to the original data. This function returns the corresponding pair for a given RDD element. We can proceed as follows. \u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594783579_458453148",
+      "id": "20211111-013943_2064242176",
+      "dateCreated": "2021-11-11 01:39:43.579",
+      "status": "READY"
+    },
+    {
+      "text": "%pyspark\ncsv_data \u003d raw_data.map(lambda x: x.split(\",\"))\nkey_value_data \u003d csv_data.map(lambda x: (x[41], x)) # x[41] contains the network interaction tag",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-12 08:45:55.879",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false,
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "completionKey": "TAB"
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594783579_967448597",
+      "id": "20211111-013943_1585059993",
+      "dateCreated": "2021-11-11 01:39:43.579",
+      "dateStarted": "2021-11-12 08:45:55.883",
+      "dateFinished": "2021-11-12 08:45:55.904",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\nWe have now our key/value pair data ready to be used. Let\u0027s get the first element in order to see how it looks like.  ",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:39:43.579",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eWe have now our key/value pair data ready to be used. Let\u0026rsquo;s get the first element in order to see how it looks like. \u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594783579_735694386",
+      "id": "20211111-013943_1037767368",
+      "dateCreated": "2021-11-11 01:39:43.579",
+      "status": "READY"
+    },
+    {
+      "text": "%pyspark\nkey_value_data.take(1)",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-12 08:45:59.699",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false,
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "completionKey": "TAB"
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "[(\u0027normal.\u0027, [\u00270\u0027, \u0027tcp\u0027, \u0027http\u0027, \u0027SF\u0027, \u0027181\u0027, \u00275450\u0027, \u00270\u0027, \u00270\u0027, \u00270\u0027, \u00270\u0027, \u00270\u0027, \u00271\u0027, \u00270\u0027, \u00270\u0027, \u00270\u0027, \u00270\u0027, \u00270\u0027, \u00270\u0027, \u00270\u0027, \u00270\u0027, \u00270\u0027, \u00270\u0027, \u00278\u0027, \u00278\u0027, \u00270.00\u0027, \u00270.00\u0027, \u00270.00\u0027, \u00270.00\u0027, \u00271.00\u0027, \u00270.00\u0027, \u00270.00\u0027, \u00279\u0027, \u00279\u0027, \u00271.00\u0027, \u00270.00\u0027, \u00270.11\u0027, \u00270.00\u0027, \u00270.00\u0027, \u00270.00\u0027, \u00270.00\u0027, \u00270.00\u0027, \u0027normal.\u0027])]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://0771528b4bd2:4040/jobs/job?id\u003d50"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594783579_471964167",
+      "id": "20211111-013943_993261895",
+      "dateCreated": "2021-11-11 01:39:43.579",
+      "dateStarted": "2021-11-12 08:45:59.703",
+      "dateFinished": "2021-11-12 08:46:02.571",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n## Data aggregations with key/value pair RDDs",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:39:43.579",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eData aggregations with key/value pair RDDs\u003c/h2\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594783579_402644815",
+      "id": "20211111-013943_247431671",
+      "dateCreated": "2021-11-11 01:39:43.579",
+      "status": "READY"
+    },
+    {
+      "text": "%md\nWe can use all the transformations and actions available for normal RDDs with key/value pair RDDs. We just need to make the functions work with pair elements. Additionally, Spark provides specific functions to work with RDDs containing pair elements. They are very similar to those available for general RDDs.  ",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:39:43.579",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eWe can use all the transformations and actions available for normal RDDs with key/value pair RDDs. We just need to make the functions work with pair elements. Additionally, Spark provides specific functions to work with RDDs containing pair elements. They are very similar to those available for general RDDs. \u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594783579_874092886",
+      "id": "20211111-013943_1048169",
+      "dateCreated": "2021-11-11 01:39:43.579",
+      "status": "READY"
+    },
+    {
+      "text": "%md\nFor example, we have a `reduceByKey` transformation that we can use as follows to calculate the total duration of each network interaction type.  ",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:39:43.579",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eFor example, we have a \u003ccode\u003ereduceByKey\u003c/code\u003e transformation that we can use as follows to calculate the total duration of each network interaction type. \u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594783579_1779167340",
+      "id": "20211111-013943_1012698740",
+      "dateCreated": "2021-11-11 01:39:43.579",
+      "status": "READY"
+    },
+    {
+      "text": "%pyspark\nkey_value_duration \u003d csv_data.map(lambda x: (x[41], float(x[0]))) \ndurations_by_key \u003d key_value_duration.reduceByKey(lambda x, y: x + y)\n\ndurations_by_key.collect()",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-12 08:46:10.187",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false,
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "completionKey": "TAB"
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "[(\u0027normal.\u0027, 21075991.0), (\u0027buffer_overflow.\u0027, 2751.0), (\u0027loadmodule.\u0027, 326.0), (\u0027perl.\u0027, 124.0), (\u0027neptune.\u0027, 0.0), (\u0027smurf.\u0027, 0.0), (\u0027guess_passwd.\u0027, 144.0), (\u0027pod.\u0027, 0.0), (\u0027teardrop.\u0027, 0.0), (\u0027portsweep.\u0027, 1991911.0), (\u0027ipsweep.\u0027, 43.0), (\u0027land.\u0027, 0.0), (\u0027ftp_write.\u0027, 259.0), (\u0027back.\u0027, 284.0), (\u0027imap.\u0027, 72.0), (\u0027satan.\u0027, 64.0), (\u0027phf.\u0027, 18.0), (\u0027nmap.\u0027, 0.0), (\u0027multihop.\u0027, 1288.0), (\u0027warezmaster.\u0027, 301.0), (\u0027warezclient.\u0027, 627563.0), (\u0027spy.\u0027, 636.0), (\u0027rootkit.\u0027, 1008.0)]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://0771528b4bd2:4040/jobs/job?id\u003d51"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594783579_802196162",
+      "id": "20211111-013943_1809780477",
+      "dateCreated": "2021-11-11 01:39:43.579",
+      "dateStarted": "2021-11-12 08:46:10.191",
+      "dateFinished": "2021-11-12 08:46:15.900",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\nWe have a specific counting action for key/value pairs.  ",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:39:43.579",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eWe have a specific counting action for key/value pairs. \u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594783579_959419439",
+      "id": "20211111-013943_254669805",
+      "dateCreated": "2021-11-11 01:39:43.579",
+      "status": "READY"
+    },
+    {
+      "text": "%pyspark\ncounts_by_key \u003d key_value_data.countByKey()\ncounts_by_key",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-12 08:46:18.451",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false,
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "completionKey": "TAB"
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "defaultdict(\u003cclass \u0027int\u0027\u003e, {\u0027normal.\u0027: 97278, \u0027buffer_overflow.\u0027: 30, \u0027loadmodule.\u0027: 9, \u0027perl.\u0027: 3, \u0027neptune.\u0027: 107201, \u0027smurf.\u0027: 280790, \u0027guess_passwd.\u0027: 53, \u0027pod.\u0027: 264, \u0027teardrop.\u0027: 979, \u0027portsweep.\u0027: 1040, \u0027ipsweep.\u0027: 1247, \u0027land.\u0027: 21, \u0027ftp_write.\u0027: 8, \u0027back.\u0027: 2203, \u0027imap.\u0027: 12, \u0027satan.\u0027: 1589, \u0027phf.\u0027: 4, \u0027nmap.\u0027: 231, \u0027multihop.\u0027: 7, \u0027warezmaster.\u0027: 20, \u0027warezclient.\u0027: 1020, \u0027spy.\u0027: 2, \u0027rootkit.\u0027: 10})\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://0771528b4bd2:4040/jobs/job?id\u003d52"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594783580_1809942962",
+      "id": "20211111-013943_653519423",
+      "dateCreated": "2021-11-11 01:39:43.580",
+      "dateStarted": "2021-11-12 08:46:18.455",
+      "dateFinished": "2021-11-12 08:46:22.872",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%spark\nval rdd1\u003dsc.parallelize(1 to 10,5) \nval rdd2 \u003d rdd1.map(x \u003d\u003e x*10).collect()\nval rdd3 \u003d rdd1.mapPartitions(iter \u003d\u003e iter.map(x\u003d\u003ex*10)).collect() \n//index表示分区号 可以获取得到每一个元素属于哪一个分区 \nval rdd4 \u003d rdd1.mapPartitionsWithIndex((index,iter)\u003d\u003eiter.map(x\u003d\u003e(index,x))).collect()",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 12:49:20.629",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mrdd1\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.rdd.RDD[Int]\u001b[0m \u003d ParallelCollectionRDD[295] at parallelize at \u003cconsole\u003e:28\n\u001b[1m\u001b[34mrdd2\u001b[0m: \u001b[1m\u001b[32mArray[Int]\u001b[0m \u003d Array(10, 20, 30, 40, 50, 60, 70, 80, 90, 100)\n\u001b[1m\u001b[34mrdd3\u001b[0m: \u001b[1m\u001b[32mArray[Int]\u001b[0m \u003d Array(10, 20, 30, 40, 50, 60, 70, 80, 90, 100)\n\u001b[1m\u001b[34mrdd4\u001b[0m: \u001b[1m\u001b[32mArray[(Int, Int)]\u001b[0m \u003d Array((0,1), (0,2), (1,3), (1,4), (2,5), (2,6), (3,7), (3,8), (4,9), (4,10))\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://2ef30a856a17:4040/jobs/job?id\u003d141"
+            },
+            {
+              "jobUrl": "http://2ef30a856a17:4040/jobs/job?id\u003d142"
+            },
+            {
+              "jobUrl": "http://2ef30a856a17:4040/jobs/job?id\u003d143"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636634778461_1587952274",
+      "id": "paragraph_1636634778461_1587952274",
+      "dateCreated": "2021-11-11 12:46:18.463",
+      "dateStarted": "2021-11-11 12:49:20.632",
+      "dateFinished": "2021-11-11 12:49:21.036",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n### Using `combineByKey`",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:39:43.580",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003eUsing \u003ccode\u003ecombineByKey\u003c/code\u003e\u003c/h3\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594783580_1004026465",
+      "id": "20211111-013943_2122645435",
+      "dateCreated": "2021-11-11 01:39:43.580",
+      "status": "READY"
+    },
+    {
+      "text": "%md\nThis is the most general of the per-key aggregation functions. Most of the other per-key combiners are implemented using it. We can think about it as the `aggregate` equivalent since it allows the user to return values that are not the same type as our input data.",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:39:43.580",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eThis is the most general of the per-key aggregation functions. Most of the other per-key combiners are implemented using it. We can think about it as the \u003ccode\u003eaggregate\u003c/code\u003e equivalent since it allows the user to return values that are not the same type as our input data.\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594783580_301315236",
+      "id": "20211111-013943_1841278576",
+      "dateCreated": "2021-11-11 01:39:43.580",
+      "status": "READY"
+    },
+    {
+      "text": "%md\nFor example, we can use it to calculate per-type average durations as follows.  ",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:39:43.580",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eFor example, we can use it to calculate per-type average durations as follows. \u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594783580_1652452741",
+      "id": "20211111-013943_233671345",
+      "dateCreated": "2021-11-11 01:39:43.580",
+      "status": "READY"
+    },
+    {
+      "text": "%pyspark\nkey_value_duration.take(10)",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-12 08:47:13.168",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "editorHide": false,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "[(\u0027normal.\u0027, 0.0), (\u0027normal.\u0027, 0.0), (\u0027normal.\u0027, 0.0), (\u0027normal.\u0027, 0.0), (\u0027normal.\u0027, 0.0), (\u0027normal.\u0027, 0.0), (\u0027normal.\u0027, 0.0), (\u0027normal.\u0027, 0.0), (\u0027normal.\u0027, 0.0), (\u0027normal.\u0027, 0.0)]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://0771528b4bd2:4040/jobs/job?id\u003d55"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636706825061_1460816320",
+      "id": "paragraph_1636706825061_1460816320",
+      "dateCreated": "2021-11-12 08:47:05.061",
+      "dateStarted": "2021-11-12 08:47:13.171",
+      "dateFinished": "2021-11-12 08:47:14.847",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%pyspark\nsum_counts \u003d key_value_duration.combineByKey(\n    (lambda x: (x, 1)), # the initial value, with value x and count 1\n    (lambda acc, value: (acc[0]+value, acc[1]+1)), # how to combine a pair value with the accumulator: sum value, and increment count\n    (lambda acc1, acc2: (acc1[0]+acc2[0], acc1[1]+acc2[1])) # combine accumulators\n)\n\nsum_counts.collectAsMap()",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-12 08:47:04.932",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false,
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "completionKey": "TAB"
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "{\u0027normal.\u0027: (21075991.0, 97278), \u0027buffer_overflow.\u0027: (2751.0, 30), \u0027loadmodule.\u0027: (326.0, 9), \u0027perl.\u0027: (124.0, 3), \u0027neptune.\u0027: (0.0, 107201), \u0027smurf.\u0027: (0.0, 280790), \u0027guess_passwd.\u0027: (144.0, 53), \u0027pod.\u0027: (0.0, 264), \u0027teardrop.\u0027: (0.0, 979), \u0027portsweep.\u0027: (1991911.0, 1040), \u0027ipsweep.\u0027: (43.0, 1247), \u0027land.\u0027: (0.0, 21), \u0027ftp_write.\u0027: (259.0, 8), \u0027back.\u0027: (284.0, 2203), \u0027imap.\u0027: (72.0, 12), \u0027satan.\u0027: (64.0, 1589), \u0027phf.\u0027: (18.0, 4), \u0027nmap.\u0027: (0.0, 231), \u0027multihop.\u0027: (1288.0, 7), \u0027warezmaster.\u0027: (301.0, 20), \u0027warezclient.\u0027: (627563.0, 1020), \u0027spy.\u0027: (636.0, 2), \u0027rootkit.\u0027: (1008.0, 10)}\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://0771528b4bd2:4040/jobs/job?id\u003d53"
+            },
+            {
+              "jobUrl": "http://0771528b4bd2:4040/jobs/job?id\u003d54"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594783580_83793053",
+      "id": "20211111-013943_880159521",
+      "dateCreated": "2021-11-11 01:39:43.580",
+      "dateStarted": "2021-11-12 08:46:28.155",
+      "dateFinished": "2021-11-12 08:46:35.006",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\nWe can see that the arguments are pretty similar to those passed to `aggregate` in the previous notebook. The result associated to each type is in the form of a pair. If we want to actually get the averages, we need to do the division before collecting the results.  ",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:39:43.580",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eWe can see that the arguments are pretty similar to those passed to \u003ccode\u003eaggregate\u003c/code\u003e in the previous notebook. The result associated to each type is in the form of a pair. If we want to actually get the averages, we need to do the division before collecting the results. \u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594783580_255488492",
+      "id": "20211111-013943_1842766643",
+      "dateCreated": "2021-11-11 01:39:43.580",
+      "status": "READY"
+    },
+    {
+      "text": "%pyspark\nduration_means_by_type \u003d sum_counts.map(lambda (key,value): (key, round(value[0]/value[1],3))).collectAsMap()\n\n# Print them sorted\nfor tag in sorted(duration_means_by_type, key\u003dduration_means_by_type.get, reverse\u003dTrue):\n    print(tag, duration_means_by_type[tag])",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-12 08:24:50.599",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false,
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "completionKey": "TAB"
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "portsweep. 1915.299\nwarezclient. 615.258\nspy. 318.0\nnormal. 216.657\nmultihop. 184.0\nrootkit. 100.8\nbuffer_overflow. 91.7\nperl. 41.333\nloadmodule. 36.222\nftp_write. 32.375\nwarezmaster. 15.05\nimap. 6.0\nphf. 4.5\nguess_passwd. 2.717\nback. 0.129\nsatan. 0.04\nipsweep. 0.034\nnmap. 0.0\nsmurf. 0.0\npod. 0.0\nneptune. 0.0\nteardrop. 0.0\nland. 0.0\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594783580_707895231",
+      "id": "20211111-013943_2106232023",
+      "dateCreated": "2021-11-11 01:39:43.580",
+      "status": "READY"
+    },
+    {
+      "text": "%md\nA small step into understanding what makes a network interaction be considered an attack.",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:39:43.580",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eA small step into understanding what makes a network interaction be considered an attack.\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594783580_1882052792",
+      "id": "20211111-013943_483600853",
+      "dateCreated": "2021-11-11 01:39:43.580",
+      "status": "READY"
+    },
+    {
+      "text": "%spark\nval rdd1 \u003d sc.parallelize(List((\"tom\", 1), (\"jerry\", 3), (\"kitty\", 2), (\"shuke\", 1)))\nval rdd2 \u003d sc.parallelize(List((\"jerry\", 2), (\"tom\", 3), (\"shuke\", 2), (\"kitty\", 5)))\nval rdd3 \u003d rdd1.union(rdd2)\nrdd3.collect().foreach {println}\nprintln(\"\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\")\n//按key进行聚合 \nval rdd4 \u003d rdd3.reduceByKey(_ + _)\nrdd4.collect().foreach {println}\nprintln(\"\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\")\n//按value的降序排序 \nval rdd5 \u003d rdd4.map(t \u003d\u003e (t._2, t._1)).sortByKey(false).map(t \u003d\u003e (t._2, t._1))\nrdd5.collect().foreach {println}\nprintln(\"\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\")\n// 统计key一共出现了多少次\nrdd3.countByKey().foreach {println}\nprintln(\"\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\")\n// 同时统计key和value各出现多少次\nval sum_counts \u003d rdd3.combineByKey( \n        (v) \u003d\u003e (v,1),                                                                           //初始化操作createCombiner，1表示当前元素的计数器，此时只有一个元素\n        (acc:(Int,Int), v) \u003d\u003e (acc._1 + v, acc._2 + 1),                                        //该函数把元素V合并到之前的元素C(createCombiner)上 (这个操作在每个分区内进行)\n        (acc1:(Int,Int), acc2:(Int,Int)) \u003d\u003e (acc1._1 + acc2._1, acc1._2 + acc2._2)             //该函数把2个元素C合并 (这个操作在不同分区间进行)\n    )\nsum_counts.collect.foreach {println}",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-12 10:25:15.291",
+      "progress": 64,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "(tom,1)\n(jerry,3)\n(kitty,2)\n(shuke,1)\n(jerry,2)\n(tom,3)\n(shuke,2)\n(kitty,5)\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n(tom,4)\n(shuke,3)\n(kitty,7)\n(jerry,5)\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n(kitty,7)\n(jerry,5)\n(tom,4)\n(shuke,3)\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n(tom,2)\n(shuke,2)\n(kitty,2)\n(jerry,2)\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n(tom,(2,4))\n(shuke,(2,3))\n(kitty,(2,7))\n(jerry,(2,5))\n\u001b[1m\u001b[34mrdd1\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.rdd.RDD[(String, Int)]\u001b[0m \u003d ParallelCollectionRDD[233] at parallelize at \u003cconsole\u003e:33\n\u001b[1m\u001b[34mrdd2\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.rdd.RDD[(String, Int)]\u001b[0m \u003d ParallelCollectionRDD[234] at parallelize at \u003cconsole\u003e:34\n\u001b[1m\u001b[34mrdd3\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.rdd.RDD[(String, Int)]\u001b[0m \u003d UnionRDD[235] at union at \u003cconsole\u003e:35\n\u001b[1m\u001b[34mrdd4\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.rdd.RDD[(String, Int)]\u001b[0m \u003d ShuffledRDD[236] at reduceByKey at \u003cconsole\u003e:39\n\u001b[1m\u001b[34mrdd5\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.rdd.RDD[(String, Int)]\u001b[0m \u003d MapPartitionsRDD[241] at map at \u003cconsole\u003e:43\n\u001b[1m\u001b[34msum_counts\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.rdd.RDD[(String, (Int, Int))]\u001b[0m \u003d ShuffledRDD[244] at combineByKey at \u003cconsole\u003e:52\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://0771528b4bd2:4040/jobs/job?id\u003d102"
+            },
+            {
+              "jobUrl": "http://0771528b4bd2:4040/jobs/job?id\u003d103"
+            },
+            {
+              "jobUrl": "http://0771528b4bd2:4040/jobs/job?id\u003d104"
+            },
+            {
+              "jobUrl": "http://0771528b4bd2:4040/jobs/job?id\u003d105"
+            },
+            {
+              "jobUrl": "http://0771528b4bd2:4040/jobs/job?id\u003d106"
+            },
+            {
+              "jobUrl": "http://0771528b4bd2:4040/jobs/job?id\u003d107"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636702889297_322743825",
+      "id": "paragraph_1636702889297_322743825",
+      "dateCreated": "2021-11-12 07:41:29.297",
+      "dateStarted": "2021-11-12 09:09:14.604",
+      "dateFinished": "2021-11-12 09:09:17.088",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%spark\nrdd3.take(10)",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-12 08:48:36.379",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mres33\u001b[0m: \u001b[1m\u001b[32mArray[(String, Int)]\u001b[0m \u003d Array((tom,1), (jerry,3), (kitty,2), (shuke,1), (jerry,2), (tom,3), (shuke,2), (kitty,5))\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://0771528b4bd2:4040/jobs/job?id\u003d68"
+            },
+            {
+              "jobUrl": "http://0771528b4bd2:4040/jobs/job?id\u003d69"
+            },
+            {
+              "jobUrl": "http://0771528b4bd2:4040/jobs/job?id\u003d70"
+            },
+            {
+              "jobUrl": "http://0771528b4bd2:4040/jobs/job?id\u003d71"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636702971626_891827224",
+      "id": "paragraph_1636702971626_891827224",
+      "dateCreated": "2021-11-12 07:42:51.626",
+      "dateStarted": "2021-11-12 08:48:36.383",
+      "dateFinished": "2021-11-12 08:48:36.769",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%spark\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-12 08:48:25.969",
+      "progress": 0,
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636706905969_1505407215",
+      "id": "paragraph_1636706905969_1505407215",
+      "dateCreated": "2021-11-12 08:48:25.969",
+      "status": "READY"
+    }
+  ],
+  "name": "11.rdd-key-value",
+  "id": "2GM5797W4",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.9.0",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}

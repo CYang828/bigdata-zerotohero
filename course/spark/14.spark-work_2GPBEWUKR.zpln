@@ -1,0 +1,2318 @@
+{
+  "paragraphs": [
+    {
+      "text": "%md\n### RDD 并行度和分区\n\n默认情况下，Spark 可以将一个作业切分多个任务后，发送给 Executor 节点并行计算，而能够并行计算的任务数量我们称之为并行度。这个数量可以在构建 RDD 时指定。记住，这里的并行执行的任务数量，并不是指的切分任务的数量，不要混淆了。",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.675",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003eRDD 并行度和分区\u003c/h3\u003e\n\u003cp\u003e默认情况下，Spark 可以将一个作业切分多个任务后，发送给 Executor 节点并行计算，而能够并行计算的任务数量我们称之为并行度。这个数量可以在构建 RDD 时指定。记住，这里的并行执行的任务数量，并不是指的切分任务的数量，不要混淆了。\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881675_828550744",
+      "id": "20211111-014121_650417651",
+      "dateCreated": "2021-11-11 01:41:21.675",
+      "status": "READY"
+    },
+    {
+      "text": "%python\nrdd3 \u003d sc.parallelize(range(0, 6, 2), 5)\nrdd3.collect()\n\nprint(\"Number of Partitions: \"+str(rdd3.getNumPartitions()))\nprint(\"Action: First element: \"+str(rdd3.first()))",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.675",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Number of Partitions: 5\nAction: First element: 0\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881675_1360125500",
+      "id": "20211111-014121_451839778",
+      "dateCreated": "2021-11-11 01:41:21.675",
+      "status": "READY"
+    },
+    {
+      "text": "%md\n这里使我们后续做优化的要去调优的一个部分，所以关于怎么去设置并行和分区，后面在说原理的时候再来看。",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.675",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003e这里使我们后续做优化的要去调优的一个部分，所以关于怎么去设置并行和分区，后面在说原理的时候再来看。\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881675_799647881",
+      "id": "20211111-014121_1056182300",
+      "dateCreated": "2021-11-11 01:41:21.675",
+      "status": "READY"
+    },
+    {
+      "text": "%md\n### RDD 转换算子\n\nRDD 根据数据处理方式的不同将算子整体上分为 Value 类型、双 Value 类型和 Key-Value 类型",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.675",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003eRDD 转换算子\u003c/h3\u003e\n\u003cp\u003eRDD 根据数据处理方式的不同将算子整体上分为 Value 类型、双 Value 类型和 Key-Value 类型\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881675_98943712",
+      "id": "20211111-014121_1938298938",
+      "dateCreated": "2021-11-11 01:41:21.675",
+      "status": "READY"
+    },
+    {
+      "text": "%python\n# 1. value 类型 \n# 将处理的数据逐条进行映射转换，这里的转换可以是类型的转换，也可以是值的转换。\nrdd4 \u003d sc.parallelize([\"b\", \"a\", \"c\"])\nsorted(rdd4.map(lambda x: (x, 1)).collect())",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.675",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "[(\u0027a\u0027, 1), (\u0027b\u0027, 1), (\u0027c\u0027, 1)]"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881675_735579941",
+      "id": "20211111-014121_1981315966",
+      "dateCreated": "2021-11-11 01:41:21.675",
+      "status": "READY"
+    },
+    {
+      "text": "%python\n# 2. value 类型\n# 将待处理的数据以分区为单位发送到计算节点进行处理，这里的处理是指可以进行任意的处理，哪怕是过滤数据。\ndef f(iterator): \n    yield sum(iterator)\n    \nrdd5 \u003d sc.parallelize([1, 2, 3, 4], 2)\nrdd5.mapPartitions(f).collect()",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.675",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "[3, 7]"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881675_1862286719",
+      "id": "20211111-014121_404829448",
+      "dateCreated": "2021-11-11 01:41:21.675",
+      "status": "READY"
+    },
+    {
+      "text": "%md\n**思考一个问题:map 和 mapPartitions 的区别?**\n\n- 数据处理角度\n    Map 算子是分区内一个数据一个数据的执行，类似于串行操作。而 mapPartitions 算子是以分区为单位进行批处理操作。\n    \n- 功能的角度\n    Map 算子主要目的将数据源中的数据进行转换和改变。但是不会减少或增多数据。 MapPartitions 算子需要传递一个迭代器，返回一个迭代器，没有要求的元素的个数保持不变， 所以可以增加或减少数据\n    \n- 性能的角度\n    Map 算子因为类似于串行操作，所以性能比较低，而是 mapPartitions 算子类似于批处理，所以性能较高。但是 mapPartitions 算子会长时间占用内存，那么这样会导致内存可能不够用，出现内存溢出的错误。所以在内存有限的情况下，不推荐使用。使用 map 操作。",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.675",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003e\u003cstrong\u003e思考一个问题:map 和 mapPartitions 的区别?\u003c/strong\u003e\u003c/p\u003e\n\u003cul\u003e\n  \u003cli\u003e\n  \u003cp\u003e数据处理角度\u003cbr/\u003eMap 算子是分区内一个数据一个数据的执行，类似于串行操作。而 mapPartitions 算子是以分区为单位进行批处理操作。\u003c/p\u003e\u003c/li\u003e\n  \u003cli\u003e\n  \u003cp\u003e功能的角度\u003cbr/\u003eMap 算子主要目的将数据源中的数据进行转换和改变。但是不会减少或增多数据。 MapPartitions 算子需要传递一个迭代器，返回一个迭代器，没有要求的元素的个数保持不变， 所以可以增加或减少数据\u003c/p\u003e\u003c/li\u003e\n  \u003cli\u003e\n  \u003cp\u003e性能的角度\u003cbr/\u003eMap 算子因为类似于串行操作，所以性能比较低，而是 mapPartitions 算子类似于批处理，所以性能较高。但是 mapPartitions 算子会长时间占用内存，那么这样会导致内存可能不够用，出现内存溢出的错误。所以在内存有限的情况下，不推荐使用。使用 map 操作。\u003c/p\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881675_449380300",
+      "id": "20211111-014121_114008800",
+      "dateCreated": "2021-11-11 01:41:21.675",
+      "status": "READY"
+    },
+    {
+      "text": "%python\n# 3. value 类型\n# 将待处理的数据以分区为单位发送到计算节点进行处理，这里的处理是指可以进行任意的处理，哪怕是过滤数据，在处理时同时可以获取当前分区索引。\ndef f(splitIndex, iterator): \n    yield splitIndex\n\nrdd6 \u003d sc.parallelize([1, 2, 3, 4], 4)\nrdd6.mapPartitionsWithIndex(f).collect()",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.675",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "[0, 1, 2, 3]"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881675_1313167626",
+      "id": "20211111-014121_900801483",
+      "dateCreated": "2021-11-11 01:41:21.675",
+      "status": "READY"
+    },
+    {
+      "text": "%python\n# 4. value 类型\n# 将处理的数据进行扁平化后再进行映射处理，所以算子也称之为扁平映射\nrdd7 \u003d sc.parallelize([2, 3, 4])\nprint(rdd7.collect())\nprint(sorted(rdd7.flatMap(lambda x: range(1, x)).collect()))\nprint(sorted(rdd7.flatMap(lambda x: [(x, x), (x, x)]).collect()))",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.675",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "[2, 3, 4]\n[1, 1, 1, 2, 2, 3]\n[(2, 2), (2, 2), (3, 3), (3, 3), (4, 4), (4, 4)]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881675_99196226",
+      "id": "20211111-014121_13069704",
+      "dateCreated": "2021-11-11 01:41:21.675",
+      "status": "READY"
+    },
+    {
+      "text": "%python\n# 5. value 类型\n# 将同一个分区的数据直接转换为相同类型的内存数组进行处理，分区不变\nrdd8 \u003d sc.parallelize([1, 2, 3, 4], 2)\nsorted(rdd8.glom().collect())",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.675",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "[[1, 2], [3, 4]]"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881675_1098632867",
+      "id": "20211111-014121_299860461",
+      "dateCreated": "2021-11-11 01:41:21.675",
+      "status": "READY"
+    },
+    {
+      "text": "%python\n# 6. value 类型\n# 将数据根据指定的规则进行分组, 分区默认不变，但是数据会被打乱重新组合，我们将这样的操作称之为 shuffle。极限情况下，数据可能被分在同一个分区中\nrdd9 \u003d sc.parallelize([1, 1, 2, 3, 5, 8])\nresult \u003d rdd9.groupBy(lambda x: x % 2).collect()\nsorted([(x, sorted(y)) for (x, y) in result])",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.675",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "[(0, [2, 8]), (1, [1, 1, 3, 5])]"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881675_489778339",
+      "id": "20211111-014121_1247346068",
+      "dateCreated": "2021-11-11 01:41:21.675",
+      "status": "READY"
+    },
+    {
+      "text": "%python\n# 7. value 类型\n# 将数据根据指定的规则进行筛选过滤，符合规则的数据保留，不符合规则的数据丢弃。\n# 当数据进行筛选过滤后，分区不变，但是分区内的数据可能不均衡，生产环境下，可能会出现数据倾斜。\nrdd10 \u003d sc.parallelize([1, 2, 3, 4, 5])\nrdd10.filter(lambda x: x % 2 \u003d\u003d 0).collect()",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.675",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "[2, 4]"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881675_567225163",
+      "id": "20211111-014121_1984634991",
+      "dateCreated": "2021-11-11 01:41:21.675",
+      "status": "READY"
+    },
+    {
+      "text": "%md\n```sample(withReplacement, fraction, seed\u003dNone)```\n\n\nReturn a sampled subset of this RDD.\n\nParameters\n- withReplacement – can elements be sampled multiple times (replaced when sampled out)\n\n- fraction – expected size of the sample as a fraction of this RDD’s size without replacement: probability that each element is chosen; fraction must be [0, 1] with replacement: expected number of times each element is chosen; fraction must be \u003e\u003d 0\n\n- seed – seed for the random number generator\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.675",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003e\u003ccode\u003esample(withReplacement, fraction, seed\u003dNone)\u003c/code\u003e\u003c/p\u003e\n\u003cp\u003eReturn a sampled subset of this RDD.\u003c/p\u003e\n\u003cp\u003eParameters\u003cbr/\u003e- withReplacement – can elements be sampled multiple times (replaced when sampled out)\u003c/p\u003e\n\u003cul\u003e\n  \u003cli\u003e\n  \u003cp\u003efraction – expected size of the sample as a fraction of this RDD’s size without replacement: probability that each element is chosen; fraction must be [0, 1] with replacement: expected number of times each element is chosen; fraction must be \u0026gt;\u003d 0\u003c/p\u003e\u003c/li\u003e\n  \u003cli\u003e\n  \u003cp\u003eseed – seed for the random number generator\u003c/p\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881675_2074918403",
+      "id": "20211111-014121_1297856515",
+      "dateCreated": "2021-11-11 01:41:21.675",
+      "status": "READY"
+    },
+    {
+      "text": "%python\n# 8. value 类型\n# 根据指定的规则从数据集中抽取数据\nrdd11 \u003d sc.parallelize(range(100), 4)\nrdd11.sample(False, 0.1, 81).count()",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.675",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "11"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881675_2063508868",
+      "id": "20211111-014121_1961865653",
+      "dateCreated": "2021-11-11 01:41:21.675",
+      "status": "READY"
+    },
+    {
+      "text": "%python\n# 9. value 类型 \n# 将数据集中重复的数据去重\nsorted(sc.parallelize([1, 1, 2, 3]).distinct().collect())",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.675",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "[1, 2, 3]"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881675_1823804748",
+      "id": "20211111-014121_364252560",
+      "dateCreated": "2021-11-11 01:41:21.675",
+      "status": "READY"
+    },
+    {
+      "text": "%python\n# 10. value 类型\n# 根据数据量缩减分区，用于大数据集过滤后，提高小数据集的执行效率\n# 当 spark 程序中，存在过多的小任务的时候，可以通过 coalesce 方法，收缩合并分区，减少分区的个数，减小任务调度成本\nprint(sc.parallelize([1, 2, 3, 4, 5], 3).glom().collect())\nprint(sc.parallelize([1, 2, 3, 4, 5], 3).coalesce(1).glom().collect())",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.675",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "[[1], [2, 3], [4, 5]]\n[[1, 2, 3, 4, 5]]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881675_135918842",
+      "id": "20211111-014121_1360150865",
+      "dateCreated": "2021-11-11 01:41:21.675",
+      "status": "READY"
+    },
+    {
+      "text": "%python\n# 11. value 类型\n# 该操作内部其实执行的是 coalesce 操作，参数 shuffle 的默认值为 true。\n# 无论是将分区数多的 RDD 转换为分区数少的 RDD，还是将分区数少的 RDD 转换为分区数多的 RDD，\n# repartition 操作都可以完成，因为无论如何都会经 shuffle 过程。\nrdd12 \u003d sc.parallelize([1,2,3,4,5,6,7], 4)\nprint(sorted(rdd.glom().collect()))\nprint(len(rdd12.repartition(2).glom().collect()))\nprint(len(rdd12.repartition(10).glom().collect()))",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.675",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "NameError\nname \u0027rdd\u0027 is not defined"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881675_409606431",
+      "id": "20211111-014121_1729268475",
+      "dateCreated": "2021-11-11 01:41:21.675",
+      "status": "READY"
+    },
+    {
+      "text": "%python\n# 12. value 类型\n# 该操作用于排序数据。在排序之前，可以将数据通过 f 函数进行处理，\n# 之后按照 f 函数处理 的结果进行排序，默认为升序排列。\n# 排序后新产生的 RDD 的分区数与原 RDD 的分区数一致。中间存在 shuffle 的过程\ntmp \u003d [(\u0027a\u0027, 1), (\u0027b\u0027, 2), (\u00271\u0027, 3), (\u0027d\u0027, 4), (\u00272\u0027, 5)]\nprint(sc.parallelize(tmp).sortBy(lambda x: x[0]).collect())\nprint(sc.parallelize(tmp).sortBy(lambda x: x[1]).collect())",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.675",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881675_2105706935",
+      "id": "20211111-014121_1861873077",
+      "dateCreated": "2021-11-11 01:41:21.675",
+      "status": "READY"
+    },
+    {
+      "text": "%python\n# 1. 双 value 类型\n# 对源 RDD 和参数 RDD 求交集后返回一个新的 RDD\nrdd13 \u003d sc.parallelize([1, 10, 2, 3, 4, 5])\nrdd14 \u003d sc.parallelize([1, 6, 2, 3, 7, 8])\nrdd13.intersection(rdd14).collect()",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.675",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881675_824323590",
+      "id": "20211111-014121_1258731383",
+      "dateCreated": "2021-11-11 01:41:21.675",
+      "status": "READY"
+    },
+    {
+      "text": "%python\n# 2. 双 value 类型\n# 对源 RDD 和参数 RDD 求并集后返回一个新的 RDD\nrdd15 \u003d sc.parallelize([1, 10, 2, 3, 4, 5])\nrdd16 \u003d sc.parallelize([1, 6, 2, 3, 7, 8])\nrdd15.union(rdd16).collect()",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.675",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881675_358835624",
+      "id": "20211111-014121_140341135",
+      "dateCreated": "2021-11-11 01:41:21.675",
+      "status": "READY"
+    },
+    {
+      "text": "%python\n# 3. 双 value 类型\n# 以一个 RDD 元素为主，去除两个 RDD 中重复元素，将其他元素保留下来。求差集\nx \u003d sc.parallelize([(\"a\", 1), (\"b\", 4), (\"b\", 5), (\"a\", 3)])\ny \u003d sc.parallelize([(\"a\", 3), (\"c\", None)])\nsorted(x.subtract(y).collect())",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.675",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881675_256382036",
+      "id": "20211111-014121_2070640941",
+      "dateCreated": "2021-11-11 01:41:21.675",
+      "status": "READY"
+    },
+    {
+      "text": "%python\n# 4. 双 value 类型\n# 将两个 RDD 中的元素，以键值对的形式进行合并。\n# 其中，键值对中的 Key 为第 1 个 RDD 中的元素，Value 为第 2 个 RDD 中的相同位置的元素。\nx \u003d sc.parallelize(range(0,5))\ny \u003d sc.parallelize(range(1000, 1005))\nx.zip(y).collect()",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.675",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881675_1414758116",
+      "id": "20211111-014121_1516152752",
+      "dateCreated": "2021-11-11 01:41:21.675",
+      "status": "READY"
+    },
+    {
+      "text": "%python\n# 1. Key-Value 类型\n# 将数据按照指定 Partitioner 重新进行分区。Spark 默认的分区器是 HashPartitioner\npairs \u003d sc.parallelize([1, 2, 3, 4, 2, 4, 1]).map(lambda x: (x, x))\nsets \u003d pairs.partitionBy(2).glom().collect()\nlen(set(sets[0]).intersection(set(sets[1])))",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.675",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881675_269514790",
+      "id": "20211111-014121_614272643",
+      "dateCreated": "2021-11-11 01:41:21.675",
+      "status": "READY"
+    },
+    {
+      "text": "%python\n# 2. Key-Value 类型\n# 可以将数据按照相同的 Key 对 Value 进行聚合\nfrom operator import add\n\n\nrdd17 \u003d sc.parallelize([(\"a\", 1), (\"b\", 1), (\"a\", 1)])\nsorted(rdd17.reduceByKey(add).collect())",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.675",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881675_566384923",
+      "id": "20211111-014121_1197419656",
+      "dateCreated": "2021-11-11 01:41:21.675",
+      "status": "READY"
+    },
+    {
+      "text": "%python\n# 3. Key-Value 类型\n# 将数据源的数据根据 key 对 value 进行分组\nrdd18 \u003d sc.parallelize([(\"a\", 1), (\"b\", 1), (\"a\", 1)])\nprint(sorted(rdd18.groupByKey().mapValues(len).collect()))\nprint(sorted(rdd18.groupByKey().mapValues(list).collect()))",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.675",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881675_1631252841",
+      "id": "20211111-014121_1742575455",
+      "dateCreated": "2021-11-11 01:41:21.675",
+      "status": "READY"
+    },
+    {
+      "text": "%md\n**reduceByKey 和 groupByKey 的区别?**\n\n- 从 shuffle 的角度:\n    \n    reduceByKey 和 groupByKey 都存在 shuffle 的操作，但是 reduceByKey 可以在 shuffle 前对分区内相同 key 的数据进行预聚合(combine)功能，这样会减少落盘的 数据量，而 groupByKey 只是进行分组，不存在数据量减少的问题，reduceByKey 性能比较高。\n\n- 从功能的角度:\n    \n    reduceByKey 其实包含分组和聚合的功能。GroupByKey 只能分组，不能聚合，所以在分组聚合的场合下，推荐使用 reduceByKey，如果仅仅是分组而不需要聚合。那么还是只能使用 groupByKey",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.675",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003e\u003cstrong\u003ereduceByKey 和 groupByKey 的区别?\u003c/strong\u003e\u003c/p\u003e\n\u003cul\u003e\n  \u003cli\u003e\n    \u003cp\u003e从 shuffle 的角度:\u003c/p\u003e\n    \u003cp\u003ereduceByKey 和 groupByKey 都存在 shuffle 的操作，但是 reduceByKey 可以在 shuffle 前对分区内相同 key 的数据进行预聚合(combine)功能，这样会减少落盘的 数据量，而 groupByKey 只是进行分组，不存在数据量减少的问题，reduceByKey 性能比较高。\u003c/p\u003e\n  \u003c/li\u003e\n  \u003cli\u003e\n    \u003cp\u003e从功能的角度:\u003c/p\u003e\n    \u003cp\u003ereduceByKey 其实包含分组和聚合的功能。GroupByKey 只能分组，不能聚合，所以在分组聚合的场合下，推荐使用 reduceByKey，如果仅仅是分组而不需要聚合。那么还是只能使用 groupByKey\u003c/p\u003e\n  \u003c/li\u003e\n\u003c/ul\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881675_1758799604",
+      "id": "20211111-014121_1217519411",
+      "dateCreated": "2021-11-11 01:41:21.675",
+      "status": "READY"
+    },
+    {
+      "text": "%python\n# 4. Key-Value 类型\n# 将数据根据不同的规则进行分区内计算和分区间计算\n# aggregateByKey",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.675",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881675_180316097",
+      "id": "20211111-014121_70527412",
+      "dateCreated": "2021-11-11 01:41:21.675",
+      "status": "READY"
+    },
+    {
+      "text": "%python\n# 5. Key-Value 类型\n# 当分区内计算规则和分区间计算规则相同时，aggregateByKey 就可以简化为 foldByKey\nfrom operator import add\n\n\nrdd19 \u003d sc.parallelize([(\"a\", 1), (\"b\", 1), (\"a\", 1)])\nsorted(rdd19.foldByKey(0, add).collect())",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.675",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881675_312843135",
+      "id": "20211111-014121_984710870",
+      "dateCreated": "2021-11-11 01:41:21.675",
+      "status": "READY"
+    },
+    {
+      "text": "%md\n```combineByKey(createCombiner, mergeValue, mergeCombiners, numPartitions\u003dNone, partitionFunc\u003d\u003cfunction portable_hash\u003e)```\n\nGeneric function to combine the elements for each key using a custom set of aggregation functions.\n\nTurns an RDD[(K, V)] into a result of type RDD[(K, C)], for a “combined type” C.\n\nUsers provide three functions:\n\n- createCombiner, which turns a V into a C (e.g., creates a one-element list)\n\n- mergeValue, to merge a V into a C (e.g., adds it to the end of a list)\n\n- mergeCombiners, to combine two C’s into a single one (e.g., merges the lists)\n\nTo avoid memory allocation, both mergeValue and mergeCombiners are allowed to modify and return their first argument instead of creating a new C.\n\nIn addition, users can control the partitioning of the output RDD.\n\n\u003e Note V and C can be different – for example, one might group an RDD of type (Int, Int) into an RDD of type (Int, List[Int]).",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.675",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003e\u003ccode\u003ecombineByKey(createCombiner, mergeValue, mergeCombiners, numPartitions\u003dNone, partitionFunc\u003d\u0026lt;function portable_hash\u0026gt;)\u003c/code\u003e\u003c/p\u003e\n\u003cp\u003eGeneric function to combine the elements for each key using a custom set of aggregation functions.\u003c/p\u003e\n\u003cp\u003eTurns an RDD[(K, V)] into a result of type RDD[(K, C)], for a “combined type” C.\u003c/p\u003e\n\u003cp\u003eUsers provide three functions:\u003c/p\u003e\n\u003cul\u003e\n  \u003cli\u003e\n  \u003cp\u003ecreateCombiner, which turns a V into a C (e.g., creates a one-element list)\u003c/p\u003e\u003c/li\u003e\n  \u003cli\u003e\n  \u003cp\u003emergeValue, to merge a V into a C (e.g., adds it to the end of a list)\u003c/p\u003e\u003c/li\u003e\n  \u003cli\u003e\n  \u003cp\u003emergeCombiners, to combine two C’s into a single one (e.g., merges the lists)\u003c/p\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003eTo avoid memory allocation, both mergeValue and mergeCombiners are allowed to modify and return their first argument instead of creating a new C.\u003c/p\u003e\n\u003cp\u003eIn addition, users can control the partitioning of the output RDD.\u003c/p\u003e\n\u003cblockquote\u003e\n  \u003cp\u003eNote V and C can be different – for example, one might group an RDD of type (Int, Int) into an RDD of type (Int, List[Int]).\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881675_1621611223",
+      "id": "20211111-014121_828203440",
+      "dateCreated": "2021-11-11 01:41:21.675",
+      "status": "READY"
+    },
+    {
+      "text": "%python\n# 6. Key-Value 类型\n# 最通用的对 key-value 型 rdd 进行聚集操作的聚集函数(aggregation function)。\n# 类似于 aggregate()，combineByKey()允许用户返回值的类型与输入不一致。\nx \u003d sc.parallelize([(\"a\", 1), (\"b\", 1), (\"a\", 2)])\n\ndef to_list(a):\n    return [a]\n\ndef append(a, b):\n    a.append(b)\n    return a\n\ndef extend(a, b):\n    a.extend(b)\n    return a\n\nsorted(x.combineByKey(to_list, append, extend).collect())",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.675",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881675_2123766124",
+      "id": "20211111-014121_2044184762",
+      "dateCreated": "2021-11-11 01:41:21.675",
+      "status": "READY"
+    },
+    {
+      "text": "%md\n**reduceByKey、foldByKey、aggregateByKey、combineByKey 的区别?**\n\n- reduceByKey: 相同 key 的第一个数据不进行任何计算，分区内和分区间计算规则相同 \n- FoldByKey: 相同 key 的第一个数据和初始值进行分区内计算，分区内和分区间计算规则相同\n- AggregateByKey:相同 key 的第一个数据和初始值进行分区内计算，分区内和分区间计算规 则可以不相同 \n- CombineByKey:当计算时，发现数据结构不满足要求时，可以让第一个数据转换结构。分区内和分区间计算规则不相同。",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.675",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003e\u003cstrong\u003ereduceByKey、foldByKey、aggregateByKey、combineByKey 的区别?\u003c/strong\u003e\u003c/p\u003e\n\u003cul\u003e\n  \u003cli\u003ereduceByKey: 相同 key 的第一个数据不进行任何计算，分区内和分区间计算规则相同\u003c/li\u003e\n  \u003cli\u003eFoldByKey: 相同 key 的第一个数据和初始值进行分区内计算，分区内和分区间计算规则相同\u003c/li\u003e\n  \u003cli\u003eAggregateByKey:相同 key 的第一个数据和初始值进行分区内计算，分区内和分区间计算规 则可以不相同\u003c/li\u003e\n  \u003cli\u003eCombineByKey:当计算时，发现数据结构不满足要求时，可以让第一个数据转换结构。分区内和分区间计算规则不相同。\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881675_1130529578",
+      "id": "20211111-014121_559234585",
+      "dateCreated": "2021-11-11 01:41:21.675",
+      "status": "READY"
+    },
+    {
+      "text": "%python\n# 7. Key-Value 类型\n# 在一个(K,V)的 RDD 上调用，K 必须实现 Ordered 接口(特质)，返回一个按照 key 进行排序的\ntmp \u003d [(\u0027a\u0027, 1), (\u0027b\u0027, 2), (\u00271\u0027, 3), (\u0027d\u0027, 4), (\u00272\u0027, 5)]\nprint(sc.parallelize(tmp).sortByKey().first())\nprint(sc.parallelize(tmp).sortByKey(True, 1).collect())\nprint(sc.parallelize(tmp).sortByKey(True, 2).collect())\ntmp2 \u003d [(\u0027Mary\u0027, 1), (\u0027had\u0027, 2), (\u0027a\u0027, 3), (\u0027little\u0027, 4), (\u0027lamb\u0027, 5)]\ntmp2.extend([(\u0027whose\u0027, 6), (\u0027fleece\u0027, 7), (\u0027was\u0027, 8), (\u0027white\u0027, 9)])\nprint(sc.parallelize(tmp2).sortByKey(True, 3, keyfunc\u003dlambda k: k.lower()).collect())",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.676",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881676_918631302",
+      "id": "20211111-014121_1836755490",
+      "dateCreated": "2021-11-11 01:41:21.676",
+      "status": "READY"
+    },
+    {
+      "text": "%python\n# 8. Key-Value 类型\n# 在类型为(K,V)和(K,W)的 RDD 上调用，返回一个相同 key 对应的所有元素连接在一起的 (K,(V,W)) 的 RDD\nx \u003d sc.parallelize([(\"a\", 1), (\"b\", 4)])\ny \u003d sc.parallelize([(\"a\", 2), (\"a\", 3)])\nsorted(x.join(y).collect())",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.676",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881676_1116565627",
+      "id": "20211111-014121_1942667471",
+      "dateCreated": "2021-11-11 01:41:21.676",
+      "status": "READY"
+    },
+    {
+      "text": "%python\n# 9. Key-Value 类型\n# 类似于 SQL 语句的左外连接\nx \u003d sc.parallelize([(\"a\", 1), (\"b\", 4)])\ny \u003d sc.parallelize([(\"a\", 2)])\nsorted(x.leftOuterJoin(y).collect())",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.676",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881676_2018009346",
+      "id": "20211111-014121_874464276",
+      "dateCreated": "2021-11-11 01:41:21.676",
+      "status": "READY"
+    },
+    {
+      "text": "%python\n# 10. Key-Value 类型\n# 在类型为 (K,V) 和 (K,W) 的 RDD 上调用，返回一个(K,(Iterable\u003cV\u003e,Iterable\u003cW\u003e))类型的 RDD\nx \u003d sc.parallelize([(\"a\", 1), (\"b\", 4)])\ny \u003d sc.parallelize([(\"a\", 2)])\n[(x, tuple(map(list, y))) for x, y in sorted(list(x.cogroup(y).collect()))]",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.676",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881676_1591491157",
+      "id": "20211111-014121_1018302840",
+      "dateCreated": "2021-11-11 01:41:21.676",
+      "status": "READY"
+    },
+    {
+      "text": "%python\n# 1\n# 聚集 RDD 中的所有元素，先聚合分区内数据，再聚合分区间数据\nfrom operator import add\n\n\nprint(sc.parallelize([1, 2, 3, 4, 5]).reduce(add))\nprint(sc.parallelize((2 for _ in range(10))).map(lambda x: 1).cache().reduce(add))",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.676",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881676_2071524471",
+      "id": "20211111-014121_77694838",
+      "dateCreated": "2021-11-11 01:41:21.676",
+      "status": "READY"
+    },
+    {
+      "text": "%python\n# 2 \n# 在驱动程序中，以数组 Array 的形式返回数据集的所有元素\n# collect",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.676",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881676_2067293335",
+      "id": "20211111-014121_558429077",
+      "dateCreated": "2021-11-11 01:41:21.676",
+      "status": "READY"
+    },
+    {
+      "text": "%python\n# 3\n# 返回 RDD 中元素的个数\nsc.parallelize([2, 3, 4]).count()",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.676",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881676_1736009362",
+      "id": "20211111-014121_1874406476",
+      "dateCreated": "2021-11-11 01:41:21.676",
+      "status": "READY"
+    },
+    {
+      "text": "%python\n# 4\n# 返回 RDD 中的第一个元素\nsc.parallelize([2, 3, 4]).first()",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.676",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881676_945810843",
+      "id": "20211111-014121_1127012626",
+      "dateCreated": "2021-11-11 01:41:21.676",
+      "status": "READY"
+    },
+    {
+      "text": "%python\n# 5\n# 返回一个由 RDD 的前 n 个元素组成的数组\nprint(sc.parallelize([2, 3, 4, 5, 6]).cache().take(2))\nprint(sc.parallelize([2, 3, 4, 5, 6]).take(10))\nprint(sc.parallelize(range(100), 100).filter(lambda x: x \u003e 90).take(3))",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.676",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881676_2060420472",
+      "id": "20211111-014121_1270774838",
+      "dateCreated": "2021-11-11 01:41:21.676",
+      "status": "READY"
+    },
+    {
+      "text": "%python\n# 6 \n# 返回该 RDD 排序后的前 n 个元素组成的数组\nprint(sc.parallelize([10, 1, 2, 9, 3, 4, 5, 6, 7]).takeOrdered(6))\nprint(sc.parallelize([10, 1, 2, 9, 3, 4, 5, 6, 7], 2).takeOrdered(6, key\u003dlambda x: -x))",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.676",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881676_972752330",
+      "id": "20211111-014121_755825295",
+      "dateCreated": "2021-11-11 01:41:21.676",
+      "status": "READY"
+    },
+    {
+      "text": "%python\n# 7 \n# 分区的数据通过初始值和分区内的数据进行聚合，然后再和初始值进行分区间的数据聚合\nseqOp \u003d (lambda x, y: (x[0] + y, x[1] + 1))\ncombOp \u003d (lambda x, y: (x[0] + y[0], x[1] + y[1]))\nprint(sc.parallelize([1, 2, 3, 4]).aggregate((0, 0), seqOp, combOp))\nprint(sc.parallelize([]).aggregate((0, 0), seqOp, combOp))",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.676",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881676_1675707323",
+      "id": "20211111-014121_200370222",
+      "dateCreated": "2021-11-11 01:41:21.676",
+      "status": "READY"
+    },
+    {
+      "text": "%python\n# 8\n# 折叠操作，aggregate 的简化版操作\nfrom operator import add\n\nsc.parallelize([1, 2, 3, 4, 5]).fold(0, add)",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.676",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881676_1358314891",
+      "id": "20211111-014121_774947851",
+      "dateCreated": "2021-11-11 01:41:21.676",
+      "status": "READY"
+    },
+    {
+      "text": "%python\n# 9\n# 统计每种 key 的个数\nrdd \u003d sc.parallelize([(\"a\", 1), (\"b\", 1), (\"a\", 1)])\nsorted(rdd.countByKey().items())",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.676",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881676_927239824",
+      "id": "20211111-014121_383210039",
+      "dateCreated": "2021-11-11 01:41:21.676",
+      "status": "READY"
+    },
+    {
+      "text": "%md\n**save 系列**\n\n```saveAsHadoopDataset(conf, keyConverter\u003dNone, valueConverter\u003dNone)```\nOutput a Python RDD of key-value pairs (of form RDD[(K, V)]) to any Hadoop file system, using the old Hadoop OutputFormat API (mapred package). Keys/values are converted for output using either user specified converters or, by default, “org.apache.spark.api.python.JavaToWritableConverter”.\n\nParameters\n- conf – Hadoop job configuration, passed in as a dict\n\n- keyConverter – (None by default)\n\n- valueConverter – (None by default)\n\n\n```saveAsHadoopFile(path, outputFormatClass, keyClass\u003dNone, valueClass\u003dNone, keyConverter\u003dNone, valueConverter\u003dNone, conf\u003dNone, compressionCodecClass\u003dNone)```\nOutput a Python RDD of key-value pairs (of form RDD[(K, V)]) to any Hadoop file system, using the old Hadoop OutputFormat API (mapred package). Key and value types will be inferred if not specified. Keys and values are converted for output using either user specified converters or “org.apache.spark.api.python.JavaToWritableConverter”. The conf is applied on top of the base Hadoop conf associated with the SparkContext of this RDD to create a merged Hadoop MapReduce job configuration for saving the data.\n\nParameters\n- path – path to Hadoop file\n\n- outputFormatClass – fully qualified classname of Hadoop OutputFormat (e.g. “org.apache.hadoop.mapred.SequenceFileOutputFormat”)\n\n- keyClass – fully qualified classname of key Writable class (e.g. “org.apache.hadoop.io.IntWritable”, None by default)\n\n- valueClass – fully qualified classname of value Writable class (e.g. “org.apache.hadoop.io.Text”, None by default)\n\n- keyConverter – (None by default)\n\n- valueConverter – (None by default)\n\n- conf – (None by default)\n\n- compressionCodecClass – (None by default)\n\n\n```saveAsNewAPIHadoopDataset(conf, keyConverter\u003dNone, valueConverter\u003dNone)```\nOutput a Python RDD of key-value pairs (of form RDD[(K, V)]) to any Hadoop file system, using the new Hadoop OutputFormat API (mapreduce package). Keys/values are converted for output using either user specified converters or, by default, “org.apache.spark.api.python.JavaToWritableConverter”.\n\nParameters\n- conf – Hadoop job configuration, passed in as a dict\n\n- keyConverter – (None by default)\n\n- valueConverter – (None by default)\n\n```saveAsNewAPIHadoopFile(path, outputFormatClass, keyClass\u003dNone, valueClass\u003dNone, keyConverter\u003dNone, valueConverter\u003dNone, conf\u003dNone)```\nOutput a Python RDD of key-value pairs (of form RDD[(K, V)]) to any Hadoop file system, using the new Hadoop OutputFormat API (mapreduce package). Key and value types will be inferred if not specified. Keys and values are converted for output using either user specified converters or “org.apache.spark.api.python.JavaToWritableConverter”. The conf is applied on top of the base Hadoop conf associated with the SparkContext of this RDD to create a merged Hadoop MapReduce job configuration for saving the data.\n\nParameters\n- path – path to Hadoop file\n\n- outputFormatClass – fully qualified classname of Hadoop OutputFormat (e.g. “org.apache.hadoop.mapreduce.lib.output.SequenceFileOutputFormat”)\n\n- keyClass – fully qualified classname of key Writable class (e.g. “org.apache.hadoop.io.IntWritable”, None by default)\n\n- valueClass – fully qualified classname of value Writable class (e.g. “org.apache.hadoop.io.Text”, None by default)\n\n- keyConverter – (None by default)\n\n- valueConverter – (None by default)\n\n- conf – Hadoop job configuration, passed in as a dict (None by default)\n\n```saveAsPickleFile(path, batchSize\u003d10)```\nSave this RDD as a SequenceFile of serialized objects. The serializer used is pyspark.serializers.PickleSerializer, default batch size is 10.\n\n\n```saveAsSequenceFile(path, compressionCodecClass\u003dNone)```\nOutput a Python RDD of key-value pairs (of form RDD[(K, V)]) to any Hadoop file system, using the “org.apache.hadoop.io.Writable” types that we convert from the RDD’s key and value types. The mechanism is as follows:\n\nPyrolite is used to convert pickled Python RDD into RDD of Java objects.\n\nKeys and values of this Java RDD are converted to Writables and written out.\n\nParameters\n- path – path to sequence file\n\n- compressionCodecClass – (None by default)\n\n```saveAsTextFile(path, compressionCodecClass\u003dNone)```\nSave this RDD as a text file, using string representations of elements.\n\nParameters\n- path – path to text file\n\n- compressionCodecClass – (None by default) string i.e. “org.apache.hadoop.io.compress.GzipCodec”",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.676",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003e\u003cstrong\u003esave 系列\u003c/strong\u003e\u003c/p\u003e\n\u003cpre\u003e\u003ccode class\u003d\"saveAsHadoopDataset(conf, keyConverter\u003dNone, valueConverter\u003dNone)```\"\u003eOutput a Python RDD of key-value pairs (of form RDD[(K, V)]) to any Hadoop file system, using the old Hadoop OutputFormat API (mapred package). Keys/values are converted for output using either user specified converters or, by default, “org.apache.spark.api.python.JavaToWritableConverter”.\n\nParameters\n- conf – Hadoop job configuration, passed in as a dict\n\n- keyConverter – (None by default)\n\n- valueConverter – (None by default)\n\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eOutput a Python RDD of key-value pairs (of form RDD[(K, V)]) to any Hadoop file system, using the old Hadoop OutputFormat API (mapred package). Key and value types will be inferred if not specified. Keys and values are converted for output using either user specified converters or “org.apache.spark.api.python.JavaToWritableConverter”. The conf is applied on top of the base Hadoop conf associated with the SparkContext of this RDD to create a merged Hadoop MapReduce job configuration for saving the data.\u003c/p\u003e\n\u003cp\u003eParameters\u003cbr/\u003e- path – path to Hadoop file\u003c/p\u003e\n\u003cul\u003e\n  \u003cli\u003e\n  \u003cp\u003eoutputFormatClass – fully qualified classname of Hadoop OutputFormat (e.g. “org.apache.hadoop.mapred.SequenceFileOutputFormat”)\u003c/p\u003e\u003c/li\u003e\n  \u003cli\u003e\n  \u003cp\u003ekeyClass – fully qualified classname of key Writable class (e.g. “org.apache.hadoop.io.IntWritable”, None by default)\u003c/p\u003e\u003c/li\u003e\n  \u003cli\u003e\n  \u003cp\u003evalueClass – fully qualified classname of value Writable class (e.g. “org.apache.hadoop.io.Text”, None by default)\u003c/p\u003e\u003c/li\u003e\n  \u003cli\u003e\n  \u003cp\u003ekeyConverter – (None by default)\u003c/p\u003e\u003c/li\u003e\n  \u003cli\u003e\n  \u003cp\u003evalueConverter – (None by default)\u003c/p\u003e\u003c/li\u003e\n  \u003cli\u003e\n  \u003cp\u003econf – (None by default)\u003c/p\u003e\u003c/li\u003e\n  \u003cli\u003e\n  \u003cp\u003ecompressionCodecClass – (None by default)\u003c/p\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003cpre\u003e\u003ccode class\u003d\"saveAsNewAPIHadoopDataset(conf, keyConverter\u003dNone, valueConverter\u003dNone)```\"\u003eOutput a Python RDD of key-value pairs (of form RDD[(K, V)]) to any Hadoop file system, using the new Hadoop OutputFormat API (mapreduce package). Keys/values are converted for output using either user specified converters or, by default, “org.apache.spark.api.python.JavaToWritableConverter”.\n\nParameters\n- conf – Hadoop job configuration, passed in as a dict\n\n- keyConverter – (None by default)\n\n- valueConverter – (None by default)\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eOutput a Python RDD of key-value pairs (of form RDD[(K, V)]) to any Hadoop file system, using the new Hadoop OutputFormat API (mapreduce package). Key and value types will be inferred if not specified. Keys and values are converted for output using either user specified converters or “org.apache.spark.api.python.JavaToWritableConverter”. The conf is applied on top of the base Hadoop conf associated with the SparkContext of this RDD to create a merged Hadoop MapReduce job configuration for saving the data.\u003c/p\u003e\n\u003cp\u003eParameters\u003cbr/\u003e- path – path to Hadoop file\u003c/p\u003e\n\u003cul\u003e\n  \u003cli\u003e\n  \u003cp\u003eoutputFormatClass – fully qualified classname of Hadoop OutputFormat (e.g. “org.apache.hadoop.mapreduce.lib.output.SequenceFileOutputFormat”)\u003c/p\u003e\u003c/li\u003e\n  \u003cli\u003e\n  \u003cp\u003ekeyClass – fully qualified classname of key Writable class (e.g. “org.apache.hadoop.io.IntWritable”, None by default)\u003c/p\u003e\u003c/li\u003e\n  \u003cli\u003e\n  \u003cp\u003evalueClass – fully qualified classname of value Writable class (e.g. “org.apache.hadoop.io.Text”, None by default)\u003c/p\u003e\u003c/li\u003e\n  \u003cli\u003e\n  \u003cp\u003ekeyConverter – (None by default)\u003c/p\u003e\u003c/li\u003e\n  \u003cli\u003e\n  \u003cp\u003evalueConverter – (None by default)\u003c/p\u003e\u003c/li\u003e\n  \u003cli\u003e\n  \u003cp\u003econf – Hadoop job configuration, passed in as a dict (None by default)\u003c/p\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003cpre\u003e\u003ccode class\u003d\"saveAsPickleFile(path, batchSize\u003d10)```\"\u003eSave this RDD as a SequenceFile of serialized objects. The serializer used is pyspark.serializers.PickleSerializer, default batch size is 10.\n\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eOutput a Python RDD of key-value pairs (of form RDD[(K, V)]) to any Hadoop file system, using the “org.apache.hadoop.io.Writable” types that we convert from the RDD’s key and value types. The mechanism is as follows:\u003c/p\u003e\n\u003cp\u003ePyrolite is used to convert pickled Python RDD into RDD of Java objects.\u003c/p\u003e\n\u003cp\u003eKeys and values of this Java RDD are converted to Writables and written out.\u003c/p\u003e\n\u003cp\u003eParameters\u003cbr/\u003e- path – path to sequence file\u003c/p\u003e\n\u003cul\u003e\n  \u003cli\u003ecompressionCodecClass – (None by default)\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e\u003ccode\u003esaveAsTextFile(path, compressionCodecClass\u003dNone)\u003c/code\u003e\u003cbr/\u003eSave this RDD as a text file, using string representations of elements.\u003c/p\u003e\n\u003cp\u003eParameters\u003cbr/\u003e- path – path to text file\u003c/p\u003e\n\u003cul\u003e\n  \u003cli\u003ecompressionCodecClass – (None by default) string i.e. “org.apache.hadoop.io.compress.GzipCodec”\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881676_1869100477",
+      "id": "20211111-014121_1548032736",
+      "dateCreated": "2021-11-11 01:41:21.676",
+      "status": "READY"
+    },
+    {
+      "text": "%python\n# 11\n# 分布式遍历 RDD 中的每一个元素，调用指定函数\ndef f(x):\n    print(x)\n    \nsc.parallelize([1, 2, 3, 4, 5]).foreach(f)",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.676",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881676_79532793",
+      "id": "20211111-014121_1957596899",
+      "dateCreated": "2021-11-11 01:41:21.676",
+      "status": "READY"
+    },
+    {
+      "text": "%md\n## RDD 的依赖关系",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.676",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eRDD 的依赖关系\u003c/h2\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881676_530917397",
+      "id": "20211111-014121_11393111",
+      "dateCreated": "2021-11-11 01:41:21.676",
+      "status": "READY"
+    },
+    {
+      "text": "%md\n### RDD 血缘关系\n\nRDD 只支持粗粒度转换，即在大量记录上执行的单个操作。将创建 RDD 的一系列 Lineage (血统)记录下来，以便恢复丢失的分区。RDD 的 Lineage 会记录 RDD 的元数据信息和转 换行为，当该 RDD 的部分分区数据丢失时，它可以根据这些信息来重新运算和恢复丢失的 数据分区。",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.676",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003eRDD 血缘关系\u003c/h3\u003e\n\u003cp\u003eRDD 只支持粗粒度转换，即在大量记录上执行的单个操作。将创建 RDD 的一系列 Lineage (血统)记录下来，以便恢复丢失的分区。RDD 的 Lineage 会记录 RDD 的元数据信息和转 换行为，当该 RDD 的部分分区数据丢失时，它可以根据这些信息来重新运算和恢复丢失的 数据分区。\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881676_993242907",
+      "id": "20211111-014121_1568352593",
+      "dateCreated": "2021-11-11 01:41:21.676",
+      "status": "READY"
+    },
+    {
+      "text": "%md\n### RDD 依赖关系\n\n这里所谓的依赖关系，其实就是两个相邻 RDD 之间的关系。",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.676",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003eRDD 依赖关系\u003c/h3\u003e\n\u003cp\u003e这里所谓的依赖关系，其实就是两个相邻 RDD 之间的关系。\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881676_2126039369",
+      "id": "20211111-014121_335949287",
+      "dateCreated": "2021-11-11 01:41:21.676",
+      "status": "READY"
+    },
+    {
+      "text": "%md\n### 窄依赖\n\n窄依赖表示每一个父(上游)RDD 的 Partition 最多被子(下游)RDD 的一个 Partition 使用，窄依赖我们形象的比喻为独生子女。",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.676",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003e窄依赖\u003c/h3\u003e\n\u003cp\u003e窄依赖表示每一个父(上游)RDD 的 Partition 最多被子(下游)RDD 的一个 Partition 使用，窄依赖我们形象的比喻为独生子女。\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881676_614035351",
+      "id": "20211111-014121_341798930",
+      "dateCreated": "2021-11-11 01:41:21.676",
+      "status": "READY"
+    },
+    {
+      "text": "%md\n### 宽依赖\n\n宽依赖表示同一个父(上游)RDD 的 Partition 被多个子(下游)RDD 的 Partition 依赖，会 引起 Shuffle，总结:宽依赖我们形象的比喻为多生。\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.676",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003e宽依赖\u003c/h3\u003e\n\u003cp\u003e宽依赖表示同一个父(上游)RDD 的 Partition 被多个子(下游)RDD 的 Partition 依赖，会 引起 Shuffle，总结:宽依赖我们形象的比喻为多生。\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881676_400494772",
+      "id": "20211111-014121_2061401518",
+      "dateCreated": "2021-11-11 01:41:21.676",
+      "status": "READY"
+    },
+    {
+      "text": "%md\n### RDD 阶段划分\n\nDAG(Directed Acyclic Graph)有向无环图是由点和线组成的拓扑图形，该图形具有方向， 不会闭环。例如，DAG 记录了 RDD 的转换过程和任务的阶段。\n\n\u003cdiv align\u003d\"center\"\u003e\u003cimg src\u003d\"asset/1613809284051.jpg\"/\u003e\u003c/div\u003e",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.676",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003eRDD 阶段划分\u003c/h3\u003e\n\u003cp\u003eDAG(Directed Acyclic Graph)有向无环图是由点和线组成的拓扑图形，该图形具有方向， 不会闭环。例如，DAG 记录了 RDD 的转换过程和任务的阶段。\u003c/p\u003e\n\u003cdiv align\u003d\"center\"\u003e\u003cimg src\u003d\"asset/1613809284051.jpg\"/\u003e\u003c/div\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881676_807929928",
+      "id": "20211111-014121_2129392133",
+      "dateCreated": "2021-11-11 01:41:21.676",
+      "status": "READY"
+    },
+    {
+      "text": "%md\n### RDD 任务划分\n\nRDD 任务切分中间分为:Application、Job、Stage 和 Task\n\n- Application:初始化一个SparkContext即生成一个Application;\n- Job:一个Action算子就会生成一个Job;\n- Stage:Stage等于宽依赖(ShuffleDependency)的个数加1;\n- Task:一个Stage阶段中，最后一个RDD的分区个数就是Task的个数。\n\n注意:Application-\u003eJob-\u003eStage-\u003eTask 每一层都是 1 对 n 的关系。\n\n\u003cdiv align\u003d\"center\"\u003e\u003cimg src\u003d\"asset/1613809448691.jpg\"/\u003e\u003c/div\u003e",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.676",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003eRDD 任务划分\u003c/h3\u003e\n\u003cp\u003eRDD 任务切分中间分为:Application、Job、Stage 和 Task\u003c/p\u003e\n\u003cul\u003e\n  \u003cli\u003eApplication:初始化一个SparkContext即生成一个Application;\u003c/li\u003e\n  \u003cli\u003eJob:一个Action算子就会生成一个Job;\u003c/li\u003e\n  \u003cli\u003eStage:Stage等于宽依赖(ShuffleDependency)的个数加1;\u003c/li\u003e\n  \u003cli\u003eTask:一个Stage阶段中，最后一个RDD的分区个数就是Task的个数。\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e注意:Application-\u0026gt;Job-\u0026gt;Stage-\u0026gt;Task 每一层都是 1 对 n 的关系。\u003c/p\u003e\n\u003cdiv align\u003d\"center\"\u003e\u003cimg src\u003d\"asset/1613809448691.jpg\"/\u003e\u003c/div\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881676_399082303",
+      "id": "20211111-014121_1529319722",
+      "dateCreated": "2021-11-11 01:41:21.676",
+      "status": "READY"
+    },
+    {
+      "text": "%md\n## RDD 的持久化",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.676",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eRDD 的持久化\u003c/h2\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881676_1016305008",
+      "id": "20211111-014121_1603163019",
+      "dateCreated": "2021-11-11 01:41:21.676",
+      "status": "READY"
+    },
+    {
+      "text": "%md\n### RDD Cache 缓存\n\nRDD 通过 Cache 或者 Persist 方法将前面的计算结果缓存，默认情况下会把数据以缓存在 JVM 的堆内存中。但是并不是这两个方法被调用时立即缓存，而是触发后面的 action 算子时，该 RDD 将会被缓存在计算节点的内存中，并供后面重用。\n\n\u003cdiv align\u003d\"center\"\u003e\u003cimg src\u003d\"asset/1613809558769.jpg\"/\u003e\u003c/div\u003e\n\n缓存有可能丢失，或者存储于内存的数据由于内存不足而被删除，RDD 的缓存容错机 制保证了即使缓存丢失也能保证计算的正确执行。通过基于 RDD 的一系列转换，丢失的数据会被重算，由于 RDD 的各个 Partition 是相对独立的，因此只需要计算丢失的部分即可，并不需要重算全部 Partition。\nSpark 会自动对一些 Shuffle 操作的中间数据做持久化操作(比如:reduceByKey)。这样做的目的是为了当一个节点 Shuffle 失败了避免重新计算整个输入。但是，在实际使用的时候，如果想重用数据，仍然建议调用 persist 或 cache。",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.676",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003eRDD Cache 缓存\u003c/h3\u003e\n\u003cp\u003eRDD 通过 Cache 或者 Persist 方法将前面的计算结果缓存，默认情况下会把数据以缓存在 JVM 的堆内存中。但是并不是这两个方法被调用时立即缓存，而是触发后面的 action 算子时，该 RDD 将会被缓存在计算节点的内存中，并供后面重用。\u003c/p\u003e\n\u003cdiv align\u003d\"center\"\u003e\u003cimg src\u003d\"asset/1613809558769.jpg\"/\u003e\u003c/div\u003e\n\u003cp\u003e缓存有可能丢失，或者存储于内存的数据由于内存不足而被删除，RDD 的缓存容错机 制保证了即使缓存丢失也能保证计算的正确执行。通过基于 RDD 的一系列转换，丢失的数据会被重算，由于 RDD 的各个 Partition 是相对独立的，因此只需要计算丢失的部分即可，并不需要重算全部 Partition。\u003cbr/\u003eSpark 会自动对一些 Shuffle 操作的中间数据做持久化操作(比如:reduceByKey)。这样做的目的是为了当一个节点 Shuffle 失败了避免重新计算整个输入。但是，在实际使用的时候，如果想重用数据，仍然建议调用 persist 或 cache。\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881676_1395310405",
+      "id": "20211111-014121_1485368186",
+      "dateCreated": "2021-11-11 01:41:21.676",
+      "status": "READY"
+    },
+    {
+      "text": "%md\n### RDD CheckPoint 检查点\n\n所谓的检查点其实就是通过将 RDD 中间结果写入磁盘，由于血缘依赖过长会造成容错成本过高，这样就不如在中间阶段做检查点容错，如果检查点之后有节点出现问题，可以从检查点开始重做血缘，减少了开销。\n\n对 RDD 进行 checkpoint 操作并不会马上被执行，必须执行 Action 操作才能触发。",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.676",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003eRDD CheckPoint 检查点\u003c/h3\u003e\n\u003cp\u003e所谓的检查点其实就是通过将 RDD 中间结果写入磁盘，由于血缘依赖过长会造成容错成本过高，这样就不如在中间阶段做检查点容错，如果检查点之后有节点出现问题，可以从检查点开始重做血缘，减少了开销。\u003c/p\u003e\n\u003cp\u003e对 RDD 进行 checkpoint 操作并不会马上被执行，必须执行 Action 操作才能触发。\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881676_877349817",
+      "id": "20211111-014121_111233264",
+      "dateCreated": "2021-11-11 01:41:21.676",
+      "status": "READY"
+    },
+    {
+      "text": "%md\n### 缓存和检查点区别\n\n- Cache 缓存只是将数据保存起来，不切断血缘依赖。Checkpoint 检查点切断血缘依赖。 \n- Cache 缓存的数据通常存储在磁盘、内存等地方，可靠性低。Checkpoint 的数据通常存 储在 HDFS 等容错、高可用的文件系统，可靠性高。\n- 建议对 checkpoint() 的 RDD 使用 Cache 缓存，这样 checkpoint 的 job 只需从 Cache 缓存中读取数据即可，否则需要再从头计算一次 RDD。",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.676",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003e缓存和检查点区别\u003c/h3\u003e\n\u003cul\u003e\n  \u003cli\u003eCache 缓存只是将数据保存起来，不切断血缘依赖。Checkpoint 检查点切断血缘依赖。\u003c/li\u003e\n  \u003cli\u003eCache 缓存的数据通常存储在磁盘、内存等地方，可靠性低。Checkpoint 的数据通常存 储在 HDFS 等容错、高可用的文件系统，可靠性高。\u003c/li\u003e\n  \u003cli\u003e建议对 checkpoint() 的 RDD 使用 Cache 缓存，这样 checkpoint 的 job 只需从 Cache 缓存中读取数据即可，否则需要再从头计算一次 RDD。\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881676_196063520",
+      "id": "20211111-014121_476408490",
+      "dateCreated": "2021-11-11 01:41:21.676",
+      "status": "READY"
+    },
+    {
+      "text": "%md\n## RDD 分区器\n\nSpark 目前支持 Hash 分区和 Range 分区，和用户自定义分区。Hash 分区为当前的默认\n分区。分区器直接决定了 RDD 中分区的个数、RDD 中每条数据经过 Shuffle 后进入哪个分 区，进而决定了 Reduce 的个数。\n\n- 只有 Key-Value 类型的RDD才有分区器，非Key-Value类型的RDD分区的值是None \n- 每个 RDD 的分区 ID 范围:0 ~ (numPartitions - 1)，决定这个值是属于那个分区的。\n\n1) Hash 分区:对于给定的 key，计算其 hashCode,并除以分区个数取余\n2) Range 分区:将一定范围内的数据映射到一个分区中，尽量保证每个分区数据均匀，而且分区间有序",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.676",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eRDD 分区器\u003c/h2\u003e\n\u003cp\u003eSpark 目前支持 Hash 分区和 Range 分区，和用户自定义分区。Hash 分区为当前的默认\u003cbr/\u003e分区。分区器直接决定了 RDD 中分区的个数、RDD 中每条数据经过 Shuffle 后进入哪个分 区，进而决定了 Reduce 的个数。\u003c/p\u003e\n\u003cul\u003e\n  \u003cli\u003e只有 Key-Value 类型的RDD才有分区器，非Key-Value类型的RDD分区的值是None\u003c/li\u003e\n  \u003cli\u003e每个 RDD 的分区 ID 范围:0 ~ (numPartitions - 1)，决定这个值是属于那个分区的。\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e1) Hash 分区:对于给定的 key，计算其 hashCode,并除以分区个数取余\u003cbr/\u003e2) Range 分区:将一定范围内的数据映射到一个分区中，尽量保证每个分区数据均匀，而且分区间有序\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881676_1959495782",
+      "id": "20211111-014121_1990742367",
+      "dateCreated": "2021-11-11 01:41:21.676",
+      "status": "READY"
+    },
+    {
+      "text": "%md\n## 累加器\n\n累加器用来把 Executor 端变量信息聚合到 Driver 端。在 Driver 程序中定义的变量，在 Executor 端的每个 Task 都会得到这个变量的一份新的副本，每个 task 更新这些副本的值后， 传回 Driver 端进行 merge。",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.676",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003e累加器\u003c/h2\u003e\n\u003cp\u003e累加器用来把 Executor 端变量信息聚合到 Driver 端。在 Driver 程序中定义的变量，在 Executor 端的每个 Task 都会得到这个变量的一份新的副本，每个 task 更新这些副本的值后， 传回 Driver 端进行 merge。\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881676_865163693",
+      "id": "20211111-014121_1775125214",
+      "dateCreated": "2021-11-11 01:41:21.676",
+      "status": "READY"
+    },
+    {
+      "text": "%md\n## 广播变量\n\n广播变量用来高效分发较大的对象。向所有工作节点发送一个较大的只读值，以供一个或多个 Spark 操作使用。比如，如果你的应用需要向所有节点发送一个较大的只读查询表， 广播变量用起来都很顺手。在多个并行操作中使用同一个变量，但是 Spark 会为每个任务分别发送。",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.676",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003e广播变量\u003c/h2\u003e\n\u003cp\u003e广播变量用来高效分发较大的对象。向所有工作节点发送一个较大的只读值，以供一个或多个 Spark 操作使用。比如，如果你的应用需要向所有节点发送一个较大的只读查询表， 广播变量用起来都很顺手。在多个并行操作中使用同一个变量，但是 Spark 会为每个任务分别发送。\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881676_788827340",
+      "id": "20211111-014121_1113515820",
+      "dateCreated": "2021-11-11 01:41:21.676",
+      "status": "READY"
+    },
+    {
+      "text": "%md\n# Spark 企业实战",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.676",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch1\u003eSpark 企业实战\u003c/h1\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881676_1283026002",
+      "id": "20211111-014121_1990657961",
+      "dateCreated": "2021-11-11 01:41:21.676",
+      "status": "READY"
+    },
+    {
+      "text": "%md\nhive 中创建用户播放视频表。\n\n```sql\ncreate database cilicili;\ncreate table cilicili.user_play \n(\n    id INT, \n    user_id INT, \n    content_id INT, \n    play_time FLOAT\n)\nROW FORMAT DELIMITED FIELDS TERMINATED BY \u0027\\t\u0027;\n```\n\n安装 datax，并增加 job 如下：\n\n```json\n{\n    \"job\": {\n        \"content\": [\n            {\n                \"reader\": {\n                    \"name\": \"mysqlreader\",\n                    \"parameter\": {\n                        \"column\": [\n                            \"id\",\n                            \"user_id\",\n                            \"content_id\",\n                            \"play_time\"\n                        ],\n                        \"connection\": [\n                            {\n                                \"jdbcUrl\": [\n                                    \"jdbc:mysql://192.168.56.101:3306/my_project\"\n                                ],\n                                \"table\": [\n                                    \"user_play\"\n                                ]\n                            }\n                        ],\n                        \"password\": \"bigdata123\",\n                        \"username\": \"bigdata\",\n                        \"where\": \"\"\n                    }\n                },\n                \"writer\": {\n                    \"name\": \"hdfswriter\",\n                    \"parameter\": {\n                        \"column\": [\n                            {\n                                \"name\": \"id\",\n                                \"type\": \"INT\"\n                            },\n                            {\n                                \"name\": \"user_id\",\n                                \"type\": \"INT\"\n                            },\n                            {\n                                \"name\": \"content_id\",\n                                \"type\": \"INT\"\n                            },\n                            {\n                                \"name\": \"play_time\",\n                                \"type\": \"FLOAT\"\n                            }\n                        ],\n                        \"compress\": \"gzip\",\n                        \"defaultFS\": \"hdfs://bigdata-node1:9820\",\n                        \"fieldDelimiter\": \"\\t\",\n                        \"fileName\": \"user\",\n                        \"fileType\": \"text\",\n                        \"path\": \"/hive/warehouse/cilicili.db/user_play\",\n                        \"writeMode\": \"append\"\n                    }\n                }\n            }\n        ],\n        \"setting\": {\n            \"speed\": {\n                \"channel\": \"1\"\n            }\n        }\n    }\n}\n```\n配置文件中 `\"path\": \"/hive/warehouse/cilicili.db/user_play\"` 地址，就是我们使用 hive 创建的表的文件存储地址。\n\n确保使用的 mysql 版本和 jdbc mysql 的驱动版本一致。\n\n```bash\nmv datax/plugin/reader/mysqlreader/libs/mysql-connector-java-5.1.34.jar plugin/reader/mysqlreader/libs/mysql-connector-java-8.x.x.jar\n```\n\n```bash\nbin/datax.py job/mysql2hive.json\n```",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.676",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003ehive 中创建用户播放视频表。\u003c/p\u003e\n\u003cpre\u003e\u003ccode class\u003d\"sql\"\u003ecreate database cilicili;\ncreate table cilicili.user_play \n(\n    id INT, \n    user_id INT, \n    content_id INT, \n    play_time FLOAT\n)\nROW FORMAT DELIMITED FIELDS TERMINATED BY \u0026#39;\\t\u0026#39;;\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e安装 datax，并增加 job 如下：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class\u003d\"json\"\u003e{\n    \u0026quot;job\u0026quot;: {\n        \u0026quot;content\u0026quot;: [\n            {\n                \u0026quot;reader\u0026quot;: {\n                    \u0026quot;name\u0026quot;: \u0026quot;mysqlreader\u0026quot;,\n                    \u0026quot;parameter\u0026quot;: {\n                        \u0026quot;column\u0026quot;: [\n                            \u0026quot;id\u0026quot;,\n                            \u0026quot;user_id\u0026quot;,\n                            \u0026quot;content_id\u0026quot;,\n                            \u0026quot;play_time\u0026quot;\n                        ],\n                        \u0026quot;connection\u0026quot;: [\n                            {\n                                \u0026quot;jdbcUrl\u0026quot;: [\n                                    \u0026quot;jdbc:mysql://192.168.56.101:3306/my_project\u0026quot;\n                                ],\n                                \u0026quot;table\u0026quot;: [\n                                    \u0026quot;user_play\u0026quot;\n                                ]\n                            }\n                        ],\n                        \u0026quot;password\u0026quot;: \u0026quot;bigdata123\u0026quot;,\n                        \u0026quot;username\u0026quot;: \u0026quot;bigdata\u0026quot;,\n                        \u0026quot;where\u0026quot;: \u0026quot;\u0026quot;\n                    }\n                },\n                \u0026quot;writer\u0026quot;: {\n                    \u0026quot;name\u0026quot;: \u0026quot;hdfswriter\u0026quot;,\n                    \u0026quot;parameter\u0026quot;: {\n                        \u0026quot;column\u0026quot;: [\n                            {\n                                \u0026quot;name\u0026quot;: \u0026quot;id\u0026quot;,\n                                \u0026quot;type\u0026quot;: \u0026quot;INT\u0026quot;\n                            },\n                            {\n                                \u0026quot;name\u0026quot;: \u0026quot;user_id\u0026quot;,\n                                \u0026quot;type\u0026quot;: \u0026quot;INT\u0026quot;\n                            },\n                            {\n                                \u0026quot;name\u0026quot;: \u0026quot;content_id\u0026quot;,\n                                \u0026quot;type\u0026quot;: \u0026quot;INT\u0026quot;\n                            },\n                            {\n                                \u0026quot;name\u0026quot;: \u0026quot;play_time\u0026quot;,\n                                \u0026quot;type\u0026quot;: \u0026quot;FLOAT\u0026quot;\n                            }\n                        ],\n                        \u0026quot;compress\u0026quot;: \u0026quot;gzip\u0026quot;,\n                        \u0026quot;defaultFS\u0026quot;: \u0026quot;hdfs://bigdata-node1:9820\u0026quot;,\n                        \u0026quot;fieldDelimiter\u0026quot;: \u0026quot;\\t\u0026quot;,\n                        \u0026quot;fileName\u0026quot;: \u0026quot;user\u0026quot;,\n                        \u0026quot;fileType\u0026quot;: \u0026quot;text\u0026quot;,\n                        \u0026quot;path\u0026quot;: \u0026quot;/hive/warehouse/cilicili.db/user_play\u0026quot;,\n                        \u0026quot;writeMode\u0026quot;: \u0026quot;append\u0026quot;\n                    }\n                }\n            }\n        ],\n        \u0026quot;setting\u0026quot;: {\n            \u0026quot;speed\u0026quot;: {\n                \u0026quot;channel\u0026quot;: \u0026quot;1\u0026quot;\n            }\n        }\n    }\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e配置文件中 \u003ccode\u003e\u0026quot;path\u0026quot;: \u0026quot;/hive/warehouse/cilicili.db/user_play\u0026quot;\u003c/code\u003e 地址，就是我们使用 hive 创建的表的文件存储地址。\u003c/p\u003e\n\u003cp\u003e确保使用的 mysql 版本和 jdbc mysql 的驱动版本一致。\u003c/p\u003e\n\u003cpre\u003e\u003ccode class\u003d\"bash\"\u003emv datax/plugin/reader/mysqlreader/libs/mysql-connector-java-5.1.34.jar plugin/reader/mysqlreader/libs/mysql-connector-java-8.x.x.jar\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre\u003e\u003ccode class\u003d\"bash\"\u003ebin/datax.py job/mysql2hive.json\n\u003c/code\u003e\u003c/pre\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881676_341952907",
+      "id": "20211111-014121_1327611954",
+      "dateCreated": "2021-11-11 01:41:21.676",
+      "status": "READY"
+    },
+    {
+      "text": "%python\n# 为了能够让 python 找到 pyspark，使用 findspark\nimport findspark\nfindspark.init()\n\n# 为了使用 RDDs，创建 SparkSession\nfrom pyspark.sql import SparkSession\nfrom pyspark.conf import SparkConf\n\n# 创建 SparkConf 和 SparkSession\nconf\u003dSparkConf()\\\n        .setMaster(\u0027local[*]\u0027)\\\n        .setAppName(\"Spark Read Hive\")\\\n        .setExecutorEnv(\"spark.executor.memory\",\"4g\")\\\n        .setExecutorEnv(\"spark.driver.memory\",\"4g\")\n\nspark\u003dSparkSession.builder\\\n        .config(conf\u003dconf)\\\n        .enableHiveSupport()\\\n        .getOrCreate()\n\n# 获取 SparkContext\nsc\u003dspark.sparkContext",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.676",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881676_1802577708",
+      "id": "20211111-014121_341303462",
+      "dateCreated": "2021-11-11 01:41:21.676",
+      "status": "READY"
+    },
+    {
+      "text": "%python\nuser_play_rdd \u003d sc.textFile(\u0027/hive/warehouse/cilicili.db/user_play\u0027)\nuser_play_rdd.take(10)",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.676",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "[\u00271\\t40\\t15094\\t44.0\u0027,\n \u00272\\t40\\t12044\\t29.0\u0027,\n \u00273\\t40\\t8419\\t52.0\u0027,\n \u00274\\t40\\t7769\\t25.0\u0027,\n \u00275\\t40\\t17174\\t49.0\u0027,\n \u00276\\t40\\t7735\\t60.0\u0027,\n \u00277\\t40\\t9266\\t35.0\u0027,\n \u00278\\t40\\t4862\\t16.0\u0027,\n \u00279\\t40\\t10480\\t57.0\u0027,\n \u002710\\t40\\t10919\\t21.0\u0027]"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881676_917943348",
+      "id": "20211111-014121_562365063",
+      "dateCreated": "2021-11-11 01:41:21.676",
+      "status": "READY"
+    },
+    {
+      "text": "%python\n# 先把它切断\nuser_play_rdd \u003d user_play_rdd.map(lambda satir: satir.split(\"\\t\"))\nuser_play_rdd.take(10)",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.676",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "[[\u00271\u0027, \u002740\u0027, \u002715094\u0027, \u002744.0\u0027],\n [\u00272\u0027, \u002740\u0027, \u002712044\u0027, \u002729.0\u0027],\n [\u00273\u0027, \u002740\u0027, \u00278419\u0027, \u002752.0\u0027],\n [\u00274\u0027, \u002740\u0027, \u00277769\u0027, \u002725.0\u0027],\n [\u00275\u0027, \u002740\u0027, \u002717174\u0027, \u002749.0\u0027],\n [\u00276\u0027, \u002740\u0027, \u00277735\u0027, \u002760.0\u0027],\n [\u00277\u0027, \u002740\u0027, \u00279266\u0027, \u002735.0\u0027],\n [\u00278\u0027, \u002740\u0027, \u00274862\u0027, \u002716.0\u0027],\n [\u00279\u0027, \u002740\u0027, \u002710480\u0027, \u002757.0\u0027],\n [\u002710\u0027, \u002740\u0027, \u002710919\u0027, \u002721.0\u0027]]"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881676_1333311472",
+      "id": "20211111-014121_1876018001",
+      "dateCreated": "2021-11-11 01:41:21.676",
+      "status": "READY"
+    },
+    {
+      "text": "%python\nfrom pyspark.sql.types import IntegerType\n\n\ndf \u003d spark.createDataFrame(user_play_rdd, [\u0027Id\u0027, \u0027UserId\u0027, \u0027ContentId\u0027, \u0027Duration\u0027])\ndf \u003d df.withColumn(\"Duration\", df[\"Duration\"].cast(IntegerType()))\ndf.take(10)\n\n# video_play_df \u003d df.groupBy(\u0027ContentId\u0027).agg({\"duration\": \"sum\", \"Duration\": \u0027count\u0027})\n# video_play_df \u003d video_play_df.withColumnRenamed(\u0027sum(duration)\u0027, \u0027play_duration\u0027).withColumnRenamed(\u0027count(Duration)\u0027, \u0027play_times\u0027)\n# video_play_df \u003d video_play_df.collect()",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.676",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "[Row(Id\u003d\u00271\u0027, UserId\u003d\u002740\u0027, ContentId\u003d\u002715094\u0027, Duration\u003d44),\n Row(Id\u003d\u00272\u0027, UserId\u003d\u002740\u0027, ContentId\u003d\u002712044\u0027, Duration\u003d29),\n Row(Id\u003d\u00273\u0027, UserId\u003d\u002740\u0027, ContentId\u003d\u00278419\u0027, Duration\u003d52),\n Row(Id\u003d\u00274\u0027, UserId\u003d\u002740\u0027, ContentId\u003d\u00277769\u0027, Duration\u003d25),\n Row(Id\u003d\u00275\u0027, UserId\u003d\u002740\u0027, ContentId\u003d\u002717174\u0027, Duration\u003d49),\n Row(Id\u003d\u00276\u0027, UserId\u003d\u002740\u0027, ContentId\u003d\u00277735\u0027, Duration\u003d60),\n Row(Id\u003d\u00277\u0027, UserId\u003d\u002740\u0027, ContentId\u003d\u00279266\u0027, Duration\u003d35),\n Row(Id\u003d\u00278\u0027, UserId\u003d\u002740\u0027, ContentId\u003d\u00274862\u0027, Duration\u003d16),\n Row(Id\u003d\u00279\u0027, UserId\u003d\u002740\u0027, ContentId\u003d\u002710480\u0027, Duration\u003d57),\n Row(Id\u003d\u002710\u0027, UserId\u003d\u002740\u0027, ContentId\u003d\u002710919\u0027, Duration\u003d21)]"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881676_1887671023",
+      "id": "20211111-014121_774946505",
+      "dateCreated": "2021-11-11 01:41:21.676",
+      "status": "READY"
+    },
+    {
+      "text": "%python\n# 分组获取播放时长\nplay_duration_df \u003d df.groupBy(\u0027ContentId\u0027).sum(\u0027Duration\u0027).withColumnRenamed(\u0027sum(Duration)\u0027, \u0027play_duration\u0027)\nplay_duration_df \u003d play_duration_df.orderBy(play_duration_df.play_duration.desc()).collect()",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.676",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881676_1821934722",
+      "id": "20211111-014121_97069433",
+      "dateCreated": "2021-11-11 01:41:21.676",
+      "status": "READY"
+    },
+    {
+      "text": "%python\n# 分组获取播放次数\nplay_times_df \u003d df.groupBy(\u0027ContentId\u0027).count().withColumnRenamed(\u0027count\u0027, \u0027play_times\u0027)\nplay_times_df \u003d play_times_df.orderBy(play_times_df.play_times.desc()).collect()",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.676",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881676_349854533",
+      "id": "20211111-014121_215057021",
+      "dateCreated": "2021-11-11 01:41:21.676",
+      "status": "READY"
+    },
+    {
+      "text": "%python\nsc.stop()",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.676",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881676_1782500222",
+      "id": "20211111-014121_1845171197",
+      "dateCreated": "2021-11-11 01:41:21.676",
+      "status": "READY"
+    },
+    {
+      "text": "%md\n为了能够让 python 使用 happy base 连接 hbase，需要启动 hbase 的 thrift 服务。\n\n```bash\nnohup hbase thrift start-port:9090 \u0026\n```\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.676",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003e为了能够让 python 使用 happy base 连接 hbase，需要启动 hbase 的 thrift 服务。\u003c/p\u003e\n\u003cpre\u003e\u003ccode class\u003d\"bash\"\u003enohup hbase thrift start-port:9090 \u0026amp;\n\u003c/code\u003e\u003c/pre\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881676_437788526",
+      "id": "20211111-014121_1175858813",
+      "dateCreated": "2021-11-11 01:41:21.676",
+      "status": "READY"
+    },
+    {
+      "text": "%md\n### HBase\n\n![](asset/hbase-logo.png)\n\n定义：\n    A column-oriented DBMS (or columnar database management system) \n    \n\n**row-oriented DBMS**\n\n![1615518246367.jpg](asset/1615518246367.jpg)\n\n\n\n**row store**\n\n```\n1, Paul Walker, US, 231, Gallardo, \n2, Vin Diesel, Brazil, 520, Mustang\n```\n\n\n**column store**\n\n```\n1,2, Paul Walker, Vin Diesel, US, Brazil, 231, 520, Gallardo, Mustang\n```\n\n- 随机读性能大幅提升\n- 水平扩展性更好\n\n\n**Hbase的优点：**\n\n- 列的可以动态增加，并且列为空就不存储数据,节省存储空间.\n- Hbase自动切分数据，使得数据存储自动具有水平scalability.\n- Hbase可以提供高并发读写操作的支持\n\n\n**Hbase的缺点：**\n\n- 不能支持条件查询，只支持按照Row key来查询.\n- 不适合于大范围扫描查询\n- 不支持事务\n- 不直接支持 SQL 的语句查询\n\n\n\n\n**HBase的应用场景**\n\nhbase适合大量随机写入和顺序读取的应用场景，不适合大量随机读的应用场景。\n\n- 写密集型应用，每天写入量巨大，而相对读数量较小的应用，比如IM的历史消息，游戏的日志、推荐结果等等\n- 不需要复杂查询条件来查询数据的应用，HBase只支持基于rowkey的查询，对于HBase来说，单条记录或者小范围的查询是可以接受的，大范围的查询由于分布式的原因，可能在性能上有点影响，而对于像SQL的join等查询，HBase无法支持。\n- 对性能和可靠性要求非常高的应用，由于HBase本身没有单点故障，可用性非常高。\n- 数据量较大，而且增长量无法预估的应用，HBase支持在线扩展，即使在一段时间内数据量呈井喷式增长，也可以通过HBase横向扩展来满足功能。\n\n\n![HBase-Table-HBase-Architecture-Edureka.png](asset/HBase-Table-HBase-Architecture-Edureka.png)\n\n\n- Tables: Data is stored in a table format in HBase. But here tables are in column-oriented format.\n- Row Key: Row keys are used to search records which make searches fast. You would be curious to know how? I will explain it in the architecture part moving ahead in this blog. \n- Column Families: Various columns are combined in a column family. These column families are stored together which makes the searching process faster because data belonging to same column family can be accessed together in a single seek.\n- Column Qualifiers: Each column’s name is known as its column qualifier.\n- Cell: Data is stored in cells. The data is dumped into cells which are specifically identified by rowkey and column qualifiers.\n- Timestamp: Timestamp is a combination of date and time. Whenever data is stored, it is stored with its timestamp. This makes easy to search for a particular version of data.",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.677",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003eHBase\u003c/h3\u003e\n\u003cp\u003e\u003cimg src\u003d\"asset/hbase-logo.png\" /\u003e\u003c/p\u003e\n\u003cp\u003e定义：\u003cbr/\u003e A column-oriented DBMS (or columnar database management system) \u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003erow-oriented DBMS\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003e\u003cimg src\u003d\"asset/1615518246367.jpg\" alt\u003d\"1615518246367.jpg\" /\u003e\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003erow store\u003c/strong\u003e\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e1, Paul Walker, US, 231, Gallardo, \n2, Vin Diesel, Brazil, 520, Mustang\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e\u003cstrong\u003ecolumn store\u003c/strong\u003e\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e1,2, Paul Walker, Vin Diesel, US, Brazil, 231, 520, Gallardo, Mustang\n\u003c/code\u003e\u003c/pre\u003e\n\u003cul\u003e\n  \u003cli\u003e随机读性能大幅提升\u003c/li\u003e\n  \u003cli\u003e水平扩展性更好\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e\u003cstrong\u003eHbase的优点：\u003c/strong\u003e\u003c/p\u003e\n\u003cul\u003e\n  \u003cli\u003e列的可以动态增加，并且列为空就不存储数据,节省存储空间.\u003c/li\u003e\n  \u003cli\u003eHbase自动切分数据，使得数据存储自动具有水平scalability.\u003c/li\u003e\n  \u003cli\u003eHbase可以提供高并发读写操作的支持\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e\u003cstrong\u003eHbase的缺点：\u003c/strong\u003e\u003c/p\u003e\n\u003cul\u003e\n  \u003cli\u003e不能支持条件查询，只支持按照Row key来查询.\u003c/li\u003e\n  \u003cli\u003e不适合于大范围扫描查询\u003c/li\u003e\n  \u003cli\u003e不支持事务\u003c/li\u003e\n  \u003cli\u003e不直接支持 SQL 的语句查询\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e\u003cstrong\u003eHBase的应用场景\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003ehbase适合大量随机写入和顺序读取的应用场景，不适合大量随机读的应用场景。\u003c/p\u003e\n\u003cul\u003e\n  \u003cli\u003e写密集型应用，每天写入量巨大，而相对读数量较小的应用，比如IM的历史消息，游戏的日志、推荐结果等等\u003c/li\u003e\n  \u003cli\u003e不需要复杂查询条件来查询数据的应用，HBase只支持基于rowkey的查询，对于HBase来说，单条记录或者小范围的查询是可以接受的，大范围的查询由于分布式的原因，可能在性能上有点影响，而对于像SQL的join等查询，HBase无法支持。\u003c/li\u003e\n  \u003cli\u003e对性能和可靠性要求非常高的应用，由于HBase本身没有单点故障，可用性非常高。\u003c/li\u003e\n  \u003cli\u003e数据量较大，而且增长量无法预估的应用，HBase支持在线扩展，即使在一段时间内数据量呈井喷式增长，也可以通过HBase横向扩展来满足功能。\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e\u003cimg src\u003d\"asset/HBase-Table-HBase-Architecture-Edureka.png\" alt\u003d\"HBase-Table-HBase-Architecture-Edureka.png\" /\u003e\u003c/p\u003e\n\u003cul\u003e\n  \u003cli\u003eTables: Data is stored in a table format in HBase. But here tables are in column-oriented format.\u003c/li\u003e\n  \u003cli\u003eRow Key: Row keys are used to search records which make searches fast. You would be curious to know how? I will explain it in the architecture part moving ahead in this blog.\u003c/li\u003e\n  \u003cli\u003eColumn Families: Various columns are combined in a column family. These column families are stored together which makes the searching process faster because data belonging to same column family can be accessed together in a single seek.\u003c/li\u003e\n  \u003cli\u003eColumn Qualifiers: Each column’s name is known as its column qualifier.\u003c/li\u003e\n  \u003cli\u003eCell: Data is stored in cells. The data is dumped into cells which are specifically identified by rowkey and column qualifiers.\u003c/li\u003e\n  \u003cli\u003eTimestamp: Timestamp is a combination of date and time. Whenever data is stored, it is stored with its timestamp. This makes easy to search for a particular version of data.\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881676_1170988771",
+      "id": "20211111-014121_181945639",
+      "dateCreated": "2021-11-11 01:41:21.676",
+      "status": "READY"
+    },
+    {
+      "text": "%python\nimport happybase\n\nconnection \u003d happybase.Connection(\u0027192.168.56.101\u0027)",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.677",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881677_1082649258",
+      "id": "20211111-014121_1016795739",
+      "dateCreated": "2021-11-11 01:41:21.677",
+      "status": "READY"
+    },
+    {
+      "text": "%python\n# connection.delete_table(\u0027video\u0027, disable\u003dTrue)",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.677",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881677_1177114805",
+      "id": "20211111-014121_2096874521",
+      "dateCreated": "2021-11-11 01:41:21.677",
+      "status": "READY"
+    },
+    {
+      "text": "%python\nconnection.create_table(\n    \u0027video\u0027,\n    {\u0027video\u0027: dict(max_versions\u003d10),\n     \u0027play\u0027: dict(max_versions\u003d10)}\n)",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.677",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881677_1607418253",
+      "id": "20211111-014121_529187439",
+      "dateCreated": "2021-11-11 01:41:21.677",
+      "status": "READY"
+    },
+    {
+      "text": "%python\nplay_duration_df[:10]",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.677",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "[Row(ContentId\u003d\u00274012\u0027, play_duration\u003d602),\n Row(ContentId\u003d\u002710702\u0027, play_duration\u003d446),\n Row(ContentId\u003d\u00275773\u0027, play_duration\u003d426),\n Row(ContentId\u003d\u002717308\u0027, play_duration\u003d426),\n Row(ContentId\u003d\u002713307\u0027, play_duration\u003d420),\n Row(ContentId\u003d\u002710680\u0027, play_duration\u003d408),\n Row(ContentId\u003d\u00276896\u0027, play_duration\u003d396),\n Row(ContentId\u003d\u00279453\u0027, play_duration\u003d394),\n Row(ContentId\u003d\u002715493\u0027, play_duration\u003d392),\n Row(ContentId\u003d\u002710649\u0027, play_duration\u003d390)]"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881677_1800257733",
+      "id": "20211111-014121_1358140988",
+      "dateCreated": "2021-11-11 01:41:21.677",
+      "status": "READY"
+    },
+    {
+      "text": "%python\nvideo_talbe \u003d connection.table(\u0027video\u0027)\n\nwith video_talbe.batch() as b:\n    def save_duration_to_hbase(idx, row):\n        video_talbe.put(f\u0027{idx:0\u003e6d}\u0027 + \u0027-play-duration\u0027 , {b\u0027video:content_id\u0027: str(row.ContentId), \n                                                            b\u0027play:duration\u0027: str(row.play_duration)})\n    for idx, row in enumerate(play_duration_df[:100]):\n        save_duration_to_hbase(idx, row)",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.677",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881677_1319902929",
+      "id": "20211111-014121_874405811",
+      "dateCreated": "2021-11-11 01:41:21.677",
+      "status": "READY"
+    },
+    {
+      "text": "%python\nvideo_talbe \u003d connection.table(\u0027video\u0027)\n\nwith video_talbe.batch() as b:\n    def save_times_to_hbase(idx, row):\n        video_talbe.put(f\u0027{idx:0\u003e6d}\u0027 + \u0027-play-times\u0027, {b\u0027video:content_id\u0027: str(row.ContentId),\n                                                        b\u0027play:times\u0027: str(row.play_times)})\n    for idx, row in enumerate(play_times_df[:100]):\n        save_times_to_hbase(idx, row)",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.677",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881677_2016235722",
+      "id": "20211111-014121_384278053",
+      "dateCreated": "2021-11-11 01:41:21.677",
+      "status": "READY"
+    },
+    {
+      "text": "%python\n# 查看数据\nvideo_talbe \u003d connection.table(\u0027video\u0027)\nfor i in video_talbe.scan(row_start\u003db\u0027000005\u0027, row_stop\u003db\u0027000030\u0027):\n    print(i)",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.677",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "(b\u0027000005-play-duration\u0027, {b\u0027play:duration\u0027: b\u0027408\u0027, b\u0027video:content_id\u0027: b\u002710680\u0027})\n(b\u0027000005-play-times\u0027, {b\u0027play:times\u0027: b\u002711\u0027, b\u0027video:content_id\u0027: b\u00274638\u0027})\n(b\u0027000006-play-duration\u0027, {b\u0027play:duration\u0027: b\u0027396\u0027, b\u0027video:content_id\u0027: b\u00276896\u0027})\n(b\u0027000006-play-times\u0027, {b\u0027play:times\u0027: b\u002711\u0027, b\u0027video:content_id\u0027: b\u00276896\u0027})\n(b\u0027000007-play-duration\u0027, {b\u0027play:duration\u0027: b\u0027394\u0027, b\u0027video:content_id\u0027: b\u00279453\u0027})\n(b\u0027000007-play-times\u0027, {b\u0027play:times\u0027: b\u002711\u0027, b\u0027video:content_id\u0027: b\u00279114\u0027})\n(b\u0027000008-play-duration\u0027, {b\u0027play:duration\u0027: b\u0027392\u0027, b\u0027video:content_id\u0027: b\u002715493\u0027})\n(b\u0027000008-play-times\u0027, {b\u0027play:times\u0027: b\u002711\u0027, b\u0027video:content_id\u0027: b\u002712009\u0027})\n(b\u0027000009-play-duration\u0027, {b\u0027play:duration\u0027: b\u0027390\u0027, b\u0027video:content_id\u0027: b\u002710649\u0027})\n(b\u0027000009-play-times\u0027, {b\u0027play:times\u0027: b\u002711\u0027, b\u0027video:content_id\u0027: b\u00274550\u0027})\n(b\u0027000010-play-duration\u0027, {b\u0027play:duration\u0027: b\u0027388\u0027, b\u0027video:content_id\u0027: b\u002712618\u0027})\n(b\u0027000010-play-times\u0027, {b\u0027play:times\u0027: b\u002711\u0027, b\u0027video:content_id\u0027: b\u002716039\u0027})\n(b\u0027000011-play-duration\u0027, {b\u0027play:duration\u0027: b\u0027388\u0027, b\u0027video:content_id\u0027: b\u00276923\u0027})\n(b\u0027000011-play-times\u0027, {b\u0027play:times\u0027: b\u002711\u0027, b\u0027video:content_id\u0027: b\u002712401\u0027})\n(b\u0027000012-play-duration\u0027, {b\u0027play:duration\u0027: b\u0027382\u0027, b\u0027video:content_id\u0027: b\u00274276\u0027})\n(b\u0027000012-play-times\u0027, {b\u0027play:times\u0027: b\u002711\u0027, b\u0027video:content_id\u0027: b\u00276126\u0027})\n(b\u0027000013-play-duration\u0027, {b\u0027play:duration\u0027: b\u0027382\u0027, b\u0027video:content_id\u0027: b\u002710040\u0027})\n(b\u0027000013-play-times\u0027, {b\u0027play:times\u0027: b\u002711\u0027, b\u0027video:content_id\u0027: b\u00278317\u0027})\n(b\u0027000014-play-duration\u0027, {b\u0027play:duration\u0027: b\u0027382\u0027, b\u0027video:content_id\u0027: b\u002710061\u0027})\n(b\u0027000014-play-times\u0027, {b\u0027play:times\u0027: b\u002711\u0027, b\u0027video:content_id\u0027: b\u00279065\u0027})\n(b\u0027000015-play-duration\u0027, {b\u0027play:duration\u0027: b\u0027380\u0027, b\u0027video:content_id\u0027: b\u00279434\u0027})\n(b\u0027000015-play-times\u0027, {b\u0027play:times\u0027: b\u002711\u0027, b\u0027video:content_id\u0027: b\u00277468\u0027})\n(b\u0027000016-play-duration\u0027, {b\u0027play:duration\u0027: b\u0027379\u0027, b\u0027video:content_id\u0027: b\u00275062\u0027})\n(b\u0027000016-play-times\u0027, {b\u0027play:times\u0027: b\u002711\u0027, b\u0027video:content_id\u0027: b\u00277920\u0027})\n(b\u0027000017-play-duration\u0027, {b\u0027play:duration\u0027: b\u0027379\u0027, b\u0027video:content_id\u0027: b\u002714907\u0027})\n(b\u0027000017-play-times\u0027, {b\u0027play:times\u0027: b\u002711\u0027, b\u0027video:content_id\u0027: b\u002710680\u0027})\n(b\u0027000018-play-duration\u0027, {b\u0027play:duration\u0027: b\u0027379\u0027, b\u0027video:content_id\u0027: b\u002711026\u0027})\n(b\u0027000018-play-times\u0027, {b\u0027play:times\u0027: b\u002711\u0027, b\u0027video:content_id\u0027: b\u00277963\u0027})\n(b\u0027000019-play-duration\u0027, {b\u0027play:duration\u0027: b\u0027378\u0027, b\u0027video:content_id\u0027: b\u00274638\u0027})\n(b\u0027000019-play-times\u0027, {b\u0027play:times\u0027: b\u002710\u0027, b\u0027video:content_id\u0027: b\u00274276\u0027})\n(b\u0027000020-play-duration\u0027, {b\u0027play:duration\u0027: b\u0027377\u0027, b\u0027video:content_id\u0027: b\u00276662\u0027})\n(b\u0027000020-play-times\u0027, {b\u0027play:times\u0027: b\u002710\u0027, b\u0027video:content_id\u0027: b\u002711058\u0027})\n(b\u0027000021-play-duration\u0027, {b\u0027play:duration\u0027: b\u0027375\u0027, b\u0027video:content_id\u0027: b\u00277616\u0027})\n(b\u0027000021-play-times\u0027, {b\u0027play:times\u0027: b\u002710\u0027, b\u0027video:content_id\u0027: b\u002716231\u0027})\n(b\u0027000022-play-duration\u0027, {b\u0027play:duration\u0027: b\u0027373\u0027, b\u0027video:content_id\u0027: b\u00277882\u0027})\n(b\u0027000022-play-times\u0027, {b\u0027play:times\u0027: b\u002710\u0027, b\u0027video:content_id\u0027: b\u00279107\u0027})\n(b\u0027000023-play-duration\u0027, {b\u0027play:duration\u0027: b\u0027371\u0027, b\u0027video:content_id\u0027: b\u00278405\u0027})\n(b\u0027000023-play-times\u0027, {b\u0027play:times\u0027: b\u002710\u0027, b\u0027video:content_id\u0027: b\u00278181\u0027})\n(b\u0027000024-play-duration\u0027, {b\u0027play:duration\u0027: b\u0027368\u0027, b\u0027video:content_id\u0027: b\u002710685\u0027})\n(b\u0027000024-play-times\u0027, {b\u0027play:times\u0027: b\u002710\u0027, b\u0027video:content_id\u0027: b\u002710685\u0027})\n(b\u0027000025-play-duration\u0027, {b\u0027play:duration\u0027: b\u0027367\u0027, b\u0027video:content_id\u0027: b\u002714186\u0027})\n(b\u0027000025-play-times\u0027, {b\u0027play:times\u0027: b\u002710\u0027, b\u0027video:content_id\u0027: b\u00276663\u0027})\n(b\u0027000026-play-duration\u0027, {b\u0027play:duration\u0027: b\u0027365\u0027, b\u0027video:content_id\u0027: b\u002716870\u0027})\n(b\u0027000026-play-times\u0027, {b\u0027play:times\u0027: b\u002710\u0027, b\u0027video:content_id\u0027: b\u002710728\u0027})\n(b\u0027000027-play-duration\u0027, {b\u0027play:duration\u0027: b\u0027363\u0027, b\u0027video:content_id\u0027: b\u00276126\u0027})\n(b\u0027000027-play-times\u0027, {b\u0027play:times\u0027: b\u002710\u0027, b\u0027video:content_id\u0027: b\u002711229\u0027})\n(b\u0027000028-play-duration\u0027, {b\u0027play:duration\u0027: b\u0027363\u0027, b\u0027video:content_id\u0027: b\u002717322\u0027})\n(b\u0027000028-play-times\u0027, {b\u0027play:times\u0027: b\u002710\u0027, b\u0027video:content_id\u0027: b\u002717191\u0027})\n(b\u0027000029-play-duration\u0027, {b\u0027play:duration\u0027: b\u0027362\u0027, b\u0027video:content_id\u0027: b\u00278317\u0027})\n(b\u0027000029-play-times\u0027, {b\u0027play:times\u0027: b\u002710\u0027, b\u0027video:content_id\u0027: b\u00278589\u0027})\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881677_2079128611",
+      "id": "20211111-014121_1605873452",
+      "dateCreated": "2021-11-11 01:41:21.677",
+      "status": "READY"
+    },
+    {
+      "text": "%python\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-11 01:41:21.677",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1636594881677_1321951923",
+      "id": "20211111-014121_322539664",
+      "dateCreated": "2021-11-11 01:41:21.677",
+      "status": "READY"
+    }
+  ],
+  "name": "00-spark",
+  "id": "2GPBEWUKR",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.9.0",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}
