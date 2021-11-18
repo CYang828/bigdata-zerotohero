@@ -16,3 +16,9 @@
 [submodule "tensorflow-developer-certificate"]
 	path = course/notebook/tensorflow-developer-certificate
 	url = https://github.com/BSlience/tensorflow-developer-certificate.git
+[submodule "nlp-zerotohero"]
+	path = course/notebook/nlp-zerotohero
+	url = https://github.com/BSlience/nlp-zerotohero.git
+[submodule "search-engine-zerotohero"]
+	path = course/notebook/search-engine-zerotohero
+	url = https://github.com/BSlience/search-engine-zerotohero.git
