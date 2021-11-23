@@ -1,24 +1,24 @@
 [submodule "hive-zerotohero"]
 	path = course/notebook/hive-zerotohero
-	url = https://github.com/BSlience/hive-zerotohero.git
+	url = git@github.com:BSlience/hive-zerotohero.git
 [submodule "spark-zerotohero"]
 	path = course/notebook/spark-zerotohero
-	url = https://github.com/BSlience/spark-zerotohero.git
+	url = git@github.com:BSlience/spark-zerotohero.git
 [submodule "recommend-system-zerotohero"]
 	path = course/notebook/recommend-system-zerotohero
-	url = https://github.com/BSlience/recommend-system-zerotohero.git
+	url = git@github.com:BSlience/recommend-system-zerotohero.git
 [submodule "hbase-zerotohero"]
 	path = course/notebook/hbase-zerotohero
 	url = https://github.com/BSlience/hbase-zerotohero.git
 [submodule "machine-learning-zerotohero"]
 	path = course/notebook/machine-learning-zerotohero
-	url = https://github.com/BSlience/machine-learning-zerotohero.git
+	url = git@github.com:BSlience/machine-learning-zerotohero.git
 [submodule "tensorflow-developer-certificate"]
 	path = course/notebook/tensorflow-developer-certificate
-	url = https://github.com/BSlience/tensorflow-developer-certificate.git
+	url = git@github.com:BSlience/tensorflow-developer-certificate.git
 [submodule "nlp-zerotohero"]
 	path = course/notebook/nlp-zerotohero
-	url = https://github.com/BSlience/nlp-zerotohero.git
+	url = git@github.com:BSlience/nlp-zerotohero.git
 [submodule "search-engine-zerotohero"]
 	path = course/notebook/search-engine-zerotohero
-	url = https://github.com/BSlience/search-engine-zerotohero.git
+	url = git@github.com:BSlience/search-engine-zerotohero.git

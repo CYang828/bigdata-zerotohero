@@ -1,18 +1,55 @@
 version: "3"
 
 services:
-  mongo:
-    image: mongo
+  mongo1:
+    hostname: mongo1
+    container_name: mongo1
+    image: mongo:4.0-xenial
+    expose:
+    - 27017
+    ports:
+      - 27011:27017
     restart: always
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: bigdata
-      MONGO_INITDB_ROOT_PASSWORD: bigdata123
+    entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "rs0" ]
     volumes:
-      - ./mongo/data/:/data/db/
-      - ./mongo/logs/:/data/logs/
-    ports: 
-      - 27016:27017
+      - ./mongo/mongo1/data/:/data/db/
+    environment:
+      - MONGODB_REPLICA_SET_MODE=primary
 
+  mongo2:
+    hostname: mongo2
+    container_name: mongo2
+    image: mongo:4.0-xenial
+    expose:
+    - 27017
+    ports:
+    - 27012:27017
+    restart: always
+    entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "rs0" ]
+    volumes:
+      - ./mongo/mongo2/data/:/data/db/
+    environment:
+      - MONGODB_REPLICA_SET_MODE=secondary
+    depends_on:
+      - mongo1
+
+  mongo3:
+    hostname: mongo3
+    container_name: mongo3
+    image: mongo:4.0-xenial
+    expose:
+    - 27017
+    ports:
+    - 27013:27017
+    restart: always
+    entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "rs0" ]
+    volumes:
+      - ./mongo/mongo3/data/:/data/db/
+    environment:
+      - MONGODB_REPLICA_SET_MODE=arbiter
+    depends_on:
+      - mongo1
+  
   mongo-express:
     image: mongo-express
     restart: always
@@ -21,7 +58,18 @@ services:
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: bigdata
       ME_CONFIG_MONGODB_ADMINPASSWORD: bigdata123
-      ME_CONFIG_MONGODB_URL: mongodb://bigdata:bigdata123@mongo:27017/
+      ME_CONFIG_MONGODB_URL: "mongodb://mongo1:27017"
+    depends_on:
+      - mongo1
+  
+  redis: 
+    image: redis
+    ports:
+     - "6379:6379"
+    volumes:
+     - ./redis/data:/var/lib/redis
+    environment:
+     - REDIS_REPLICATION_MODE=master
 
 networks:
   custom_net:
