@@ -203,22 +203,23 @@ services:
       - 2181:2181
 
   hbase-master:
-    image: bde2020/hbase-master:1.0.0-hbase1.2.6
+    image: bslience/hbase-master
     container_name: hbase-master
     hostname: hbase-master
     env_file:
-      - ./hbase-distributed-local.env
+      - ./hbase/hbase-distributed-local.env
     environment:
       SERVICE_PRECONDITION: "namenode:9870 datanode1:9864 datanode2:9864 datanode3:9864 zoo:2181"
     ports:
       - 16010:16010
+      - 9090:9090
 
   hbase-region1:
     image: bde2020/hbase-regionserver:1.0.0-hbase1.2.6
     container_name: hbase-regionserver1
     hostname: hbase-regionserver1
     env_file:
-      - ./hbase-distributed-local.env
+      - ./hbase/hbase-distributed-local.env
     environment:
       HBASE_CONF_hbase_regionserver_hostname: hbase-region1
       SERVICE_PRECONDITION: "namenode:9870 datanode1:9864 datanode2:9864 datanode3:9864 zoo:2181 hbase-master:16010"
@@ -230,7 +231,7 @@ services:
     container_name: hbase-regionserver2
     hostname: hbase-regionserver2
     env_file:
-      - ./hbase-distributed-local.env
+      - ./hbase/hbase-distributed-local.env
     environment:
       HBASE_CONF_hbase_regionserver_hostname: hbase-region2
       SERVICE_PRECONDITION: "namenode:9870 datanode1:9864 datanode2:9864 datanode3:9864 zoo:2181 hbase-master:16010"
@@ -288,7 +289,7 @@ services:
 
 
   elasticsearch:
-    image: elasticsearch:5.6.10
+    image: elasticsearch:7.8.0
     container_name: elk-es
     restart: always
     environment:
@@ -315,7 +316,7 @@ services:
       - -Dhosts.0.host=http://elk-es:9200
 
   kibana:
-    image: kibana:5.6.10
+    image: kibana:7.8.0
     container_name: elk-kibana
     restart: always
     environment:
