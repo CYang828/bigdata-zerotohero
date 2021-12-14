@@ -22,3 +22,6 @@
 [submodule "search-engine-zerotohero"]
 	path = course/notebook/search-engine-zerotohero
 	url = git@github.com:BSlience/search-engine-zerotohero.git
+[submodule "python-all-you-need"]
+	path = course/notebook/python-all-you-need
+	url = git@github.com:BSlience/python-all-you-need.git

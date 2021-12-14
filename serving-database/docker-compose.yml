@@ -67,11 +67,19 @@ services:
     ports:
      - "6379:6379"
     volumes:
-     - ./redis/data:/var/lib/redis
+     - ./redis/data:/data/
     environment:
      - REDIS_REPLICATION_MODE=master
 
+  mysql:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: bigdata123
+    volumes:
+      - "./mysql/data:/var/lib/mysql"
+      - "./mysql/conf/my.cnf:/etc/my.cnf"
+
 networks:
-  custom_net:
-   external:
-      name: bigdata-net
+  serving-database:
+    driver: bridge

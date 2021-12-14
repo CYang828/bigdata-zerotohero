@@ -276,20 +276,26 @@ services:
       - ../course/:/opt/zeppelin/notebook/
 
   datascience-lab:
-    image: tensorflow/tensorflow:2.6.0rc1-gpu-jupyter
+    image: bslience/datascience-lab
     container_name: datascience-lab
-    environment: 
-      JUPYTER_ENABLE_LAB: 'yes'
-      PASSWORD: bigdata123
     ports:
       - "8889:8888"
+      - "6123:6123"
     volumes:
       - ../course/notebook/tensorflow-developer-certificate:/tf/tensorflow-developer-certificate/
       - ../course/notebook/recommend-system-zerotohero:/tf/recommend-system-zerotohero/
-
+      - ../course/notebook/nlp-zerotohero:/tf/nlp-zerotohero/
+      - ../course/notebook/machine-learning-zerotohero:/tf/machine-learning-zerotohero/
+    command: ["bash", "-c", "source /etc/bash.bashrc && jupyter --notebook-dir=/tf --ip 0.0.0.0 --no-browser --allow-root"]
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [gpu]
 
   elasticsearch:
-    image: elasticsearch:7.8.0
+    image: tomczhen/elasticsearch-with-hanlp:7.5.0
     container_name: elk-es
     restart: always
     environment:
@@ -316,7 +322,7 @@ services:
       - -Dhosts.0.host=http://elk-es:9200
 
   kibana:
-    image: kibana:7.8.0
+    image: kibana:7.5.0
     container_name: elk-kibana
     restart: always
     environment:
