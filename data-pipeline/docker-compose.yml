@@ -1,0 +1,15 @@
+version: '3.7'
+
+services:
+   # 节点名称
+   monstache:
+    #镜像来源
+    image: zhengjiawei001/monstache
+    container_name: zjw_monstache
+    restart: always
+    command: bash -c "source /etc/profile && cd /usr/local/monstache && monstache -f config.toml"
+
+networks:
+  default:
+    external:
+            name: serving-database_default

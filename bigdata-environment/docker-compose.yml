@@ -286,7 +286,8 @@ services:
       - ../course/notebook/recommend-system-zerotohero:/tf/recommend-system-zerotohero/
       - ../course/notebook/nlp-zerotohero:/tf/nlp-zerotohero/
       - ../course/notebook/machine-learning-zerotohero:/tf/machine-learning-zerotohero/
-    command: ["bash", "-c", "source /etc/bash.bashrc && jupyter --notebook-dir=/tf --ip 0.0.0.0 --no-browser --allow-root"]
+      - ../dataset/:/root/.keras/
+    command: ["bash", "-c", "source /etc/bash.bashrc && jupyter lab --notebook-dir=/tf --ip 0.0.0.0 --no-browser --allow-root"]
     deploy:
       resources:
         reservations:

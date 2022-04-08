@@ -58,7 +58,7 @@ services:
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: bigdata
       ME_CONFIG_MONGODB_ADMINPASSWORD: bigdata123
-      ME_CONFIG_MONGODB_URL: "mongodb://mongo1:27017"
+      ME_CONFIG_MONGODB_URL: "mongodb://mongo3:27017"
     depends_on:
       - mongo1
   
