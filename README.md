@@ -82,6 +82,8 @@
 
 由于以上这些难点，导致很多对大数据有兴趣的人被挡在了这个非常有趣的领域之外。本项目就是希望，能够通过 docker 技术，给大家提供一个一站式的学习平台，让我们一起分享大数据时代的红利。
 
+如果觉得能够帮助你，请帮忙点一颗星星，非常感谢🙏
+
 [![Product Name Screen Shot][product-screenshot]](https://github.com/BSlience/bigdata-zerotohero)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
